@@ -6,7 +6,7 @@
  * @version    1.9-dev
  * @author     Fuel Development Team
  * @license    MIT License
- * @copyright  2010 - 2019 Fuel Development Team test git
+ * @copyright  2010 - 2019 Fuel Development Team test git 1
  * @link       https://fuelphp.com
  */
 
