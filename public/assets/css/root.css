@@ -2,9 +2,11 @@
   --primary_color: #252e3d;
   --secondary_color: #ff9125;
   --third_color: #304560;
+  --fourth_color: #ee552c;
   --title_color: #333333;
   --border_color: #e5e5e5;
   --text_color: #333333;
+  --swiper-theme-color: #252e3d;
 }
 
 ._bg-primary_color {

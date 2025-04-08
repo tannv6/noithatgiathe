@@ -1,6 +1,7 @@
 <form method="post" enctype="multipart/form-data">
     <input type="hidden" name="category_code" value="<?=$category_code?>">
     <div class="d-flex justify-content-end gap-2">
+        <a href="/bai-viet/<?=$bbs['slug']?>" class="btn btn-info px-3" target="_blank">Xem</a>
         <a href="/admin/bbs?category_code=<?=$category_code?>" class="btn btn-secondary px-3"><i class="fa-solid fa-list"></i> Về danh sách</a>
         <button class="btn btn-primary px-3"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
     </div>
@@ -55,7 +56,31 @@
 </form>
 <script>
     $(document).ready(function() {
-        ClassicEditor.create(document.querySelector("#description"));
-        ClassicEditor.create(document.querySelector("#content"));
+		tinymce.init({
+            selector: "#description, #content",
+            content_css: 'https://noithatgiathe.vn/assets/vendor/all.min.css, https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css, https://noithatgiathe.vn/assets/css/component.css',
+            plugins: "image code table autoresize fullscreen media",
+            toolbar: "undo redo | styles fontsize fontfamily | bold italic underline | alignleft aligncenter alignright | table | image | media | code | fullscreen",
+            images_upload_url: "/api/upload/editor",
+            automatic_uploads: true,
+            elementpath: false,
+            menubar: false,
+            autoresize_bottom_margin: 20,
+            autoresize_min_height: 200,
+			font_size_formats: '8px 10px 12px 14px 16px 18px 24px 36px 48px',
+            toolbar_sticky: true,
+            media_live_embeds: true,
+            setup: function(editor) {
+                editor.on('init', function() {
+                    editor.getBody().classList.add('container', 'mt-3');
+					$(editor.getDoc()).find("html").css({
+						fontSize: '14px'
+					});
+                });
+            }
+        });
+		$("form").submit(function (e) {
+            tinymce.triggerSave();
+        })
     });
 </script>

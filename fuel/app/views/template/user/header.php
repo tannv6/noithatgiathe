@@ -3,6 +3,8 @@
 function getCategoriesWithChildren($parent_id = null) {
     $categories1 = Model_ProductCategory::query()
         ->where('parent_id', $parent_id)
+        ->where('status', 'Y')
+        ->order_by('o_num', 'desc')
         ->get();
 
     $categories_array = array_map(function($category) {
@@ -100,7 +102,7 @@ $categories = getCategoriesWithChildren();
         </div>
         <div class="menu-header-wrap">
             <div class="container p-0">
-                <div class="row py-1">
+                <div class="row py-1 position-relative">
                     <!-- <div class="all-product">
                         <i class="fa-solid fa-bars"></i>
                         <span>Danh mục sản phẩm</span>
@@ -139,8 +141,35 @@ $categories = getCategoriesWithChildren();
                             </li>
                             <li id="menu-item-86613" class="menu-item menu-item-type-post_type menu-item-object-page <?=$active == 'gioithieu' ? "current-menu-item current_page_item" : ""?> menu-item-86613">
                                 <a rel="nofollow" href="/gioi-thieu" data-wpel-link="internal">Giới thiệu</a></li>
-                            <li id="menu-item-69880" class="menu-item menu-item-type-custom <?=$active == 'shop' ? "current-menu-item current_page_item" : ""?> menu-item-object-custom menu-item-69880">
-                                <a rel="nofollow" href="/danh-muc-san-pham" data-wpel-link="internal">Sản phẩm</a></li>
+                            <li id="menu_item_product" class="menu-item menu-item-type-custom <?=$active == 'shop' ? "current-menu-item current_page_item" : ""?> menu-item-object-custom menu-item-69880">
+                                <a rel="nofollow" href="/danh-muc-san-pham" data-wpel-link="internal">Sản phẩm &nbsp; <i class="fa-solid fa-chevron-down small"></i></a>
+                                <div id="product_category_w" class="product_category_w position-absolute pt-2 start-0 end-0 shadow rounded overflow-hidden" style="display: none;top: 150%;opacity: 0.5;">
+                                    <div class="product_category_wrap">
+                                        <div class="w-100">
+                                        <ul class="row gy-2 p-3 bg-white list-unstyled">
+                                        <?php foreach($categories as $category): ?>
+                                            <li class="col-6 col-md-4 col-lg-3">
+                                                <div class="product_category_item">
+                                                    <a class="<?=$category_id == $category['category_id'] ? "active" : ""?>" href="/danh-muc-san-pham/<?=$category['slug']?>"><?=$category['category_name']?></a>
+                                                    <?php if(count($category['children']) > 0): ?>
+                                                    <ul class="product_category_child list-unstyled d-flex flex-column gap-2 mt-2">
+                                                    <?php foreach($category['children'] as $category1): ?>
+                                                        <li>
+                                                            <a href="/danh-muc-san-pham/<?=$category1['slug']?>" class="<?=$category1['category_id'] == $category_id ? "active" : ""?>">
+                                                                <?=$category1['category_name']?>
+                                                            </a>
+                                                        </li>
+                                                    <?php endforeach; ?>
+                                                    </ul>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </li>
+                                        <?php endforeach; ?>
+                                        </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
                             <li id="menu-item-69888" class="menu-item menu-item-type-taxonomy menu-item-object-category <?=$active == 'du-an' ? "current-menu-item current_page_item" : ""?> menu-item-69888">
                                 <a rel="nofollow external noopener noreferrer" href="/danh-muc-bai-viet/du-an" data-wpel-link="external">
                                     Dự Án
@@ -149,7 +178,7 @@ $categories = getCategoriesWithChildren();
                             <li id="menu-item-69891" class="menu-item menu-item-type-taxonomy menu-item-object-category <?=$active == 'video' ? "current-menu-item current_page_item" : ""?> menu-item-69891">
                                 <a rel="nofollow" href="/danh-muc-bai-viet/video" data-wpel-link="internal">Video</a>
                             </li>
-                            <li id="menu-item-69874" class="menu-item menu-item-type-post_type menu-item-object-page 
+                            <!-- <li id="menu-item-69874" class="menu-item menu-item-type-post_type menu-item-object-page 
                             <?=(in_array($active, ['tin-tuc', 'kinh-nghiem', 'thiet-ke', 'phong-thuy', 'tuyen-dung', 'khuyen-mai'])) ? "current-menu-item current_page_item" : ""?> menu-item-has-children menu-item-69874">
                                 <a rel="nofollow" href="/danh-muc-bai-viet/tin-tuc" data-wpel-link="internal">Tin tức</a>
                                 <ul class="sub-menu">
@@ -169,7 +198,7 @@ $categories = getCategoriesWithChildren();
                                         <a rel="nofollow" href="/danh-muc-bai-viet/khuyen-mai" data-wpel-link="internal">Khuyến mại</a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> -->
                             <li id="menu-item-69877"
                                 class="menu-item menu-item-type-post_type menu-item-object-page <?=$active == 'lienhe' ? "current-menu-item current_page_item" : ""?> menu-item-69877">
                                 <a rel="nofollow external noopener noreferrer" href="/lien-he" data-wpel-link="external">Liên hệ</a>
@@ -181,3 +210,21 @@ $categories = getCategoriesWithChildren();
         </div>
     </div>
 </header>
+<script>
+    // $("#menu_item_product").on("mouseenter", function() {
+    //     $("#product_category_w").slideDown();
+    // })
+    // $("#menu_item_product").on("mouseleave", function() {
+    //     $("#product_category_w").slideUp();
+    // })
+    $("#menu_item_product").hover(
+        function() {
+            $(this).find("#product_category_w").stop().show().animate({ top: "100%", opacity: 1 }, 300);
+        },
+        function() {
+            $(this).find("#product_category_w").stop().animate({ top: "150%", opacity: 0.5 }, 300, function() {
+                $(this).hide();
+            });
+        }
+    );
+</script>

@@ -46,4 +46,5 @@ return array(
 	'danh-muc-san-pham/(:any)' => 'shop/category/$1',
 	'danh-muc-san-pham' => 'shop/index',
 	'san-pham/(:any)' => 'shop/product/$1',
+	'sitemap.xml' => 'sitemap/index',
 );

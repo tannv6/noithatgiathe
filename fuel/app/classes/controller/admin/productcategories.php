@@ -17,7 +17,7 @@ class Controller_Admin_ProductCategories extends Controller_Base
 
         $grand_parent_id = Model_ProductCategory::find($parent['parent_id'])['category_id'];
 
-        $categories = Model_ProductCategory::find('all' , ['where' => ['parent_id' => $parent_id]]);
+        $categories = Model_ProductCategory::find('all' , ['where' => ['parent_id' => $parent_id], 'order_by' => ['o_num' => 'desc']]);
 
         foreach($categories as $category) {
             $children = Model_ProductCategory::find('all', ['where' => ['parent_id' => $category->category_id]]);
@@ -88,28 +88,12 @@ class Controller_Admin_ProductCategories extends Controller_Base
     {
         $category = null;
         if (Input::method() == 'POST') {
-            \Upload::process([
-                'path' => DOCROOT . 'uploads/categories/',
-                'randomize' => true,
-                'ext_whitelist' => ['jpg', 'jpeg', 'png', 'gif'],
-            ]);
+            $uploader = new \Helper\Uploader(DOCROOT . 'uploads/categories/', IMAGE_ALLOWED_FORMAT);
 
-            if (\Upload::is_valid()) {
-                \Upload::save();
-                $files = \Upload::get_files();
+            if ($uploader->upload()) {
+                $category_image = $uploader->getName('category_image');
 
-                $category_images = array_filter($files, function($value) {
-                    return $value['field'] == 'category_image';
-                });
-
-                $category_banner = array_filter($files, function($value) {
-                    return strpos($value['field'], 'category_banner') !== false;
-                });
-
-                $category_image = $category_images[0]['saved_as'];
-
-                $category_banner = $category_banner[0]['saved_as'];
-
+                $category_banner = $uploader->getName('category_banner');
             }
             $parent_id = Input::post('parent_id');
             if ($parent_id) {
@@ -119,6 +103,8 @@ class Controller_Admin_ProductCategories extends Controller_Base
                 $level = 1;
             }
             if($id) {
+                $delete_image = Input::post('delete_image');
+                $delete_banner = Input::post('delete_banner');
                 $category = Model_ProductCategory::find($id);
                 $category->category_name = Input::post('category_name');
                 $category->parent_id = Input::post('parent_id') ?: null;
@@ -126,6 +112,12 @@ class Controller_Admin_ProductCategories extends Controller_Base
                 $category->sort_description = Input::post('sort_description');
                 $category->slug = $this->getUniqueSlug($this->convert_vn_to_str(Input::post('slug')), $id);
                 $category->level = $level;
+                if($delete_image) {
+                    $category->category_image = '';
+                }
+                if($delete_banner) {
+                    $category->category_banner = '';
+                }
                 if($category_image) $category->category_image = $category_image;
                 if($category_banner) $category->category_banner = $category_banner;
     
@@ -142,7 +134,8 @@ class Controller_Admin_ProductCategories extends Controller_Base
                     'status' => Input::post('status', 1),
                     'sort_description' => Input::post('sort_description'),
                     'slug' => $this->getUniqueSlug($this->convert_vn_to_str(Input::post('category_name'))),
-                    'level' => $level
+                    'level' => $level,
+                    'o_num' => 0
                 ]);
 
                 if($category_image) $category->category_image = $category_image;
@@ -187,5 +180,25 @@ class Controller_Admin_ProductCategories extends Controller_Base
         return Response::forge(json_encode([
             'result' => 'success'
         ]));
+    }
+    public function post_change()
+    {
+        $category_id = Input::post('category_id');
+        $o_num = Input::post('o_num');
+
+        $cnt = count($category_id);
+        for ($i=0; $i < $cnt; $i++) { 
+            $entry = Model_ProductCategory::find($category_id[$i]);
+            $entry->o_num = $o_num[$i];
+            $entry->save();
+        }
+        \Session::set_flash('message', "Thông tin đã được cập nhật!");
+
+        $res = '<script>
+                    parent.location.reload();
+                </script>';
+
+        return Response::forge($res);
+
     }
 }

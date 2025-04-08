@@ -30,7 +30,7 @@ $categories = getCategoriesWithChildren();
                     <div class="image-big-wrapper">
                         <div class="image-big">
                         <?php foreach ($product['gallery'] as $key => $value): ?>
-                            <div class="img-cover ">
+                            <div class="img-cover">
                                 <div class="img-wrap thumbnail-wrapper" id="ex1">
                                     <img id="thumb" src="/uploads/products/<?=$value['image_path']?>" alt="">
                                 </div>
@@ -41,7 +41,7 @@ $categories = getCategoriesWithChildren();
                     <div class="image-small">
                     <?php foreach ($product['gallery'] as $key => $value): ?>
                         <div class="item-small img-cover">
-                            <div class=" thumbnail-wrapper">
+                            <div class="thumbnail-wrapper">
                                 <img src="/uploads/products/<?=$value['image_path']?>" alt="" >
                             </div>
                         </div>
@@ -158,7 +158,6 @@ $categories = getCategoriesWithChildren();
                             </ul>
                             <div class="wpcf7-response-output" aria-hidden="true"></div>
                         </form>
-                        <iframe frameborder="0" id="hiddenIframe" name="hiddenIframe" hidden class="d-none"></iframe>
                     </div>
                 </div>
                 <div class="quick-link">
@@ -181,14 +180,14 @@ $categories = getCategoriesWithChildren();
                         <a rel="nofollow external noopener noreferrer" href="<?=INSTALLATION_INSTRUCTIONS?>" data-wpel-link="external"><i class="fa-solid fa-up-right-from-square"></i>Hướng dẫn lắp đặt </a>
                     </div>
                     <div class="link-wrapper">
-                        <a rel="nofollow external noopener noreferrer" href="<?=GOOGLEMAP_LINK?>" data-wpel-link="external">
+                        <a rel="nofollow external noopener noreferrer" href="<?=GOOGLEMAP_LINK?>" target="_blank" data-wpel-link="external">
                             <i class="fa-solid fa-up-right-from-square"></i>Showroom: <?=SHOWROOM_ADDRESS?>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container p-0">
             <div class="row body-product">
                 <div class="col-12 col-md-12 col-lg-9">
                     <div class="nav nav-pills head" id="pills-tab" role="tablist">
@@ -235,13 +234,13 @@ $categories = getCategoriesWithChildren();
                                 <div class="wrapper col_2">
                                     <div class="title">
                                         Thông tin liên hệ </div>
-                                    <a href="<?=GOOGLEMAP_LINK?>" data-wpel-link="external" rel="nofollow external noopener noreferrer">
+                                    <a href="<?=GOOGLEMAP_LINK?>" data-wpel-link="external" rel="nofollow external noopener noreferrer" target="_blank">
                                         <i class="fa-solid fa-hand-point-right"></i>Showroom: <?=SHOWROOM_ADDRESS?>
                                     </a>
-                                    <a href="https://maps.app.goo.gl/JaYYuTKSX1RwZMnx7" data-wpel-link="external" rel="nofollow external noopener noreferrer">
+                                    <a href="<?= WAREHOUSE_GOOGLEMAP_LINK ?>" data-wpel-link="external" rel="nofollow external noopener noreferrer" target="_blank">
                                         <i class="fa-solid fa-hand-point-right"></i>Tổng kho: <?=WAREHOUSE_ADDRESS?>
                                     </a>
-                                    <a href="https://maps.app.goo.gl/f6cupr842YFSXyNy6" data-wpel-link="external" rel="nofollow external noopener noreferrer">
+                                    <a href="<?= FACTORY_GOOGLEMAP_LINK ?>" data-wpel-link="external" rel="nofollow external noopener noreferrer" target="_blank">
                                         <i class="fa-solid fa-hand-point-right"></i>Xưởng sản xuất: <?=FACTORY_ADDRESS?>
                                     </a>
                                     <a href="tel:0968585812" data-wpel-link="internal">
@@ -286,7 +285,7 @@ $categories = getCategoriesWithChildren();
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container p-0">
             <?php if(count($related_products) > 0): ?>
             <section class="related products">
                 <div class="title-thc">Sản phẩm tương tự</div>

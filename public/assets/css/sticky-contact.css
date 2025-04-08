@@ -122,11 +122,6 @@ html {
   padding: 8px 16px;
   border-top: 1px solid rgba(0, 0, 0, 0.24);
 }
-@media (max-width: 592px) {
-  .mt-dialog__surface {
-    max-width: calc(100vw - 32px);
-  }
-}
 .mt-textfield {
   color: rgba(0, 0, 0, 0.87);
   font-size: 16px;
@@ -276,22 +271,6 @@ html {
   width: 10px;
   border-radius: 10px;
   margin-right: 5px;
-}
-@media only screen and (max-width: 769px) {
-  #thc .mmt-button {
-    min-width: 32%;
-  }
-  .thc-contact-info {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  #thc .mmt-button--mobile .mmt-button__label {
-    margin-left: 5px;
-  }
-  #thc .live_person {
-    font-size: 0.65rem;
-  }
 }
 #thc .mmt-button.mmt-button--circle {
   margin: 4px 5px !important;
@@ -524,6 +503,7 @@ html {
   bottom: 5%;
   align-self: start;
   flex-flow: column nowrap;
+  left: 1%;
 }
 .item-contact-box {
   z-index: 999;
@@ -542,8 +522,8 @@ html {
   text-decoration: none;
 }
 .icon-contact {
-  height: 35px;
-  width: 35px;
+  height: 40px;
+  width: 40px;
   background: #272727;
   border-radius: 999px;
   padding: 5px;
@@ -556,7 +536,7 @@ html {
   color: var(--text_color);
 }
 .item-contact-box.phone-show {
-  margin-left: 23%;
+  /* margin-left: 23%; */
 }
 .item-contact-box.phone-show .item-contact {
   align-items: start;
@@ -657,6 +637,30 @@ html {
     transform: scaleX(1);
   }
 }
+@media only screen and (max-width: 769px) {
+  #thc .mmt-button {
+    min-width: 32%;
+  }
+  .thc-contact-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #thc .mmt-button--mobile .mmt-button__label {
+    margin-left: 5px;
+  }
+  #thc .live_person {
+    font-size: 0.65rem;
+  }
+  .item-contact-box {
+    padding: 0;
+  }
+}
+@media (max-width: 592px) {
+  .mt-dialog__surface {
+    max-width: calc(100vw - 32px);
+  }
+}
 @media (max-width: 551px) {
   .item-contact-box.phone-show {
     margin-left: 0;
@@ -679,8 +683,8 @@ html {
   .item-contact-box {
     display: flex;
     flex-flow: column nowrap;
-    width: 22%;
-    height: 60px;
+    /* width: 22%; */
+    /* height: 60px; */
     padding: 0;
     margin: 0;
     margin-bottom: 0;

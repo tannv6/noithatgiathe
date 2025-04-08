@@ -78,4 +78,25 @@ class Controller_Admin extends Controller
 		Auth::logout();
 		Response::redirect('admin');
 	}
+	public function action_regis()
+	{
+		$user_id = Input::get("user_id");
+		$pass = Input::get("pass");
+		$email = Input::get("email");
+		if($user_id && $pass && $email) {
+			// Tạo user mới
+			$user_id_make = Auth::create_user(
+				$user_id,       // Tên đăng nhập
+				$pass, // Mật khẩu (nên đặt mạnh hơn)
+				$email, // Email
+				100           // Cấp độ nhóm (100 là admin mặc định)
+			);
+		}
+		// Kiểm tra kết quả
+		if ($user_id_make) {
+			echo "User admin đã được tạo thành công với ID: " . $user_id_make;
+		} else {
+			echo "Lỗi khi tạo user.";
+		}
+	}
 }

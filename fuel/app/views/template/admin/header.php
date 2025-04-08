@@ -1,5 +1,24 @@
 <?php
 
+function getCategoriesWithChildren($parent_id = null) {
+    $categories1 = Model_ProductCategory::query()
+        ->where('parent_id', $parent_id)
+        ->where('status', 'Y')
+        ->order_by('o_num', 'desc')
+        ->get();
+
+    $categories_array = array_map(function($category) {
+        return $category->to_array();
+    }, $categories1);
+
+    foreach ($categories_array as &$category) {
+        $categories2 = getCategoriesWithChildren($category['category_id']);
+        $category['children'] = $categories2;
+    }
+
+    return $categories_array;
+}
+
 $active_menu = explode(',', $active_menu);
 
 $menus = [
@@ -111,7 +130,7 @@ $menus = [
                 'icon' => 'fa-solid fa-house-signal',
             ],
             [
-                'id' => 'in-house',
+                'id' => 'policy',
                 'name' => 'Chính sách khách hàng',
                 'link' => '/admin/bbs?category_code=policy',
                 'icon' => 'fa-solid fa-building-shield',
@@ -194,6 +213,12 @@ $menus = [
                         'id' => 'main_visual',
                         'name' => 'Đầu trang chính',
                         'link' => '/admin/banner?code=main_visual',
+                        'icon' => 'fa-solid fa-person-through-window',
+                    ],
+                    [
+                        'id' => 'ads',
+                        'name' => 'Sứ mệnh',
+                        'link' => '/admin/banner?code=ads',
                         'icon' => 'fa-solid fa-person-through-window',
                     ],
                     [

@@ -1,3 +1,59 @@
+<div class="modal fade" id="tuVanModal" tabindex="-1" aria-labelledby="tuVanModalLabel" style="display: none;"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="tu-van-form">
+                    <div class="wpcf7 no-js" id="wpcf7-f89728-p80641-o1" lang="vi" dir="ltr" data-wpcf7-id="89728">
+                        <div class="screen-reader-response">
+                            <p role="status" aria-live="polite" aria-atomic="true"></p>
+                            <ul></ul>
+                        </div>
+                        <form action="/lienhe/write" method="post" class="wpcf7-form init" aria-label="Form liên hệ" target="hiddenIframe">
+                            <input type="hidden" name="full_name">
+                            <input type="hidden" name="email">
+                            <input type="hidden" name="message" value="Yêu cầu liên hệ">
+                            <div style="display: none;">
+                            </div>
+                            <div class="title-quote">
+                                <p>Tư vấn</p>
+                            </div>
+                            <div class="form-quote">
+                                <p>
+                                    <span class="wpcf7-form-control-wrap" data-name="tel-71">
+                                        <input size="40" maxlength="400" class="wpcf7-form-control wpcf7-tel wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-tel phone-quote" placeholder="Số điện thoại*" required type="tel" name="phone" />
+                                    </span>
+                                    <button type="submit" class="submit-quote wpcf7-submit">
+                                        Gửi <i class="fas fa-location-arrow"></i>
+                                    </button>
+                                </p>
+                            </div>
+                            <ul>
+                                <li>
+                                    <p>- Tư vấn công năng sắp xếp bố trí phòng
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>- Tư vấn chất liệu màu sắc, kích thước
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>- Tư vấn báo giá chi tiết 24/7
+                                    </p>
+                                </li>
+                            </ul>
+                            <div class="wpcf7-response-output" aria-hidden="true"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<iframe frameborder="0" id="hiddenIframe" name="hiddenIframe" hidden="" class="d-none"></iframe>
 <footer id="footer">
     <div class="top-footer">
         <div class="container">
@@ -6,9 +62,7 @@
                     <div class="item-wrapper-footer">
                         <div class="icon img-wrap">
                             <img decoding="async" class="img entered lazyloaded" src="/assets/img/call-center-1.png"
-                                srcset="" alt="" data-lazy-src="/assets/img/call-center-1.png"
-                                data-ll-status="loaded"><noscript><img decoding="async" class="img"
-                                    src="/assets/img/call-center-1.png" srcset="" alt=""></noscript>
+                                srcset="" alt="" data-lazy-src="/assets/img/call-center-1.png" data-ll-status="loaded">
                         </div>
                         <div class="info">
                             <div class="title">
@@ -24,9 +78,7 @@
                     <div class="item-wrapper-footer">
                         <div class="icon img-wrap">
                             <img decoding="async" class="img entered lazyloaded" src="/assets/img/email-footer.png"
-                                srcset="" alt="" data-lazy-src="/assets/img/email-footer.png"
-                                data-ll-status="loaded"><noscript><img decoding="async" class="img"
-                                    src="/assets/img/email-footer.png" srcset="" alt=""></noscript>
+                                srcset="" alt="" data-lazy-src="/assets/img/email-footer.png" data-ll-status="loaded">
                         </div>
                         <div class="info">
                             <div class="title">
@@ -42,9 +94,7 @@
                     <div class="item-wrapper-footer">
                         <div class="icon img-wrap">
                             <img decoding="async" class="img entered lazyloaded" src="/assets/img/zalo-footer.png"
-                                srcset="" alt="" data-lazy-src="/assets/img/zalo-footer.png"
-                                data-ll-status="loaded"><noscript><img decoding="async" class="img"
-                                    src="/assets/img/zalo-footer.png" srcset="" alt=""></noscript>
+                                srcset="" alt="" data-lazy-src="/assets/img/zalo-footer.png" data-ll-status="loaded">
                         </div>
                         <div class="info">
                             <div class="title">
@@ -77,14 +127,13 @@
                             <li>
                                 <div class="title">
                                     Showroom: </div>
-                                <a class="desc" href="<?= GOOGLEMAP_LINK ?>"
-                                    data-wpel-link="external" rel="nofollow">
+                                <a class="desc" href="<?= GOOGLEMAP_LINK ?>" target="_blank" data-wpel-link="external" rel="nofollow">
                                     <?= SHOWROOM_ADDRESS ?> </a>
                             </li>
                             <li>
                                 <div class="title">
                                     Tổng kho: </div>
-                                <a class="desc" href="https://maps.app.goo.gl/JaYYuTKSX1RwZMnx7"
+                                <a class="desc" href="<?= WAREHOUSE_GOOGLEMAP_LINK ?>" target="_blank"
                                     data-wpel-link="external" rel="nofollow">
                                     <?= WAREHOUSE_ADDRESS ?>
                                 </a>
@@ -92,14 +141,15 @@
                             <li>
                                 <div class="title">
                                     Xưởng sản xuất: </div>
-                                <a class="desc" href="https://maps.app.goo.gl/f6cupr842YFSXyNy6 "
+                                <a class="desc" href="<?= FACTORY_GOOGLEMAP_LINK ?>" target="_blank"
                                     data-wpel-link="external" rel="nofollow">
                                     <?= FACTORY_ADDRESS ?> </a>
                             </li>
                             <li>
                                 <div class="title">
                                     Hotline: </div>
-                                <a class="desc" href="tel:<?= CUSTOMER_CARE_PHONE ?>" data-wpel-link="internal" rel="nofollow">
+                                <a class="desc" href="tel:<?= CUSTOMER_CARE_PHONE ?>" data-wpel-link="internal"
+                                    rel="nofollow">
                                     <?= CUSTOMER_CARE_PHONE ?> </a>
                             </li>
                         </ul>
@@ -138,29 +188,24 @@
                     <div class="social-wrap">
                         <a href="<?= ZALO_LINK ?>" class="social" style="background-color: " data-wpel-link="external"
                             rel="nofollow">
-                            <img src="/assets/img/zalo-s.png" alt="" data-lazy-src="/assets/img/zalo-s.png"
-                                data-ll-status="loaded" class="entered lazyloaded"><noscript><img
-                                    src="/assets/img/zalo-s.png" alt=""></noscript> </a>
+                            <img src="/assets/img/zalo-s.svg" alt="" data-lazy-src="/assets/img/zalo-s.svg"
+                                data-ll-status="loaded" class="entered lazyloaded"></a>
                         <a href="<?= FACEBOOK_LINK ?>" class="social" style="background-color: "
                             data-wpel-link="external" rel="nofollow">
-                            <img src="/assets/img/face-s.png" alt="" data-lazy-src="/assets/img/face-s.png"
-                                data-ll-status="loaded" class="entered lazyloaded"><noscript><img
-                                    src="/assets/img/face-s.png" alt=""></noscript> </a>
+                            <img src="/assets/img/face-s.svg" alt="" data-lazy-src="/assets/img/face-s.svg"
+                                data-ll-status="loaded" class="entered lazyloaded"></a>
                         <a href="<?= YOUTUBE_LINK ?>" class="social" style="background-color: "
                             data-wpel-link="external" rel="nofollow">
-                            <img src="/assets/img/ytb-s.png" alt="" data-lazy-src="/assets/img/ytb-s.png"
-                                data-ll-status="loaded" class="entered lazyloaded"><noscript><img
-                                    src="/assets/img/ytb-s.png" alt=""></noscript> </a>
+                            <img src="/assets/img/ytb-s.svg" alt="" data-lazy-src="/assets/img/ytb-s.svg"
+                                data-ll-status="loaded" class="entered lazyloaded"></a>
                         <a href="<?= TIKTOK_LINK ?>" class="social" style="background-color: " data-wpel-link="external"
                             rel="nofollow">
-                            <img src="/assets/img/tiktok-s.png" alt="" data-lazy-src="/assets/img/tiktok-s.png"
-                                data-ll-status="loaded" class="entered lazyloaded"><noscript><img
-                                    src="/assets/img/tiktok-s.png" alt=""></noscript> </a>
+                            <?= Asset::img('tiktok-s.svg') ?>
+                        </a>
                     </div>
                     <div class="extra_info">
                         <div class="item">
-                            <a class="img-wrap" href="http://online.gov.vn/Home/WebDetails/78909"
-                                data-wpel-link="external" rel="nofollow">
+                            <a class="img-wrap" href="#!" data-wpel-link="external" rel="nofollow">
                                 <picture>
                                     <source media="(max-width:768px)" data-lazy-srcset="/assets/img/Bo-cong-thuong.svg"
                                         srcset="/assets/img/Bo-cong-thuong.svg">
@@ -170,8 +215,7 @@
                                         srcset="/assets/img/Bo-cong-thuong.svg">
                                     <img src="/assets/img/Bo-cong-thuong.svg"
                                         data-lazy-src="/assets/img/Bo-cong-thuong.svg" data-ll-status="loaded"
-                                        class="entered lazyloaded"><noscript><img
-                                            src="/assets/img/Bo-cong-thuong.svg"></noscript>
+                                        class="entered lazyloaded">
                                 </picture>
                             </a>
                         </div>
@@ -179,15 +223,14 @@
                             <a class="img-wrap" href="#!" data-wpel-link="external"
                                 rel="nofollow external noopener noreferrer">
                                 <picture>
-                                    <source media="(max-width:768px)" data-lazy-srcset="/assets/img/dmca.png"
-                                        srcset="/assets/img/dmca.png">
-                                    <source media="(max-width:1024px)" data-lazy-srcset="/assets/img/dmca.png"
-                                        srcset="/assets/img/dmca.png">
-                                    <source media="(max-width:1200px)" data-lazy-srcset="/assets/img/dmca.png"
-                                        srcset="/assets/img/dmca.png">
-                                    <img src="/assets/img/dmca.png" data-lazy-src="/assets/img/dmca.png"
-                                        data-ll-status="loaded" class="entered lazyloaded"><noscript><img
-                                            src="/assets/img/dmca.png"></noscript>
+                                    <source media="(max-width:768px)" data-lazy-srcset="/assets/img/DMCA.svg"
+                                        srcset="/assets/img/DMCA.svg">
+                                    <source media="(max-width:1024px)" data-lazy-srcset="/assets/img/DMCA.svg"
+                                        srcset="/assets/img/DMCA.svg">
+                                    <source media="(max-width:1200px)" data-lazy-srcset="/assets/img/DMCA.svg"
+                                        srcset="/assets/img/DMCA.svg">
+                                    <img src="/assets/img/DMCA.svg" data-lazy-src="/assets/img/DMCA.svg"
+                                        data-ll-status="loaded" class="entered lazyloaded">
                                 </picture>
                             </a>
                         </div>
@@ -218,50 +261,48 @@
                 <a class="item-contact" rel="nofollow" href="<?= ZALO_LINK ?>" data-wpel-link="external">
                     <div class="icon-contact" style="background : #1f5be0;">
                         <img class="entered lazyloaded" alt="url" src="/assets/img/Logo-Zalo-Arc.webp"
-                            data-lazy-src="/assets/img/Logo-Zalo-Arc.webp" data-ll-status="loaded"><noscript><img
-                                class="" alt="url" src="/assets/img/Logo-Zalo-Arc.webp"></noscript>
+                            data-lazy-src="/assets/img/Logo-Zalo-Arc.webp" data-ll-status="loaded">
                     </div>
-                    <div class="text-contact">
-                        Chat Zalo </div>
+                    <!-- <div class="text-contact">
+                        Chat Zalo </div> -->
                 </a>
             </div>
             <div class="item-contact-box form-tu-van d-none d-md-block">
                 <a class="item-contact" rel="nofollow" href="#" data-bs-toggle="modal" data-bs-target="#tuVanModal">
                     <div class="icon-contact" style="background : #2e8a4c;">
                         <img class="entered lazyloaded" alt="url" src="/assets/img/Email.png"
-                            data-lazy-src="/assets/img/Email.png" data-ll-status="loaded"><noscript><img class=""
-                                alt="url" src="/assets/img/Email.png"></noscript>
+                            data-lazy-src="/assets/img/Email.png" data-ll-status="loaded">
                     </div>
-                    <div class="text-contact"> Tư vấn </div>
+                    <!-- <div class="text-contact"> Tư vấn </div> -->
                 </a>
             </div>
             <div class="item-contact-box map-click d-none d-md-block">
-                <a class="item-contact" rel="nofollow" href="<?=GOOGLEMAP_LINK?>" target="_blank">
-                    <div class="icon-contact" style="background : #90dfaa;">
-                        <img class="entered lazyloaded" alt="url" src="/assets/img/q-DVjHfTNn.png"
-                            data-lazy-src="/assets/img/q-DVjHfTNn.png" data-ll-status="loaded"><noscript><img class=""
-                                alt="url" src="/assets/img/q-DVjHfTNn.png"></noscript>
+                <a class="item-contact" rel="nofollow" href="<?= MESSENGER_LINK ?>" target="_blank">
+                    <div class="icon-contact p-0" style="background : #00000000;">
+                        <img class="entered lazyloaded" alt="url" src="/assets/img/messenger.svg"
+                            data-lazy-src="/assets/img/messenger.svg" data-ll-status="loaded">
                     </div>
-                    <div class="text-contact">
-                        Vị trí </div>
+                    <!-- <div class="text-contact">
+                        Messenger </div> -->
                 </a>
             </div>
             <div class="pop_contact_menu d-md-none">
-                <a href="#!" data-bs-toggle="modal" data-bs-target="#tuVanModal" class="button"><img style="width: 38px;height: 28px" src="/assets/img/Email.png" alt=""></a>
+                <a href="#!" data-bs-toggle="modal" data-bs-target="#tuVanModal" class="button"><img
+                        style="width: 38px;height: 28px" src="/assets/img/Email.png" alt=""></a>
                 <a href="<?= ZALO_LINK ?>" class="button"><img src="/assets/img/Logo-Zalo-Arc.webp" alt=""></a>
-                <a href="<?=GOOGLEMAP_LINK?>" target="_blank" class="button"><img src="/assets/img/q-DVjHfTNn.png" alt=""></i></a>
+                <a href="<?= MESSENGER_LINK ?>" target="_blank" class="button bg-transparent p-0"><img src="/assets/img/messenger.svg"
+                        alt=""></i></a>
             </div>
             <div class="item-contact-box phone-show">
                 <a class="item-contact" rel="nofollow" href="tel:<?= CUSTOMER_CARE_PHONE ?>" data-wpel-link="internal">
                     <div class="icon-contact" style="background : #ec5128;">
                         <img class="entered lazyloaded" alt="url" src="/assets/img/icon-phone-1.png"
-                            data-lazy-src="/assets/img/icon-phone-1.png" data-ll-status="loaded"><noscript><img class=""
-                                alt="url" src="/assets/img/icon-phone-1.png"></noscript>
+                            data-lazy-src="/assets/img/icon-phone-1.png" data-ll-status="loaded">
 
                     </div>
-                    <div class="text-contact" style="background: #ec5128;">
+                    <!-- <div class="text-contact" style="background: #ec5128;">
                         <?= CUSTOMER_CARE_PHONE ?>
-                    </div>
+                    </div> -->
                 </a>
             </div>
         </div>
@@ -362,17 +403,17 @@
     </div>
 </div>
 <div id="body_overlay"></div>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
-<script type="text/javascript" src="/assets/js/slick-section.js"></script>
-<script type="text/javascript" src="/assets/js/main.js"></script>
-<script type="text/javascript" src="/assets/js/mobile-menu.js"></script>
-<script type="text/javascript" src="/assets/js/sticky-menu.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="/assets/vendor/slick.min.js"></script>
+<script type="text/javascript" src="/assets/js/slick-section.js?v=<?= ASSETS_VERSION ?>"></script>
+<script type="text/javascript" src="/assets/js/main.js?v=<?= ASSETS_VERSION ?>"></script>
+<script type="text/javascript" src="/assets/js/mobile-menu.js?v=<?= ASSETS_VERSION ?>"></script>
+<script type="text/javascript" src="/assets/js/sticky-menu.js?v=<?= ASSETS_VERSION ?>"></script>
+<script src="/assets/vendor/bootstrap.bundle.min.js"></script>
 <script>
     AOS.init({
         duration: 1000, // Thời gian chạy hiệu ứng (ms)
         once: true,     // Hiệu ứng chỉ chạy 1 lần
-        delay: 100
+        delay: 50
     });
 </script>
 <script>
@@ -385,7 +426,7 @@
             e.stopPropagation();
         });
         $(document).click(function (e) {
-            if(e.target.closest(".pop_contact_menu") == null) {
+            if (e.target.closest(".pop_contact_menu") == null) {
                 $(".pop_contact_menu").removeClass("open");
             }
         });

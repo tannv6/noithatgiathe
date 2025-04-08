@@ -51,36 +51,18 @@ class Controller_Admin_Setting extends Controller_Base
 
         $post = Input::post();
 
-        \Upload::process([
-            'path' => DOCROOT . 'uploads/settings/',
-            'randomize' => true,
-            'ext_whitelist' => ['jpg', 'jpeg', 'png', 'gif', 'ico'],
-        ]);
+        $uploader = new \Helper\Uploader(DOCROOT . 'uploads/settings/', IMAGE_ALLOWED_FORMAT);
 
-        if (\Upload::is_valid()) {
-            \Upload::save();
-            $files = \Upload::get_files();
+        if ($uploader->upload()) {
+            $favicon = $uploader->getName('favicon');
 
-            $favicon = array_filter($files, function($value) {
-                return $value['field'] == 'favicon';
-            })[0]['saved_as'];
+            $logo_header = $uploader->getName('logo_header');
 
-            $logo_header = array_filter($files, function($value) {
-                return $value['field'] == 'logo_header';
-            })[0]['saved_as'];
+            $logo_header_reverse = $uploader->getName('logo_header_reverse');
 
-            $logo_header_reverse = array_filter($files, function($value) {
-                return $value['field'] == 'logo_header_reverse';
-            })[0]['saved_as'];
+            $og_image = $uploader->getName('og_image');
 
-            $og_image = array_filter($files, function($value) {
-                return $value['field'] == 'og_image';
-            })[0]['saved_as'];
-
-            $owner_avatar = array_filter($files, function($value) {
-                return $value['field'] == 'owner_avatar';
-            })[0]['saved_as'];
-
+            $owner_avatar = $uploader->getName('owner_avatar');
         }
 
         foreach ($post as $key => $value) {

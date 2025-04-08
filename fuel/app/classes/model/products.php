@@ -38,42 +38,52 @@ class Model_Products extends Orm\Model
         'Orm\Observer_UpdatedAt' => ['events' => ['before_save'], 'mysql_timestamp' => true],
     ];
 
+    protected static $_has_many = array(
+        'product_category_mappings' => array(
+            'key_from' => 'product_id',
+            'model_to' => 'Model_ProductCategoryMapping',
+            'key_to' => 'product_id',
+            'cascade_save' => true,
+            'cascade_delete' => false,
+        ),
+        'categories' => array(
+            'key_from' => 'product_id',
+            'model_to' => 'Model_ProductCategory',
+            'key_to' => 'category_id',
+            'through' => 'product_category_mapping', // liên kết qua bảng trung gian
+        ),
+    );
+
     public static function getPaging($where = [], $page = 1, $limit = 10, $order_by = [], $sell_price = []) {
         $offset = ($page - 1) * $limit;
-    
         // Đảm bảo chỉ lấy sản phẩm chưa bị xóa
         $where['deleted_at'] = null;
+        $product_name = $where['product_name'];
+        unset($where['product_name']);
+        $category_id = $where['category_id'];
+        unset($where['category_id']);
     
         // Đếm tổng số bản ghi phù hợp
-        $total = Model_Products::query()->where($where);
-
-        if (count($sell_price) > 0) {
-            $total->where_open();
-            foreach ($sell_price as $index => $range) {
-                if (is_array($range) && count($range) === 2) {
-                    list($min, $max) = $range;
-                    if ($index == 0) {
-                        // Điều kiện đầu tiên thì chỉ cần where
-                        $total->where('sell_price', '>=', $min)
-                            ->where('sell_price', '<=', $max);
-                    } else {
-                        // Các điều kiện tiếp theo thì dùng or_where
-                        $total->or_where_open()
-                            ->where('sell_price', '>=', $min)
-                            ->where('sell_price', '<=', $max)
-                            ->or_where_close();
-                    }
-                }
-            }
-            $total->where_close();
-        }
-
-        $total = $total->count();
-
-        $total_page = ceil($total / $limit);
-    
-        // Truy vấn dữ liệu
         $query = Model_Products::query()->where($where);
+
+        if ($product_name) {
+            $query->where('product_name', 'like', '%' . $product_name . '%');
+        }
+        if ($category_id) {
+            $children = Model_ProductCategory::getChildren($category_id);
+            $children = array_column($children, 'category_id');
+			if(count($children) > 0) {
+				$query->related('product_category_mappings', [
+					'where' => [
+						['category_id', 'IN', $children]
+					]
+				]);
+			} else {
+				$query->related('product_category_mappings', [
+					'where' => ['category_id' => $category_id]
+				]);
+			}
+        }
 
         if (count($sell_price) > 0) {
             $query->where_open();
@@ -95,17 +105,25 @@ class Model_Products extends Orm\Model
             }
             $query->where_close();
         }
-    
+
+		$total = clone $query;
+
+        $total = $total->count();
+
+        $total_page = ceil($total / $limit);
+
         // Thêm điều kiện sắp xếp nếu có
         if (!empty($order_by)) {
             foreach ($order_by as $column => $direction) {
                 $query->order_by($column, $direction);
             }
         }
-    
+
         // Lấy danh sách sản phẩm theo phân trang
         $data = $query->rows_limit($limit)->rows_offset($offset)->get();
-    
+
+		// dd(DB::last_query());
+
         return [
             'total_page' => $total_page,
             'total' => $total,
@@ -119,9 +137,9 @@ class Model_Products extends Orm\Model
 
     public static function updateViewCount($product_id) {
         DB::update('products')
-            ->set('view_count', DB::expr('view_count + 1'))
-            ->where('product_id', $product_id)
-            ->execute();
+        ->set(['view_count' => DB::expr('view_count + 1')])
+        ->where('product_id', $product_id)
+        ->execute();
     }
 
     public static function getMostView() {

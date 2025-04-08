@@ -75,15 +75,40 @@
             <tr>
                 <th>Danh mục:</th>
                 <td>
-                    <select name="category_id" class="form-select w-auto">
-                        <option value="">Chọn danh mục</option>
-                        <?php foreach ($categories as $category1): ?>
-                            <option value="<?= $category1['category_id'] ?>" <?=$category1['level'] == 1 ? "disabled" : ""?> <?=$category1['category_id'] == $product['category_id'] ? "selected" : ""?> >
-                                <?php for ($i = 1; $i < $category1['level']; $i++): ?>-<?php endfor; ?>
-                                <?= $category1['category_name'] ?>
-                            </option>
-                        <?php endforeach; ?>
+					<?php $categories = getCategoriesWithChildren(); ?>
+                    <select class="js-example-basic-multiple" name="category_ids[]" multiple="multiple">
+						<?php foreach($categories as $category): ?>
+							<option value="<?=$category['category_id']?>" <?= in_array($category['category_id'], $product['categories']) ? "selected" : ""?> data-level="parent">
+								<?= $category['category_name'] ?>
+							</option>
+							<?php foreach($category['children'] as $category1): ?>
+								<option value="<?=$category1['category_id']?>" <?= in_array($category1['category_id'], $product['categories']) ? "selected" : ""?> data-level="child">
+									<?= $category1['category_name'] ?>
+								</option>
+							<?php endforeach; ?>
+						<?php endforeach; ?>
                     </select>
+                    <script>
+                        $(document).ready(function() {
+                            $('.js-example-basic-multiple').select2({
+								placeholder: "Chọn danh mục",
+								allowClear: true,
+								width: '100%',
+								templateResult: function (data) {
+									if (!data.id) return data.text;
+
+									const level = $(data.element).data('level');
+									const $result = $('<span></span>').text(data.text);
+
+									if (level === 'parent') {
+									$result.css('font-weight', 'bold');
+									}
+
+									return $result;
+								}
+							});
+                        });
+                    </script>
                 </td>
             </tr>
             <tr>
@@ -169,7 +194,30 @@
 </form>
 <script>
     $(document).ready(function() {
-        ClassicEditor.create(document.querySelector("#description"));
+        tinymce.init({
+            selector: "#description",
+            content_css: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
+            plugins: "image code table autoresize",
+            toolbar: "undo redo | styles fontsize fontfamily | bold italic underline | alignleft aligncenter alignright | table | image | code",
+            images_upload_url: "/api/upload/editor",
+            automatic_uploads: true,
+            elementpath: false,
+            menubar: false,
+            autoresize_bottom_margin: 20,
+            autoresize_min_height: 200,
+			font_size_formats: '8px 10px 12px 14px 16px 18px 24px 36px 48px',
+            setup: function(editor) {
+                editor.on('init', function() {
+                    editor.getBody().classList.add('container', 'mt-3');
+					$(editor.getDoc()).find("html").css({
+						fontSize: '14px'
+					});
+                });
+            }
+        });
+        $("form").submit(function (e) {
+            tinymce.triggerSave();
+        })
         $(document).on('change', '#addImage', function (evt) {
             var file = evt.target.files[0];
             if(!file) return;

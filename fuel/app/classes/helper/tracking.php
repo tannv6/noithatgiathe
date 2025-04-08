@@ -4,6 +4,7 @@ namespace Helper;
 use Fuel\Core\DB;
 use Detection\MobileDetect as Mobile_Detect;
 use Model_Products;
+use Model_BbsList;
 
 class Tracking {
     public static function trackProductView($product_id) {
@@ -35,16 +36,9 @@ class Tracking {
         if ($exists == 0) {
             // Lưu vào database
             DB::insert('product_views')
-                ->set([
-                    'product_id'  => $product_id,
-                    'user_ip'     => $user_ip,
-                    'device_type' => $device,
-                    'view_date'   => $current_date,
-                    'view_hour'   => $current_hour,
-                    'view_month'  => $current_month,
-                    'view_year'   => $current_year
-                ])
-                ->execute();
+            ->columns(['product_id', 'user_ip', 'device_type', 'view_date', 'view_hour', 'view_month', 'view_year'])
+            ->values([$product_id, $user_ip, $device, $current_date, $current_hour, $current_month, $current_year])
+            ->execute();
 
             // Lưu session để ngăn trùng lặp trong phiên
             \Session::set("viewed_product_{$product_id}", true);
@@ -77,14 +71,9 @@ class Tracking {
         if (empty($exists)) {
             // Chèn dữ liệu nếu chưa có
             DB::insert('post_views')
-                ->set([
-                    'post_id'    => $post_id,
-                    'ip_address' => $ip_address,
-                    'user_agent' => $user_agent,
-                    'device'     => $device,
-                    'view_date'  => date('Y-m-d H:i:s'),
-                ])
-                ->execute();
+            ->columns(['post_id', 'ip_address', 'user_agent', 'device', 'view_date']) // Danh sách cột
+            ->values([$post_id, $ip_address, $user_agent, $device, date('Y-m-d H:i:s')]) // Giá trị tương ứng
+            ->execute();
 
             // Luu session de ngan trung lap trong phien
             \Session::set("viewed_post_{$post_id}", true);

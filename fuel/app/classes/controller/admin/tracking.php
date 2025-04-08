@@ -33,7 +33,8 @@ class Controller_Admin_Tracking extends Controller
     public function action_product() {
 
         $template = View::forge('template/admin/template_main', [
-            'active_menu' => "8,tracking,tracking_product"
+            'active_menu' => "8,tracking,tracking_product",
+            'title' => 'Thống kê lượt xem sản phẩm'
         ]);
 
         $template->content = View::forge('admin/tracking/product');
@@ -44,7 +45,8 @@ class Controller_Admin_Tracking extends Controller
     public function action_articles() {
 
         $template = View::forge('template/admin/template_main', [
-            'active_menu' => "8,tracking,tracking_articles"
+            'active_menu' => "8,tracking,tracking_articles",
+            'title' => 'Thống kê lượt xem bài việt'
         ]);
 
         $template->content = View::forge('admin/tracking/articles');

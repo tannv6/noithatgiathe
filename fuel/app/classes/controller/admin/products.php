@@ -41,14 +41,28 @@ class Controller_Admin_Products extends Controller_Base
 	{
 
         $page = Input::get('page', 1);
+        $product_name = Input::get('product_name');
+        $sort = Input::get('sort');
+
+        $sort_arr1 = explode('-', $sort);
 
         $template = View::forge('template/admin/template_main', [
             'active_menu' => "2,4"
         ]);
 
-        $products = Model_Products::getPaging([], $page);
+        $sort_arr = [];
 
-        $view = View::forge('admin/products/index', compact('products'));
+        if($sort_arr1[0] && $sort_arr1[1]) {
+            $sort_arr[$sort_arr1[0]] = $sort_arr1[1];
+        }
+
+        $sort_arr['product_id'] = 'desc';
+
+        $products = Model_Products::getPaging([
+            'product_name' => $product_name
+        ], $page, 10, $sort_arr);
+
+        $view = View::forge('admin/products/index', compact('products', 'product_name', 'sort'));
 
         $template->content = $view;
 		$template->title = 'Sản phẩm';
@@ -107,25 +121,14 @@ class Controller_Admin_Products extends Controller_Base
             $deleted_images = array_filter($deleted_images, function($value) {
                 return $value;
             });
-            \Upload::process([
-                'path' => DOCROOT . 'uploads/products/',
-                'randomize' => true,
-                'ext_whitelist' => ['jpg', 'jpeg', 'png', 'gif'],
-            ]);
 
-            if (\Upload::is_valid()) {
-                \Upload::save();
-                $files = \Upload::get_files();
+            $uploader = new \Helper\Uploader(DOCROOT . 'uploads/products/', IMAGE_ALLOWED_FORMAT);
 
-                $product_images = array_filter($files, function($value) {
-                    return $value['field'] == 'product_image';
-                });
+            if ($uploader->upload()) {
 
-                $product_gallery = array_filter($files, function($value) {
-                    return strpos($value['field'], 'product_gallery') !== false;
-                });
+                $product_gallery = $uploader->get('product_gallery');
 
-                $product_image = $product_images[0]['saved_as'];
+                $product_image = $uploader->getName('product_image');
 
             }
 
@@ -156,7 +159,8 @@ class Controller_Admin_Products extends Controller_Base
                     'is_new' => Input::post('is_new', 'N'),
                     'is_flash_sale' => Input::post('is_flash_sale', 'N'),
                     'top_seller' => Input::post('top_seller', 'N'),
-                    'slug' => $this->getUniqueSlug($this->convert_vn_to_str(Input::post('product_name')))
+                    'slug' => $this->getUniqueSlug($this->convert_vn_to_str(Input::post('product_name'))),
+					'view_count' => 0
                 ]);
 
                 if($product_image) $product->product_image = $product_image;
@@ -182,6 +186,19 @@ class Controller_Admin_Products extends Controller_Base
                     $product_gallery1->delete();
                 }
 
+				$category_ids = Input::post('category_ids');
+
+				DB::query('DELETE FROM `product_category_mapping` WHERE `product_id` = ' . $product->product_id)->execute();
+
+				if(is_array($category_ids)) {
+					foreach($category_ids as $id) {
+						Model_ProductCategoryMapping::forge([
+							'category_id' => $id,
+							'product_id' => $product->product_id
+						])->save();
+					}
+				}
+
                 Session::set_flash('success', $success);
                 Response::redirect($redirect);
             } else {
@@ -193,6 +210,8 @@ class Controller_Admin_Products extends Controller_Base
                 if (!$product) {
                     Response::redirect('admin/products');
                 }
+				$product['categories'] = array_column(Model_ProductCategoryMapping::find("all", ['where' => ['product_id' => $id]]), 'category_id');
+				// dd($product['categories']);
                 $product_gallery = Model_ProductGallery::find('all', ['where' => ['product_id' => $id]]);
             }
         }

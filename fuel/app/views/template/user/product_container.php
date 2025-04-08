@@ -38,11 +38,18 @@ $price = Input::get('price');
             <?=htmlspecialchars_decode($category['sort_description'])?>
         </div>
     <?php endif; ?>
-    <div class="row child-categories child-categories-top">
+	<style>
+        .top_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+13) {
+            display: none;
+        }
+    </style>
+    <?php if($top_categories): ?>
+    <div class="swiper child-categories-top top_categories_carousel">
+    <div class="swiper-wrapper row g-0">
         <?php foreach($top_categories as $category): ?>
-            <div class="col-4 col-md-2 col-lg-2 child-cate">
+            <div class="swiper-slide col-2">
                 <div class="card-cate-item"><a href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="internal">
-                        <div class="cover-image">
+                        <div class="cover-image border-0">
                             <div class="img-wrap thumbnail-wrapper">
                                 <img src="/uploads/categories/<?=$category['category_image']?>" alt="<?=$category['category_name']?>" />
                             </div>
@@ -55,6 +62,44 @@ $price = Input::get('price');
             </div>
         <?php endforeach; ?>
     </div>
+    <!-- <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div> -->
+    <div class="swiper-pagination"></div>
+    </div>
+    <?php endif; ?>
+    <script>
+        $(document).ready(function(){
+            var swiper = new Swiper(".top_categories_carousel", {
+                speed: 1000,
+                slidesPerView: 1,
+                spaceBetween: 10,
+                // navigation: {
+                //     nextEl: '.swiper-button-next',
+                //     prevEl: '.swiper-button-prev',
+                // },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true
+                },
+                breakpoints: {
+                    679: {
+                        slidesPerView: 3,
+                        grid: {
+                            rows: 2,
+                            fill: 'columns',
+                        },
+                    },
+                    1024: {
+                        slidesPerView: 6,
+                        grid: {
+                            rows: 2,
+                            fill: 'columns',
+                        },
+                    }
+                }
+            });
+        });
+    </script>
     <div class="row">
         <div class="col-12 col-md-6 col-lg-3 sidebar">
             <div class="column-sidebar mobile-sidebar ">
@@ -65,12 +110,12 @@ $price = Input::get('price');
                             <ul id="product-cate-sidebar-new" class="menu-class">
                                 <?php foreach($categories as $category): ?>
                                     <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-85544">
-                                        <a href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="external" rel="nofollow external noopener noreferrer"><?=$category['category_name']?></a>
+                                        <a class="<?=$category_id == $category['category_id'] ? 'active' : ''?>" href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="external" rel="nofollow external noopener noreferrer"><?=$category['category_name']?></a>
                                         <?php if(count($category['children']) > 0): ?>
-                                        <ul class="sub-menu">
+                                        <ul class="sub-menu <?=in_array($category['category_id'], $parents_category) ? 'active' : ''?>">
                                             <?php foreach($category['children'] as $category1): ?>
                                                 <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-85484">
-                                                    <a href="/danh-muc-san-pham/<?=$category1['slug']?>" data-wpel-link="external" rel="nofollow external noopener noreferrer">
+                                                    <a class="<?=$category_id == $category1['category_id'] ? 'active' : ''?>" href="/danh-muc-san-pham/<?=$category1['slug']?>" data-wpel-link="external" rel="nofollow external noopener noreferrer">
                                                         <?=$category1['category_name']?>
                                                     </a>
                                                 </li>
@@ -92,7 +137,7 @@ $price = Input::get('price');
                             <input type="hidden" name="orderby" value="<?=$orderby?>">
                             <div class="item">
                                 <input type="checkbox" id="price-0-500000" name="price[]" value="0-500000" <?= (in_array('0-500000', $price)) ? 'checked' : '' ?>>
-                                <label for="price-0-100000">Giá dưới 500.000đ</label>
+                                <label for="price-0-500000">Giá dưới 500.000đ</label>
                             </div>
                             <div class="item">
                                 <input type="checkbox" id="price-500000-1000000" name="price[]" value="500000-1000000" <?= (in_array('500000-1000000', $price)) ? 'checked' : '' ?>>

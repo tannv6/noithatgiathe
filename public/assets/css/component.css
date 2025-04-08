@@ -508,7 +508,7 @@
 .promotions .right {
   display: flex;
   color: #fff;
-  background: var(--primary_color);
+  background: var(--third_color);
   align-items: center;
   padding: 15px;
 }
@@ -542,7 +542,7 @@
 }
 .promotions .right .primary-button i,
 .promotions .right .primary-button a {
-  background: var(--third_color);
+  background: var(--primary_color);
 }
 .product_list {
   margin-top: 30px;
@@ -2340,7 +2340,8 @@ form.woocommerce-form.woocommerce-form-login.login {
   align-items: center;
   position: relative;
 }
-#product-cate-sidebar-new li a:hover {
+#product-cate-sidebar-new li a:hover,
+#product-cate-sidebar-new li a.active {
   color: var(--secondary_color);
 }
 #product-cate-sidebar-new li a:before {
@@ -2370,7 +2371,7 @@ form.woocommerce-form.woocommerce-form-login.login {
   display: none;
   list-style: none;
   padding: 0;
-  font-size: 16px;
+  font-size: 14px;
   top: 0;
   left: 100%;
   z-index: 1010;
@@ -2387,4 +2388,24 @@ form.woocommerce-form.woocommerce-form-login.login {
 #product-cate-sidebar-new li.current-menu-ancestor .sub-menu,
 #product-cate-sidebar-new li.current-menu-item .sub-menu {
   display: block;
+}
+
+.iframe-container > *,
+.iframe-container iframe {
+  max-width: 100%;
+}
+
+.content-entry .iframe-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 66.66%;
+  height: 0
+}
+
+.content-entry .iframe-container iframe {
+  position: absolute;
+  width: 100% !important;
+  height: 100% !important;
+  top: 0;
+  left: 0
 }

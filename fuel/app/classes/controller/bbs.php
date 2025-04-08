@@ -36,7 +36,9 @@ class Controller_Bbs extends Controller
 	 */
 	public function action_index()
 	{
-        $template = View::forge('template/user/template_main');
+        $template = View::forge('template/user/template_main',[
+            'title' => 'Chuyên mục bài viết',
+        ]);
 
 		return Response::forge($template);
 	}
@@ -44,11 +46,11 @@ class Controller_Bbs extends Controller
     public function get_list($slug = null, $page = 1)
 	{
 
-        $limit = 3;
+        $limit = 10;
 
         $category = Model_BbsCategory::find('first', ['where' => ['slug' => $slug]]);
 
-        $posts = Model_BbsList::getPaging(['category_code' => $category['code']], $page, $limit);
+        $posts = Model_BbsList::getPaging(['category_code' => $category['code'], 'status' => "Y",], $page, $limit);
 
         $view = View::forge('bbs/list', [
             'title' => $category['name'],
@@ -73,6 +75,7 @@ class Controller_Bbs extends Controller
 
         $template = View::forge('template/user/template_main', [
             'active' => $slug,
+            'title' => $category['name'],
         ]);
 
         $template->content = $content;
@@ -85,14 +88,23 @@ class Controller_Bbs extends Controller
         $comment_email = \Session::get('comment_email');
         $comment_remember = \Session::get('comment_remember');
 
-        $bbs = Model_BbsList::find('first', ['where' => ['slug' => $slug]]);
+        $bbs = Model_BbsList::find('first', ['where' => ['slug' => $slug, 'status' => "Y",]]);
+
+		if (empty($bbs)) {
+			return Response::redirect('/');
+		}
+
+        $comments = Model_Comments::find('all', ['where' => ['bbs_id' => $bbs['bbs_id']]]);
 
         Tracking::trackPostView($bbs['bbs_id']);
 
         $view = View::forge('bbs/view', [
             'comment_author' => $comment_author,
             'comment_email' => $comment_email,
-            'comment_remember' => $comment_remember
+            'comment_remember' => $comment_remember,
+            'comments' => $comments,
+            'star' => 4,
+            'cmt_count' => 101,
         ]);
 
         $view ->set('bbs', $bbs, false);
@@ -106,10 +118,17 @@ class Controller_Bbs extends Controller
         $content = View::forge('template/user/bbs_container', [
             'view' => $view,
             'breadcrumb' => $breadcrumb,
-            'most_view' => $most_view
+            'most_view' => $most_view,
         ]);
 
-        $template = View::forge('template/user/template_main');
+        $category = Model_BbsCategory::find('first', ['where' => ['code' => $bbs['category_code']]]);
+
+        $template = View::forge('template/user/template_main', [
+            'active' => $category['slug'],
+            'title' => $bbs['title'],
+            'og_image' => DOMAIN . "/uploads/bbs/{$bbs['category_code']}/" . $bbs['thumb'],
+            'og_url' => DOMAIN . "/bai-viet/" . $bbs['slug'],
+        ]);
 
         $template->content = $content;
 

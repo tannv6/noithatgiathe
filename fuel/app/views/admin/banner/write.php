@@ -23,7 +23,7 @@
                 <td><input type="text" name="sub_title" value="<?=$banner['sub_title']?>" class="form-control"></td>
             </tr>
             <tr>
-                <th>Ảnh PC:</th>
+                <th>Ảnh PC:<br/>(<?=$config['ratio_width'] ?? '0'?>px X <?=$config['ratio_height'] ?? '0'?>px)</th>
                 <td>
                     <input type="file" name="image" class="form-control">
                     <!-- <div class="d-flex mt-1 gap-3">
@@ -40,7 +40,7 @@
                 </td>
             </tr>
             <tr>
-                <th>Ảnh Mobile:</th>
+                <th>Ảnh Mobile:<br/>(<?=$config['mobile_ratio_width'] ?? '0'?>px X <?=$config['mobile_ratio_height'] ?? '0'?>px)</th>
                 <td>
                     <input type="file" name="image_mobile" class="form-control">
                     <!-- <div class="d-flex mt-1 gap-3">

@@ -1,4 +1,4 @@
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" onsubmit="return handleSubmit(event);">
     <div class="d-flex justify-content-end gap-2">
         <a href="/admin/productcategories?parent_id=<?=$category['parent_id']?>" class="btn btn-secondary px-3"><i class="fa-solid fa-list"></i> Về danh sách</a>
         <button class="btn btn-primary px-3"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
@@ -40,6 +40,7 @@
                     <?php if($category['category_image']): ?>
                         <div class="mt-2">Hình ảnh hiện tại: <br/>
                         <img src="/uploads/categories/<?=$category['category_image']?>" class="img-thumbnail" width="100">
+                        <button type="submit" name="delete_image" value="delete_image" class="btn btn-danger">Xóa</button>
                     </div>
                     <?php endif; ?>
                 </td>
@@ -51,6 +52,7 @@
                     <?php if($category['category_banner']): ?>
                         <div class="mt-2">Hình ảnh hiện tại: <br/>
                         <img src="/uploads/categories/<?=$category['category_banner']?>" class="img-thumbnail" width="200">
+                        <button type="submit" name="delete_banner" value="delete_banner" class="btn btn-danger">Xoa</button>
                     </div>
                     <?php endif; ?>
                 </td>
@@ -74,7 +76,37 @@
     </table>
 </form>
 <script>
+    function handleSubmit(event) {
+        tinymce.triggerSave();
+        const clickedButton = event.submitter;
+        if (clickedButton && (clickedButton.value === "delete_image" || clickedButton.value === "delete_banner")) {
+            return confirm("Bạn có chắc chắn muốn xoá?");
+        }
+        return true;
+    }
+</script>
+<script>
     $(document).ready(function () {
-        ClassicEditor.create(document.querySelector("#sort_description"));
+		tinymce.init({
+            selector: "#sort_description",
+            content_css: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
+            plugins: "image code table autoresize",
+            toolbar: "undo redo | styles fontsize fontfamily | bold italic underline | alignleft aligncenter alignright | table | image | code",
+            images_upload_url: "/api/upload/editor",
+            automatic_uploads: true,
+            elementpath: false,
+            menubar: false,
+            autoresize_bottom_margin: 20,
+            autoresize_min_height: 200,
+			font_size_formats: '8px 10px 12px 14px 16px 18px 24px 36px 48px',
+            setup: function(editor) {
+                editor.on('init', function() {
+                    editor.getBody().classList.add('container', 'mt-3');
+					$(editor.getDoc()).find("html").css({
+						fontSize: '14px'
+					});
+                });
+            }
+        });
     });
 </script>

@@ -25,10 +25,10 @@ return array(
 		'type'           => 'mysqli',
 		'connection'     => array(
 			'hostname'       => 'localhost',
-			'port'           => '3333',
+			'port'           => '3306',
 			'database'       => 'noi74109_db',
-			'username'       => 'root',
-			'password'       => 'root',
+			'username'       => 'noi74109_db',
+			'password'       => 'JoPo%5PuKe@3ToGi',
 			'persistent'     => false,
 			'compress'       => false,
 		),

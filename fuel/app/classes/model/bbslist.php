@@ -26,19 +26,42 @@ class Model_BbsList extends Orm\Model
         'Orm\Observer_UpdatedAt' => ['events' => ['before_save'], 'mysql_timestamp' => true],
     ];
 
-    public static function getPaging($where = [], $page = 1, $limit = 10) {
+    public static function getPaging($where = [], $page = 1, $limit = 10, $sort = []) {
         $offset = ($page - 1) * $limit;
+
+        $title = $where['title'];
+        unset($where['title']);
 
         $query = Model_BbsList::query();
 
         if (!empty($where)) {
             $query->where($where);
         }
+
+        if ($title) {
+            $query->where('title', 'like', '%' . $title . '%');
+        }
         
         $total = $query->count();
 
         $total_page = ceil($total / $limit);
 
+        $query = Model_BbsList::query();
+
+        if (!empty($where)) {
+            $query->where($where);
+        }
+
+        if ($title) {
+            $query->where('title', 'like', '%' . $title . '%');
+        }
+
+        if (!empty($sort)) {
+            $query->order_by($sort);
+        }
+
+        $query->limit($limit);
+        $query->offset($offset);
         return [
             'total_page' => $total_page,
             'total' => $total,
@@ -46,20 +69,15 @@ class Model_BbsList extends Orm\Model
             'limit' => $limit,
             'offset' => $offset,
             'num' => $total - $offset,
-            'data' => self::find('all', [
-                'where' => $where,
-                'limit' => $limit,
-                'offset' => $offset,
-                'order_by' => ['o_num' => 'DESC']
-            ])
+            'data' => $query->get(),
         ];
     }
 
     public static function updateViewCount($bbs_id) {
         DB::update('bbs_list')
-            ->set('view_count', DB::expr('view_count + 1'))
-            ->where('bbs_id', $bbs_id)
-            ->execute();
+        ->set(['view_count' => DB::expr('view_count + 1')])
+        ->where('bbs_id', $bbs_id)
+        ->execute();
     }
 
     public static function getMostView() {

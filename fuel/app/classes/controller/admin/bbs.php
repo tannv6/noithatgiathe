@@ -11,14 +11,27 @@ class Controller_Admin_Bbs extends Controller_Base
 	}
     public function action_index()
     {
+        $page = Input::get('page', 1);
 
         $category_code = Input::get('category_code');
+        $title = Input::get('title');
+        $sort = Input::get('sort');
 
-        $result = Model_BbsList::getPaging( ['category_code' => $category_code]);
+        $sort_arr1 = explode('-', $sort);
+
+        $sort_arr = [];
+
+        if($sort_arr1[0] && $sort_arr1[1]) {
+            $sort_arr[$sort_arr1[0]] = $sort_arr1[1];
+        }
+
+        $sort_arr['bbs_id'] = 'desc';
+
+        $result = Model_BbsList::getPaging( ['category_code' => $category_code, 'title' => $title], $page, 10, $sort_arr);
 
         $list = $result['data'];
 
-        $view = View::forge('admin/bbs/index', compact('result', 'category_code'));
+        $view = View::forge('admin/bbs/index', compact('result', 'category_code', 'title', 'sort'));
 
         $template = View::forge('template/admin/template_main', [
             'active_menu' => "5,$category_code"
@@ -58,16 +71,10 @@ class Controller_Admin_Bbs extends Controller_Base
     {
         $bbs = null;
         if (Input::method() == 'POST') {
-            \Upload::process([
-                'path' => DOCROOT . 'uploads/bbs/' . Input::post('category_code') . '/',
-                'randomize' => true,
-                'ext_whitelist' => ['jpg', 'jpeg', 'png', 'gif'],
-            ]);
+            $uploader = new \Helper\Uploader(DOCROOT . 'uploads/bbs/' . Input::post('category_code') . '/', IMAGE_ALLOWED_FORMAT);
 
-            if (\Upload::is_valid()) {
-                \Upload::save();
-                $files = \Upload::get_files();
-                $thumb = $files[0]['saved_as'];
+            if ($uploader->upload()) {
+                $thumb = $uploader->getName('image');
             }
             if($id) {
                 $bbs = Model_BbsList::find($id);

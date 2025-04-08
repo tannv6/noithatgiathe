@@ -10,9 +10,9 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 left">
-                <div class="title">
+                <div class="title ">
                     LIÊN HỆ VỚI CHÚNG TÔI </div>
-                <div class="desc">
+                <div class="desc ">
                     Chúng tôi mong muốn lắng nghe ý kiến của quý khách. Vui lòng gửi mọi yêu cầu, thắc mắc theo thông
                     tin bên dưới, chúng tôi sẽ liên lạc với bạn sớm nhất có thế. </div>
                 <div class="ctf7">
@@ -22,25 +22,25 @@
                             <ul></ul>
                         </div>
                         <form action="/lienhe/write" method="post" class="wpcf7-form init" aria-label="Contact form" data-status="init" target="hiddenIframe">
-                            <p><label> Họ và tên*<br>
+                            <p><label class=""> Họ và tên*<br>
                                     <span class="wpcf7-form-control-wrap" data-name="full_name">
                                         <input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" placeholder="Nhập họ và tên" type="text" name="full_name" required>
                                     </span><br>
                                 </label>
                             </p>
-                            <p><label> Email*<br>
+                            <p><label class=""> Email*<br>
                                     <span class="wpcf7-form-control-wrap" data-name="email">
                                         <input size="40" maxlength="400" class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email" placeholder="Nhập địa chỉ Email" type="email" name="email" required>
                                     </span><br>
                                 </label>
                             </p>
-                            <p><label> Điện thoại*<br>
+                            <p><label class=""> Điện thoại*<br>
                                     <span class="wpcf7-form-control-wrap" data-name="phone">
                                         <input size="40" maxlength="400" class="wpcf7-form-control wpcf7-tel wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-tel" placeholder="Nhập số điện thoại" value="" type="tel" name="phone">
                                     </span><br>
                                 </label>
                             </p>
-                            <p><label> Lời nhắn*<br>
+                            <p><label class=""> Lời nhắn*<br>
                                     <span class="wpcf7-form-control-wrap" data-name="message">
                                         <textarea cols="40" rows="10" maxlength="2000" class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required" placeholder="Nội dung liên hệ" name="message" required></textarea>
                                     </span><br>
@@ -100,7 +100,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="list-text">
+                <div class="list-text ">
                     <div class="item-wrapper">
                         <div class="title">
                             VÌ KHÁCH HÀNG </div>

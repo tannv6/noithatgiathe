@@ -35,26 +35,60 @@ class Controller_Shop extends Controller
 	 * @access  public
 	 * @return  Response
 	 */
-	public function action_index()
+	public function action_index($page = 1)
 	{
 
         $breadcrumb = [[
             'name' => 'Danh mục sản phẩm',
         ]];
 
+        $limit = 20;
+
+        $orderby = Input::get('orderby');
+        $price = Input::get('price');
+
+        $orderbys = explode('-', $orderby);
+
+		$fields = Model_Products::$_properties;
+
+        $orderby_arr = [];
+
+        if(in_array($orderbys[0], $fields)) {
+            if(in_array($orderbys[1], ['asc', 'desc'])) {
+                $orderby_arr[$orderbys[0]] = $orderbys[1];
+            }
+        }
+
+        if(!is_array($price)) {
+            if($price) {
+                $prices = [explode('-', $price)];
+            }
+        } else {
+            $prices = array_map(function($price) {
+                return explode('-', $price);
+            }, $price);
+        }
+
+        $products = Model_Products::getPaging([ 'status' => "Y", ], $page, $limit, $orderby_arr, $prices);
+
         $content = View::forge('template/user/product_container', [
             'breadcrumb' => $breadcrumb,
             'top_categories' => Model_ProductCategory::find('all', ['where' => ['level' => 1, 'status' => 'Y']]),
-            'content' => View::forge('shop/category', [
-                'categories' => Model_ProductCategory::find('all', ['where' => ['level' => 2]]),
+            'content' => View::forge('shop/products', [
+                'content' => '',
+                'products' => $products['data'],
+                'page' => $products['page'],
+                'total_page' => $products['total_page'],
+                'url' => "/danh-muc-san-pham/abc/",
             ]),
             'title' => 'Sản phẩm tại nội thất Gia Thế',
-            'top_sellers' => Model_Products::find('all', ['where' => ['top_seller' => "Y"]]),
+            'top_sellers' => Model_Products::find('all', ['where' => ['top_seller' => "Y", 'status' => "Y",]]),
             'banner' => Model_Banners::find('first', ['where' => ['banner_code' => 'products_bottom']]),
         ]);
 
         $template = View::forge('template/user/template_main', [
             'active' => 'shop',
+            'title' => 'Sản phẩm tại nội thất Gia Thế',
         ]);
 
         $template->content = $content;
@@ -67,7 +101,6 @@ class Controller_Shop extends Controller
         $price = Input::get('price');
 
         $orderbys = explode('-', $orderby);
-
         if(!is_array($price)) {
             if($price) {
                 $prices = [explode('-', $price)];
@@ -80,7 +113,7 @@ class Controller_Shop extends Controller
 
         $fields = Model_Products::$_properties;
 
-        $limit = 1;
+        $limit = 20;
 
         $category = Model_ProductCategory::find('first', ['where' => ['slug' => $slug]]);
 
@@ -96,13 +129,17 @@ class Controller_Shop extends Controller
             }
         }
 
-        $where = ['category_id' => $category['category_id']];
+        $where = ['category_id' => $category['category_id'], 'status' => "Y",];
 
         $products = Model_Products::getPaging($where, $page, $limit, $orderby_arr, $prices);
 
+        $parents_category = Model_ProductCategory::getParents($category['category_id']);
+        $parents_category = array_column($parents_category, 'category_id');
         $content = View::forge('template/user/product_container', [
             'breadcrumb' => $breadcrumb,
-            'top_categories' => Model_ProductCategory::find('all', ['where' => ['parent_id' => $category['category_id'], 'status' => 'Y']]),
+            'top_categories' => [],
+            'category_id' => $category['category_id'],
+            'parents_category' => $parents_category,
             'content' => View::forge('shop/products', [
                 'content' => $category['sort_description'],
                 'products' => $products['data'],
@@ -111,15 +148,17 @@ class Controller_Shop extends Controller
                 'url' => "/danh-muc-san-pham/{$slug}/",
             ]),
             'title' => $category['category_name'],
-            'top_sellers' => Model_Products::find('all', ['where' => ['top_seller' => "Y"]]),
+            'top_sellers' => Model_Products::find('all', ['where' => ['top_seller' => "Y", 'status' => "Y",]]),
             'banner' => Model_Banners::find('first', ['where' => ['banner_code' => 'products_bottom']]),
         ]);
 
         $content->set('category', $category, false);
 
         $template = View::forge('template/user/template_main', [
+            'category_id' => $category['category_id'],
             'body_class' => "archive tax-product_cat term-{$category['slug']} term-{$category['category_id']} website-design-by-thcmedia theme-thcmedia-company woocommerce woocommerce-page woocommerce-no-js",
             'active' => 'shop',
+            'title' => $category['category_name'],
         ]);
 
         $template->content = $content;
@@ -128,13 +167,19 @@ class Controller_Shop extends Controller
     }
     public function action_product($slug = null)
     {
-        $product = Model_Products::find('first', ['where' => ['slug' => $slug]])->to_array();
+        $product = Model_Products::find('first', ['where' => ['slug' => $slug, 'status' => "Y",]])->to_array();
+
+		if(!$product) return Response::redirect('/');
 
         Tracking::trackProductView($product['product_id']);
 
         $template = View::forge('template/user/template_main', [
             'body_class' => "product-template-default single single-product postid-{$product['product_id']} website-design-by-thcmedia theme-thcmedia-company woocommerce woocommerce-page woocommerce-no-js",
             'active' => 'shop',
+            'title' => $product['product_name'],
+            // 'description' => $product['product_name'],
+            'og_image' => DOMAIN . "/uploads/products/" . $product['product_image'],
+            'og_url' => DOMAIN . '/san-pham/' . $product['slug'],
         ]);
         $breadcrumb = [[
             'name' => $product['product_name'],
@@ -161,7 +206,8 @@ class Controller_Shop extends Controller
         $related_products = Model_Products::find('all', [
             'where' => [
                 ['category_id', '=', $product['category_id']],
-                ['product_id', '!=', $product['product_id']]
+                ['product_id', '!=', $product['product_id']],
+				'status' => "Y",
             ],
             'limit' => 6
         ]);
@@ -170,13 +216,13 @@ class Controller_Shop extends Controller
             $related_products[$key]['category'] = Model_ProductCategory::find('first', ['where' => ['category_id' => $product1->category_id]]);
         }
 
-        $flash_sale_products = Model_Products::find('all', ['where' => ['is_flash_sale' => "Y"], 'limit' => 3]);
+        $flash_sale_products = Model_Products::find('all', ['where' => ['is_flash_sale' => "Y", 'status' => "Y",], 'limit' => 3]);
 
         foreach ($flash_sale_products as $key => $product2) {
             $flash_sale_products[$key]['category'] = Model_ProductCategory::find('first', ['where' => ['category_id' => $product2->category_id]]);
         }
 
-        $top_sell_products = Model_Products::find('all', ['where' => ['top_seller' => "Y"], 'limit' => 3]);
+        $top_sell_products = Model_Products::find('all', ['where' => ['top_seller' => "Y", 'status' => "Y",], 'limit' => 3]);
 
         foreach ($top_sell_products as $key => $product3) {
             $top_sell_products[$key]['category'] = Model_ProductCategory::find('first', ['where' => ['category_id' => $product3->category_id]]);

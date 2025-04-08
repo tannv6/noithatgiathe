@@ -13,6 +13,7 @@ class Controller_Lienhe extends Controller
 
         $template = View::forge('template/user/template_main', [
             'active' => 'lienhe',
+            'title' => 'Liên hệ'
         ]);
 
         $template->content = $view;

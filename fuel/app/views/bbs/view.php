@@ -9,48 +9,27 @@
         <div id="ftwp-postcontent">
             <?= html_entity_decode($bbs->description) ?>
             <?= html_entity_decode($bbs->content) ?>
-            <div class="kk-star-ratings kksr-auto kksr-align-left kksr-valign-bottom"
-                data-payload='{"align":"left","id":"28939","slug":"default","valign":"bottom","ignore":"","reference":"auto","class":"","count":"1","legendonly":"","readonly":"","score":"5","starsonly":"","best":"5","gap":"5","greet":"Rate this post","legend":"5\/5 - (1 bình chọn)","size":"18","title":"Bàn Chân Sắt 1m8 | 9 Mẫu UPDATE mới 2025 Hiện đại, Mới Mẻ Cho Văn Phòng","width":"112.5","_legend":"{score}\/{best} - ({count} {votes})","font_factor":"1.25"}'>
+            <div class="kk-star-ratings kksr-auto kksr-align-left kksr-valign-bottom">
                 <div class="kksr-stars">
+                    <!-- Inactive Stars -->
                     <div class="kksr-stars-inactive">
-                        <div class="kksr-star" data-star="1" style="padding-right: 5px">
-                            <div class="kksr-icon" style="width: 18px; height: 18px"></div>
-                        </div>
-                        <div class="kksr-star" data-star="2" style="padding-right: 5px">
-                            <div class="kksr-icon" style="width: 18px; height: 18px"></div>
-                        </div>
-                        <div class="kksr-star" data-star="3" style="padding-right: 5px">
-                            <div class="kksr-icon" style="width: 18px; height: 18px"></div>
-                        </div>
-                        <div class="kksr-star" data-star="4" style="padding-right: 5px">
-                            <div class="kksr-icon" style="width: 18px; height: 18px"></div>
-                        </div>
-                        <div class="kksr-star" data-star="5" style="padding-right: 5px">
-                            <div class="kksr-icon" style="width: 18px; height: 18px"></div>
-                        </div>
+                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                            <div class="kksr-star" data-star="<?= $i ?>" style="padding-right: 5px">
+                                <div class="kksr-icon" style="width: 18px; height: 18px"></div>
+                            </div>
+                        <?php endfor; ?>
                     </div>
-
-                    <div class="kksr-stars-active" style="width: 112.5px">
-                        <div class="kksr-star" style="padding-right: 5px">
-                            <div class="kksr-icon" style="width: 18px; height: 18px"></div>
-                        </div>
-                        <div class="kksr-star" style="padding-right: 5px">
-                            <div class="kksr-icon" style="width: 18px; height: 18px"></div>
-                        </div>
-                        <div class="kksr-star" style="padding-right: 5px">
-                            <div class="kksr-icon" style="width: 18px; height: 18px"></div>
-                        </div>
-                        <div class="kksr-star" style="padding-right: 5px">
-                            <div class="kksr-icon" style="width: 18px; height: 18px"></div>
-                        </div>
-                        <div class="kksr-star" style="padding-right: 5px">
-                            <div class="kksr-icon" style="width: 18px; height: 18px"></div>
-                        </div>
+                    <!-- Active Stars -->
+                    <div class="kksr-stars-active">
+                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                            <div class="kksr-star" style="padding-right: 5px; <?= $i > $star ? 'visibility: hidden;' : '' ?>">
+                                <div class="kksr-icon" style="width: 18px; height: 18px"></div>
+                            </div>
+                        <?php endfor; ?>
                     </div>
                 </div>
-
                 <div class="kksr-legend" style="font-size: 14.4px">
-                    5/5 - (1 bình chọn)
+                    <?=$star?>/5 - (<?=$cmt_count?> bình chọn)
                 </div>
             </div>
         </div>
@@ -136,11 +115,12 @@
     <div id="cm-thc" class="thc-comment">
         <div id="comments" class="comments-area">
             <p class="comments-title uppercase">
-                0 comment cho bài viết “<span>Dịch vụ thiết kế thi công nội thất trọn gói tại Nội thất Lương Sơn</span>”
+                <?=count($comments)?> comment cho bài viết “<span><?=$bbs->title?></span>”
             </p>
             <ol class="comment-list">
-                <li class="comment even thread-even depth-1" id="li-comment-1590">
-                    <article id="comment-1590" class="comment-inner">
+                <?php foreach ($comments as $key => $comment) { ?>
+                <li class="comment even thread-even depth-1" id="li-comment-<?=$comment['cmt_id']?>">
+                    <article id="comment-<?=$comment['cmt_id']?>" class="comment-inner">
                         <div class="d-flex align-top">
                             <div class="d-flex">
                                 <div class="comment-author mr-half pr-3">
@@ -148,27 +128,21 @@
                                 </div>
                             </div>
                             <div class="flex-col flex-grow">
-                                <span class="strong author-comment fn"><a href="http://abc.com" class="url"
+                                <!-- <span class="strong author-comment fn"><a href="http://abc.com" class="url"
                                         rel="nofollow" data-wpel-link="external">1</a> /
-                                    <span class="cm-date">Ngày 12/03/2025,</span>
-                                    <span class="cm-time">14:09</span>
+                                    <span class="cm-date">Ngày <?=date("d/m/Y", strtotime($comment['created_at']))?>,</span>
+                                    <span class="cm-time"><?=date("H:i", strtotime($comment['created_at']))?></span>
                                 </span>
                                 <em>Câu hỏi của bạng đang được chuyển đến quản trị viên</em>
-                                <br>
+                                <br> -->
                                 <div class="comment-content">
-                                    <p>Bình luận *</p>
-                                </div>
-                                <div class="reply pull-right">
-                                    <a rel="nofollow" class="comment-reply-link" href="#comment-1590"
-                                        data-commentid="1590" data-postid="34165" data-belowelement="comment-1590"
-                                        data-respondelement="respond" data-replyto="Trả lời đến 1"
-                                        aria-label="Trả lời đến 1"><i class="fas fa-reply"></i> Trả lời</a>
+                                    <p><?=nl2br($comment['content'])?></p>
                                 </div>
                                 <div class="comment-meta commentmetadata uppercase is-xsmall clear">
-                                    <a href="https://noithatgiathe.vn/thiet-ke-thi-cong-noi-that-tron-goi/#comment-1590"
+                                    <a href="#!"
                                         data-wpel-link="internal">
-                                        <time datetime="2025-03-12T14:09:01+00:00" class="pull-left">
-                                            12/03/2025 at 14:09 </time>
+                                        <time datetime="<?=$comment['created_at']?>" class="pull-left">
+                                        <?=date("d/m/Y", strtotime($comment['created_at']))?> lúc <?=date("H:i", strtotime($comment['created_at']))?> </time>
                                     </a>
                                     <span class="edit-link ml-half strong"></span>
                                 </div>
@@ -176,6 +150,7 @@
                         </div>
                     </article>
                 </li>
+                <?php } ?>
             </ol>
             <div id="respond" class="comment-respond">
                 <span id="reply-title" class="h4 comment-reply-title">Để lại một bình luận

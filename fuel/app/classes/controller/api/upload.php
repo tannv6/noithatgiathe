@@ -30,27 +30,21 @@ class Controller_Api_Upload extends Controller
 
     public function action_editor() {
 
-        \Upload::process([
-            'path' => DOCROOT . 'uploads/editor/',
-            'randomize' => true,
-            'ext_whitelist' => ['jpg', 'jpeg', 'png', 'gif', 'webp'],
-        ]);
+        $uploader = new \Helper\Uploader(DOCROOT . 'uploads/editor/', IMAGE_ALLOWED_FORMAT);
 
-        if (\Upload::is_valid()) {
-            \Upload::save();
-            $files = \Upload::get_files();
-
+        if ($uploader->upload()) {
+            $files = $uploader->get();
             $image = $files[0]['saved_as'];
             $name = $files[0]['name'];
             $type = $files[0]['type'];
         }
-
 
         return Response::forge(json_encode([
             "success" => true,
             "url" => "/uploads/editor/$image",
             "name" => $name,
             "type" => $type,
+			'location' => "/uploads/editor/$image",
         ]));
     }
 

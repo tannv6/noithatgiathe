@@ -1,7 +1,4 @@
 @media only screen and (max-width: 1050px) {
-  p {
-    font-size: 13px;
-  }
   header .all-product {
     display: none;
   }
@@ -245,29 +242,6 @@
   }
 }
 @media only screen and (max-width: 769px) {
-  p {
-    font-size: 13px;
-  }
-  h1,
-  .h1 {
-    font-size: 24px;
-  }
-  h2,
-  .h2 {
-    font-size: 20px;
-  }
-  h3,
-  .h3 {
-    font-size: 18px;
-  }
-  h4,
-  .h4 {
-    font-size: 16px;
-  }
-  h5,
-  .h5 {
-    font-size: 16px;
-  }
   header {
     position: relative;
   }
@@ -569,7 +543,7 @@
     height: 41vw;
   }
   .content .content-entry p span {
-    font-size: 13px !important;
+    /* font-size: 13px !important; */
   }
   .promotions .left.row {
     margin-bottom: 15px;
@@ -1038,9 +1012,6 @@
   .thc-center-horizontal-manifest {
     display: flex;
   }
-  .header_slide_carousel.owl-carousel .item {
-    padding-top: 121%;
-  }
   .header_slide_carousel.owl-carousel .owl-nav button.owl-prev,
   .header_slide_carousel.owl-carousel .owl-nav button.owl-next {
     width: 40px;
@@ -1078,6 +1049,9 @@
   }
   .header_slide_carousel.owl-theme .owl-dots .owl-dot.active span {
     background-color: var(--primary_color);
+  }
+  .single-product .contact_policy_information {
+    padding: 20px;
   }
 }
 @media only screen and (max-width: 300px) {

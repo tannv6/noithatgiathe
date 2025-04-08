@@ -8,23 +8,23 @@ $price = Input::get('price');
             <span>Xếp theo:</span>
             <div class="item">
                 <input type="radio"
-                    id="title-asc" name="orderby" value="title-asc" <?= ($orderby == 'title-asc') ? 'checked' : '' ?>>
-                <label for="title-asc">Tên A-Z</label>
+                    id="product_name-asc" name="orderby" value="product_name-asc" <?= ($orderby == 'product_name-asc') ? 'checked' : '' ?>>
+                <label for="product_name-asc">Tên A-Z</label>
             </div>
             <div class="item">
                 <input type="radio"
-                    id="title-desc" name="orderby" value="title-desc" <?= ($orderby == 'title-desc') ? 'checked' : '' ?>>
-                <label for="title-desc">Tên Z-A</label>
+                    id="product_name-desc" name="orderby" value="product_name-desc" <?= ($orderby == 'product_name-desc') ? 'checked' : '' ?>>
+                <label for="product_name-desc">Tên Z-A</label>
             </div>
             <div class="item">
                 <input type="radio"
-                    id="price-asc" name="orderby" value="price" <?= ($orderby == 'price') ? 'checked' : '' ?>>
-                <label for="price-asc">Giá thấp đến cao</label>
+                    id="sell_price-asc" name="orderby" value="sell_price-asc" <?= ($orderby == 'sell_price-asc') ? 'checked' : '' ?>>
+                <label for="sell_price-asc">Giá thấp đến cao</label>
             </div>
             <div class="item">
                 <input type="radio"
-                    id="price-desc" name="orderby" value="price-desc" <?= ($orderby == 'price-desc') ? 'checked' : '' ?>>
-                <label for="price-desc">Giá cao đến thấp</label>
+                    id="sell_price-desc" name="orderby" value="sell_price-desc" <?= ($orderby == 'sell_price-desc') ? 'checked' : '' ?>>
+                <label for="sell_price-desc">Giá cao đến thấp</label>
             </div>
             <?php foreach ($price as $key => $value): ?>
                 <input type="hidden" name="price[]" value="<?=$value?>">
@@ -32,14 +32,28 @@ $price = Input::get('price');
         </form>
     </div>
     <div class="row products columns-1">
-        <?php foreach ($products as $product) : ?>
+        <?php foreach ($products as $product) :
+			$sell_price = $product['sell_price'];
+			$init_price = $product['init_price'];
+			if($init_price && $init_price > $sell_price) {
+				$product['init_price'] = number_format($init_price, 0, ',', '.');
+
+				$save = round(($init_price - $sell_price) / $init_price * 100);
+			} else {
+				$product['init_price'] = "";
+				$save = 0;
+			}
+
+?>
         <div class="product-card-wrapper col-6 col-md-3 col-lg-3 product type-product post-<?=$product['product_id']?> status-publish first instock product_cat-noi-that-thanh-ly product_cat-ghe-cong-thai-hoc product_cat-ghe-xoay product_cat-ghe-lam-viec-tai-nha product_cat-ghe-van-phong-gia-re has-post-thumbnail sale shipping-taxable purchasable product-type-simple">
             <div class="product-card">
                 <div class="img-cover">
                     <a rel="" href="/san-pham/<?=$product['slug']?>"
                         class="thumbnail-wrapper" title="<?=$product['product_name']?>"
                         data-wpel-link="internal">
-                        <span class="onsale">-33%</span>
+					<?php if($save > 0): ?>
+                        <span class="onsale">-<?=$save?>%</span>
+					<?php endif; ?>
                         <img width="300" height="300" src="/uploads/products/<?=$product['product_image']?>"
                             class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail entered lazyloaded"
                             alt="" decoding="async" >
@@ -55,14 +69,16 @@ $price = Input::get('price');
                     </a>
 
                     <span class="price">
+						<?php if($product['init_price']): ?>
                         <del aria-hidden="true">
                             <span class="woocommerce-Price-amount amount">
                                 <bdi>
-                                    <?=number_format($product['init_price'], 0, ',', '.')?>&nbsp; <span class="woocommerce-Price-currencySymbol">₫</span>
+                                    <?=$product['init_price']?>&nbsp; <span class="woocommerce-Price-currencySymbol">₫</span>
                                 </bdi>
                             </span>
                         </del> 
-                        <span class="screen-reader-text">Giá gốc là: <?=number_format($product['init_price'], 0, ',', '.')?>&nbsp;₫.</span>
+                        <span class="screen-reader-text">Giá gốc là: <?=$product['init_price']?>&nbsp;₫.</span>
+						<?php endif; ?>
                         <ins aria-hidden="true">
                             <span class="woocommerce-Price-amount amount">
                                 <bdi>
@@ -91,11 +107,14 @@ $price = Input::get('price');
     <div class="row">
         <?=ipagelisting($page, $total_page)?>
     </div>
-    <div class="entry-content content-entry archive-content">
+    <!-- <div class="entry-content content-entry archive-content">
         <div class="thc-content-custom">
             <?= htmlspecialchars_decode($content); ?>
             <p class="dtcvmodetail"><span class="read-more-homedy">Xem thêm</span></p>
             <p class="dtchide"><span class="collapse-homedy">Thu gọn</span></p>
         </div>
-    </div>
+    </div> -->
+	<div>
+		<?= htmlspecialchars_decode($content); ?>
+	</div>
 </div>

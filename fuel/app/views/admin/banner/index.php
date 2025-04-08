@@ -39,6 +39,22 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+<h4>Điều chỉnh tỉ lệ </h4>
+<div>
+    <div class="d-inline-flex align-items-center gap-2">
+        PC
+        <input type="text" name="ratio_width" id="ratio_width" value="<?=$config['ratio_width'] ?? ''?>" class="form-control" style="width: 60px;">
+        X
+        <input type="text" name="ratio_height" id="ratio_height" value="<?=$config['ratio_height'] ?? ''?>" class="form-control" style="width: 60px;">
+    </div>
+    <div class="d-inline-flex align-items-center gap-2">
+        Mobile
+        <input type="text" name="mobile_ratio_width" id="mobile_ratio_width" value="<?=$config['mobile_ratio_width'] ?? ''?>" class="form-control" style="width: 60px;">
+        X
+        <input type="text" name="mobile_ratio_height" id="mobile_ratio_height" value="<?=$config['mobile_ratio_height'] ?? ''?>" class="form-control" style="width: 60px;">
+    </div>
+    <button class="btn btn-primary" id="update_ratio">Cập nhật</button>
+</div>
 <script>
     function confirmDelete(id) {
         if(confirm("Xóa banner này?")) {
@@ -56,4 +72,27 @@
             });
         }
     }
+    $(document).ready(function() {
+        $("#update_ratio").click(function() {
+            $.ajax({
+                url: '/admin/banner/updateratio',
+                data: { 
+                    "ratio_width": $("#ratio_width").val(),
+                    "ratio_height": $("#ratio_height").val(),
+                    "mobile_ratio_width": $("#mobile_ratio_width").val(),
+                    "mobile_ratio_height": $("#mobile_ratio_height").val(),
+                    "banner_code": "<?=$code?>"
+                },
+                type: 'post',
+                dataType: "json",
+                success: function(response) {
+                    alert('Cập nhật tỉ lệ thành công');
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    alert('Cập nhật tỉ lệ thất bại');
+                }
+            });
+        });
+    });
 </script>

@@ -6,7 +6,7 @@
  * @version    1.9-dev
  * @author     Fuel Development Team
  * @license    MIT License
- * @copyright  2010 - 2019 Fuel Development Team test git 1
+ * @copyright  2010 - 2019 Fuel Development Team
  * @link       https://fuelphp.com
  */
 
@@ -46,6 +46,7 @@ class Controller_Admin_Banner extends Controller
             'main_visual' => "Đầu trang chính",
             'middle_visual' => 'Giữa trang chính',
             'products_bottom' => 'Danh sách sản phẩm',
+            'ads' => 'Sứ mệnh',
         ];
 
         $template = View::forge('template/admin/template_main', [
@@ -56,7 +57,9 @@ class Controller_Admin_Banner extends Controller
 
         $banners = array_values($banners);
 
-        $view = View::forge('admin/banner/index', compact('banners', 'code'));
+        $config = Model_BannerConfig::find('first', ['where' => ['banner_code' => $code]]);
+
+        $view = View::forge('admin/banner/index', compact('banners', 'code', 'config'));
 
         $template->content = $view;
 		$template->title = 'Banner ' . $code_names[$code];
@@ -67,25 +70,15 @@ class Controller_Admin_Banner extends Controller
     {
         $banner = null;
         $image_url = null;
+        $config = null;
         if (Input::method() == 'POST') {
-            \Upload::process([
-                'path' => DOCROOT . 'uploads/banners/',
-                'randomize' => true,
-                'ext_whitelist' => ['jpg', 'jpeg', 'png', 'gif'],
-            ]);
+            $uploader = new \Helper\Uploader(DOCROOT . 'uploads/banners/', IMAGE_ALLOWED_FORMAT);
 
-            if (\Upload::is_valid()) {
-                \Upload::save();
-                $files = \Upload::get_files();
-                $image_url = $files[0]['saved_as'];
+            if ($uploader->upload()) {
 
-                $image_url = array_filter($files, function($value) {
-                    return $value['field'] == 'image';
-                })[0]['saved_as'];
+                $image_url = $uploader->getName('image');
 
-                $image_url_m = array_filter($files, function($value) {
-                    return $value['field'] == 'image_mobile';
-                })[0]['saved_as'];
+                $image_url_m = $uploader->getName('image_mobile');
             }
 
             if($id) {
@@ -130,6 +123,7 @@ class Controller_Admin_Banner extends Controller
             $code = Input::get('code');
             if ($id) {
                 $banner = Model_Banners::find($id);
+                $config = Model_BannerConfig::find('first', ['where' => ['banner_code' => $code]]);
                 if (!$banner) {
                     Response::redirect('admin/banner');
                 }
@@ -140,7 +134,7 @@ class Controller_Admin_Banner extends Controller
             'active_menu' => "12,banner,$code"
         ]);
 
-        $template->content = View::forge('admin/banner/write', compact('banner', 'code'));
+        $template->content = View::forge('admin/banner/write', compact('banner', 'code', 'config'));
         $template->title = $id ? 'Sửa banner' : 'Thêm banner';
 
         return Response::forge($template);
@@ -154,6 +148,15 @@ class Controller_Admin_Banner extends Controller
         }
         return Response::forge(json_encode([
             'result' => 'success'
+        ]));
+    }
+    public function post_updateratio() {
+        $post = Input::post();
+
+        Model_BannerConfig::updateOrCreate($post);
+
+        return Response::forge(json_encode([
+            'result' => 'success',
         ]));
     }
 }

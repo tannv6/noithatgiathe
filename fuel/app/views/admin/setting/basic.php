@@ -239,7 +239,18 @@
             </div>
         </div>
         <div class="col-2">
-            <p class="fw-bold h-100 border-bottom m-0">Hướng dẫn mua hàng</p>
+            <p class="fw-bold h-100 border-bottom m-0">Giới thiệu công ty</p>
+        </div>
+        <div class="col-10">
+            <div class="d-flex gap-3 align-items-center">
+                <div class="flex-fill">
+                    <input type="text" name="introduction" class="form-control" value="<?= $setting['introduction']; ?>">
+                </div>
+                <span>INTRODUCTION</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <p class="fw-bold h-100 border-bottom m-0">Link hướng dẫn mua hàng</p>
         </div>
         <div class="col-10">
             <div class="d-flex gap-3 align-items-center">
@@ -250,7 +261,7 @@
             </div>
         </div>
         <div class="col-2">
-            <p class="fw-bold h-100 border-bottom m-0">Chính sách bảo hành sản phẩm</p>
+            <p class="fw-bold h-100 border-bottom m-0">Link chính sách bảo hành sản phẩm</p>
         </div>
         <div class="col-10">
             <div class="d-flex gap-3 align-items-center">
@@ -261,7 +272,7 @@
             </div>
         </div>
         <div class="col-2">
-            <p class="fw-bold h-100 border-bottom m-0">Chính sách giao hàng</p>
+            <p class="fw-bold h-100 border-bottom m-0">Link chính sách giao hàng</p>
         </div>
         <div class="col-10">
             <div class="d-flex gap-3 align-items-center">
@@ -272,7 +283,7 @@
             </div>
         </div>
         <div class="col-2">
-            <p class="fw-bold h-100 border-bottom m-0">Chính sách đổi trả, hoàn tiền</p>
+            <p class="fw-bold h-100 border-bottom m-0">Link chính sách đổi trả, hoàn tiền</p>
         </div>
         <div class="col-10">
             <div class="d-flex gap-3 align-items-center">
@@ -283,7 +294,7 @@
             </div>
         </div>
         <div class="col-2">
-            <p class="fw-bold h-100 border-bottom m-0">Chính sách bảo mật thông tin cá nhân</p>
+            <p class="fw-bold h-100 border-bottom m-0">Link chính sách bảo mật thông tin cá nhân</p>
         </div>
         <div class="col-10">
             <div class="d-flex gap-3 align-items-center">
@@ -294,7 +305,7 @@
             </div>
         </div>
         <div class="col-2">
-            <p class="fw-bold h-100 border-bottom m-0">Hướng dẫn lắp đặt </p>
+            <p class="fw-bold h-100 border-bottom m-0">Link hướng dẫn lắp đặt </p>
         </div>
         <div class="col-10">
             <div class="d-flex gap-3 align-items-center">
@@ -327,6 +338,17 @@
             </div>
         </div>
         <div class="col-2">
+            <p class="fw-bold h-100 border-bottom m-0">Link Messenger</p>
+        </div>
+        <div class="col-10">
+            <div class="d-flex gap-3 align-items-center">
+                <div class="flex-fill">
+                    <input type="text" name="messenger_link" class="form-control" value="<?= $setting['messenger_link']; ?>">
+                </div>
+                <span>MESSENGER_LINK</span>
+            </div>
+        </div>
+        <div class="col-2">
             <p class="fw-bold h-100 border-bottom m-0">Link Youtube</p>
         </div>
         <div class="col-10">
@@ -335,6 +357,17 @@
                     <input type="text" name="youtube_link" class="form-control" value="<?= $setting['youtube_link']; ?>">
                 </div>
                 <span>YOUTUBE_LINK</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <p class="fw-bold h-100 border-bottom m-0">Link Tiktok</p>
+        </div>
+        <div class="col-10">
+            <div class="d-flex gap-3 align-items-center">
+                <div class="flex-fill">
+                    <input type="text" name="tiktok_link" class="form-control" value="<?= $setting['tiktok_link']; ?>">
+                </div>
+                <span>TIKTOK_LINK</span>
             </div>
         </div>
         <div class="col-2">
@@ -382,28 +415,6 @@
             </div>
         </div>
         <div class="col-2">
-            <p class="fw-bold h-100 border-bottom m-0">Địa chỉ kho</p>
-        </div>
-        <div class="col-10">
-            <div class="d-flex gap-3 align-items-center">
-                <div class="flex-fill">
-                    <input type="text" name="warehouse_address" class="form-control" value="<?= $setting['warehouse_address']; ?>">
-                </div>
-                <span>WAREHOUSE_ADDRESS</span>
-            </div>
-        </div>
-        <div class="col-2">
-            <p class="fw-bold h-100 border-bottom m-0">Địa chỉ xưởng</p>
-        </div>
-        <div class="col-10">
-            <div class="d-flex gap-3 align-items-center">
-                <div class="flex-fill">
-                    <input type="text" name="factory_address" class="form-control" value="<?= $setting['factory_address']; ?>">
-                </div>
-                <span>FACTORY_ADDRESS</span>
-            </div>
-        </div>
-        <div class="col-2">
             <p class="fw-bold h-100 border-bottom m-0">Link Google Map</p>
         </div>
         <div class="col-10">
@@ -423,6 +434,50 @@
                     <input type="text" name="googlemap_embed_link" class="form-control" value="<?= $setting['googlemap_embed_link']; ?>">
                 </div>
                 <span>GOOGLEMAP_EMBED_LINK</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <p class="fw-bold h-100 border-bottom m-0">Địa chỉ kho</p>
+        </div>
+        <div class="col-10">
+            <div class="d-flex gap-3 align-items-center">
+                <div class="flex-fill">
+                    <input type="text" name="warehouse_address" class="form-control" value="<?= $setting['warehouse_address']; ?>">
+                </div>
+                <span>WAREHOUSE_ADDRESS</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <p class="fw-bold h-100 border-bottom m-0">Link Google Map Kho</p>
+        </div>
+        <div class="col-10">
+            <div class="d-flex gap-3 align-items-center">
+                <div class="flex-fill">
+                    <input type="text" name="warehouse_googlemap_link" class="form-control" value="<?= $setting['warehouse_googlemap_link']; ?>">
+                </div>
+                <span>WAREHOUSE_GOOGLEMAP_LINK</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <p class="fw-bold h-100 border-bottom m-0">Địa chỉ xưởng</p>
+        </div>
+        <div class="col-10">
+            <div class="d-flex gap-3 align-items-center">
+                <div class="flex-fill">
+                    <input type="text" name="factory_address" class="form-control" value="<?= $setting['factory_address']; ?>">
+                </div>
+                <span>FACTORY_ADDRESS</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <p class="fw-bold h-100 border-bottom m-0">Link Google Map Xưởng</p>
+        </div>
+        <div class="col-10">
+            <div class="d-flex gap-3 align-items-center">
+                <div class="flex-fill">
+                    <input type="text" name="factory_googlemap_link" class="form-control" value="<?= $setting['factory_googlemap_link']; ?>">
+                </div>
+                <span>FACTORY_GOOGLEMAP_LINK</span>
             </div>
         </div>
         <div class="col-2">

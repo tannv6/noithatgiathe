@@ -201,3 +201,45 @@ function renderPagination($page, $pages) {
     $output .= '</ul></nav>';
     return $output;
 }
+
+if (!function_exists('dd')) {
+    function dd(...$vars)
+    {
+        \Debug::$js_toggle_open = true;
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
+        $caller = $trace[0];
+        echo "<pre style='background: #222; color: #0f0; padding: 10px;margin: 0;'>";
+        echo "Called at: " . ($caller['file'] ?? 'unknown file') . " on line " . ($caller['line'] ?? 'unknown line') . "\n";
+        echo "</pre>";
+        \Debug::dump(...$vars);
+        exit;
+    }
+}
+
+if (!function_exists('d')) {
+    function d(...$vars)
+    {
+        \Debug::$js_toggle_open = true;
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
+        $caller = $trace[0];
+        echo "<pre style='background: #222; color: #0f0; padding: 10px;margin: 0;'>";
+        echo "Called at: " . ($caller['file'] ?? 'unknown file') . " on line " . ($caller['line'] ?? 'unknown line') . "\n";
+        echo "</pre>";
+        \Debug::dump(...$vars);
+    }
+}
+
+define("IMAGE_ALLOWED_FORMAT", ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'bmp', 'tiff', 'tif', 'ico', 'heic', 'heif', 'raw', 'psd', 'ai', 'eps']);
+
+define("ASSETS_VERSION", time());
+
+function to_snake_case_filename($filename) {
+    $name = pathinfo($filename, PATHINFO_FILENAME);
+    $ext  = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+    // Bỏ ký tự đặc biệt, chuyển sang snake_case
+    $snake = preg_replace('/[^a-zA-Z0-9]+/', '_', $name);
+    $snake = strtolower(trim($snake, '_'));
+
+    return $snake . '.' . $ext;
+}

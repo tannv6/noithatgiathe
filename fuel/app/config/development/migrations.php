@@ -42,6 +42,13 @@ return array (
         36 => '037_add_ratio_to_banners',
         37 => '038_add_type_to_bbs_category',
         38 => '039_add_tiktok_link_to_sitesettings',
+        39 => '040_create_banner_config',
+        40 => '041_add_mobile_columns_to_banner_config',
+        41 => '042_add_messenger_link_to_site_settings',
+        42 => '043_create_product_category_mapping',
+        43 => '044_add_o_num_to_product_categories',
+        44 => '045_add_introduction_to_site_settings',
+        45 => '046_add_googlemap_links_to_site_settings',
       ),
     ),
     'module' => array(    
