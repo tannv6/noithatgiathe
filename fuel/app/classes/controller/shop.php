@@ -167,9 +167,11 @@ class Controller_Shop extends Controller
 	}
 	public function action_product($slug = null)
 	{
-		$product = Model_Products::find('first', ['where' => ['slug' => $slug, 'status' => "Y",]])->to_array();
+		$product = Model_Products::find('first', ['where' => ['slug' => $slug, 'status' => "Y",]]);
 
 		if(!$product) return Response::redirect('/');
+
+		$product = $product->to_array();
 
 		Tracking::trackProductView($product['product_id']);
 

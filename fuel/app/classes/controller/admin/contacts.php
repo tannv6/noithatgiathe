@@ -26,7 +26,7 @@ class Controller_Admin_Contacts extends Controller
 	public function before() {
 		parent::before();
 		error_reporting(0);
-		if (!Auth::check() && Request::active()->action !== 'index') {
+		if (!Auth::check()) {
 			Response::redirect('admin');
 		}
 	}

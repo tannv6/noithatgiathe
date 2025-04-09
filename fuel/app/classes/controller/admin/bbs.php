@@ -5,7 +5,7 @@ class Controller_Admin_Bbs extends Controller_Base
 	public function before() {
 		parent::before();
 		error_reporting(0);
-		if (!Auth::check() && Request::active()->action !== 'index') {
+		if (!Auth::check()) {
 			Response::redirect('admin');
 		}
 	}
