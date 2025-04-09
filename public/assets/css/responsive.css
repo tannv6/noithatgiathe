@@ -338,7 +338,16 @@
 	section .title {
 	width: 100%;
 	font-size: 20px;
-	padding: 10px;
+	padding: 5px;
+	}
+	.card-cate-item .title a {
+	font-size: 13px;
+	text-transform: none;
+	padding: 0;
+	}
+	.card-cate-item {
+		padding: 0;
+		margin-bottom: 10px;
 	}
 	section .title-with-border {
 	width: 100%;
@@ -1046,12 +1055,20 @@
 	.header_slide_carousel.owl-theme .owl-dots .owl-dot span {
 	box-shadow: 0px 0px 8px 1px #fffdfd40;
 	margin: 4px;
+	width: 8px;
+    height: 8px;
 	}
 	.header_slide_carousel.owl-theme .owl-dots .owl-dot.active span {
 	background-color: var(--primary_color);
 	}
 	.single-product .contact_policy_information {
 	padding: 20px;
+	}
+	.promotions .left .img-wrap, .promotions .right .img-wrap {
+		height: 110px;
+	}
+	.promotions .primary-button.small button, .primary-button.small a {
+		min-width: 130px;
 	}
 }
 @media only screen and (max-width: 300px) {

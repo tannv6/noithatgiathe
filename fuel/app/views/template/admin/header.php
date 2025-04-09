@@ -235,6 +235,12 @@ $menus = [
 					]
 				]
 			],
+			[
+				'id' => 'popup',
+				'name' => 'Popup',
+				'link' => '/admin/popup',
+				'icon' => 'fa-solid fa-clone',
+			],
 		]
 	]
 ];

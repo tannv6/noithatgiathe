@@ -144,7 +144,7 @@ $categories = getCategoriesWithChildren();
 				</div>
 				<div class="row g-2">
 					<?php $cnt = 0; foreach ($projects as $project): ?>
-						<div class="col-6 col-md-3 col-lg-3" data-aos="fade-up" data-aos-delay="<?= $cnt++ * 150 ?>">
+						<div class="col-6 col-md-3 col-lg-3" data-aos="fade-up" data-aos-delay="<?= $cnt++ * 0 ?>">
 							<div class="card-post">
 								<div class="card-wrap">
 									<div class="wrapper-thumb">
@@ -199,7 +199,7 @@ $categories = getCategoriesWithChildren();
 			<div class="swiper child-categories-top top_categories_carousel">
 			<div class="swiper-wrapper row g-0">
 				<?php foreach($top_categories as $category): ?>
-					<div class="swiper-slide col-6 col-md-4 col-lg-2">
+					<div class="swiper-slide col-5 col-md-4 col-lg-2">
 						<div class="card-cate-item"><a href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="internal">
 								<div class="cover-image border-0">
 									<div class="img-wrap thumbnail-wrapper">
@@ -230,8 +230,8 @@ $categories = getCategoriesWithChildren();
 		$(document).ready(function(){
 			var swiper = new Swiper(".top_categories_carousel", {
 				speed: 1000,
-				slidesPerView: 1.5,
-				spaceBetween: 10,
+				slidesPerView: 2.5,
+				spaceBetween: 5,
 				navigation: false,
 				grid: {
 					rows: 2,
@@ -239,6 +239,7 @@ $categories = getCategoriesWithChildren();
 				},
 				breakpoints: {
 					679: {
+						spaceBetween: 10,
 						slidesPerView: 3,
 						navigation: false,
 						pagination: {
@@ -247,6 +248,7 @@ $categories = getCategoriesWithChildren();
 						},
 					},
 					1025: {
+						spaceBetween: 10,
 						slidesPerView: 6,
 						navigation: false,
 						pagination: {
@@ -272,7 +274,7 @@ $categories = getCategoriesWithChildren();
 							$product['save'] = number_format($init_price - $sell_price, 0, ',', '.');
 						}
 						?>
-						<div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="<?= $cnt++ * 150 ?>">
+						<div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="<?= $cnt++ * 0 ?>">
 							<div class="h-100 d-flex flex-column">
 								<a rel="nofollow" href="/san-pham/<?=$product['slug']?>" class="ratio ratio ratio-1x1 ratio-hover" title="<?=$product['product_name']?>" data-wpel-link="internal">
 									<img src="/uploads/products/<?= $product['product_image'] ?>" class="" alt="<?=$product['product_name']?>">
@@ -310,7 +312,7 @@ $categories = getCategoriesWithChildren();
 							$product['save'] = number_format($init_price - $sell_price, 0, ',', '.');
 						}
 						?>
-						<div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="<?= $cnt++ * 150 ?>">
+						<div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="<?= $cnt++ * 0 ?>">
 							<div class="h-100 d-flex flex-column">
 								<a rel="nofollow" href="/san-pham/<?=$product['slug']?>" class="ratio ratio ratio-1x1 ratio-hover" title="<?=$product['product_name']?>" data-wpel-link="internal">
 									<img src="/uploads/products/<?= $product['product_image'] ?>" class="" alt="<?=$product['product_name']?>">
@@ -351,7 +353,7 @@ $categories = getCategoriesWithChildren();
 							$save = 0;
 						}
 						?>
-						<div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="<?= $cnt++ * 150 ?>">
+						<div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="<?= $cnt++ * 0 ?>">
 							<div class="h-100 d-flex flex-column">
 								<a rel="nofollow" href="/san-pham/<?=$product['slug']?>" class="ratio ratio ratio-1x1 ratio-hover" title="<?=$product['product_name']?>" data-wpel-link="internal">
 									<img src="/uploads/products/<?= $product['product_image'] ?>" class="" alt="<?=$product['product_name']?>">
@@ -525,7 +527,7 @@ $categories = getCategoriesWithChildren();
 			<div class="row">
 				<div class="col-12 col-md-12 col-lg-6 mb-md-4" data-aos="fade-right">
 					<div class="row left">
-						<div class="col-12 col-md-6 col-lg-6">
+						<div class="col-6 col-md-6 col-lg-6">
 							<div class="img-wrap">
 								<picture>
 									<source media="(max-width:768px)" srcset="/uploads/banners/<?=$banners_middle[0]['image_url']?>">
@@ -533,7 +535,7 @@ $categories = getCategoriesWithChildren();
 								</picture>
 							</div>
 						</div>
-						<div class="col-12 col-md-6 col-lg-6">
+						<div class="col-6 col-md-6 col-lg-6">
 							<div class="content">
 								<div class="sub_menu_1"><?=$banners_middle[0]['title']?></div>
 								<div class="title_1"><?=$banners_middle[0]['sub_title']?></div>
@@ -548,7 +550,7 @@ $categories = getCategoriesWithChildren();
 				</div>
 				<div class="col-12 col-md-12 col-lg-6 mb-md-4" data-aos="fade-left">
 					<div class="row right">
-						<div class="col-12 col-md-6 col-lg-6">
+						<div class="col-6 col-md-6 col-lg-6">
 							<div class="img-wrap">
 								<picture>
 									<source media="(max-width:768px)" srcset="/uploads/banners/<?=$banners_middle[1]['image_url']?>">
@@ -556,7 +558,7 @@ $categories = getCategoriesWithChildren();
 								</picture>
 							</div>
 						</div>
-						<div class="col-12 col-md-6 col-lg-6">
+						<div class="col-6 col-md-6 col-lg-6">
 							<div class="content">
 								<div class="sub_menu_1">
 									<?=$banners_middle[1]['title']?> </div>
@@ -589,12 +591,12 @@ $categories = getCategoriesWithChildren();
 				</div>
 			</div>
 			<div class="tab-content" id="pills-tabContent">
-			<?php  $cnt1=0;foreach ($category['children'] as $key => $category1): ?>
-				<div class="tab-pane fade <?=$cnt1 == 0 ? "show active" : ""?>" id="pills-tab_<?=$category1['category_id']?>" role="tabpanel"
+			<?php  $cnt=0;foreach ($category['children'] as $key => $category1): ?>
+				<div class="tab-pane fade <?=$cnt == 0 ? "show active" : ""?>" id="pills-tab_<?=$category1['category_id']?>" role="tabpanel"
 					aria-labelledby="pills-home-tab">
 					<div class="row row-cols-lg-5 row-cols-md-5">
-						<?php $cnt1=0; foreach ($category1['products'] as $product): ?>
-						<div data-aos="fade-up" data-aos-delay="<?=$cnt1++ * 200?>"
+						<?php $cnt=0; foreach ($category1['products'] as $product): ?>
+						<div data-aos="fade-up" data-aos-delay="<?= $cnt++ * 0 ?>"
 							class="product-card-wrapper col-sm-6 col-6 product type-product post-93654 status-publish last instock product_cat-ghe-giam-doc product_cat-ghe-van-phong-gia-re has-post-thumbnail shipping-taxable purchasable product-type-simple">
 							<div class="product-card">
 								<div class="img-cover">
@@ -629,7 +631,7 @@ $categories = getCategoriesWithChildren();
 							href="/danh-muc-san-pham/<?=$category1['slug']?>" rel="nofollow"
 							data-wpel-link="internal">Xem thêm<i class="fa-solid fa-arrow-right-long"></i></a></div>
 				</div>
-			<?php $cnt1++; endforeach; ?>
+			<?php $cnt++; endforeach; ?>
 			</div>
 		</div>
 	</section>

@@ -410,11 +410,12 @@
 <script type="text/javascript" src="/assets/js/sticky-menu.js?v=<?= ASSETS_VERSION ?>"></script>
 <script src="/assets/vendor/bootstrap.bundle.min.js"></script>
 <script>
-	AOS.init({
-		duration: 1000, // Thời gian chạy hiệu ứng (ms)
-		once: true,     // Hiệu ứng chỉ chạy 1 lần
-		delay: 50
-	});
+	$(document).ready(function () {
+		AOS.init({
+			duration: 1000,
+			once: true,
+		});
+	})
 </script>
 <script>
 	$(document).ready(function () {
