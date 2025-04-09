@@ -21,7 +21,7 @@
  */
 
 return array(
-    'default' => array(
+	'default' => array(
 		'type'           => 'mysqli',
 		'connection'     => array(
 			'hostname'       => 'localhost',

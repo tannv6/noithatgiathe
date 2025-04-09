@@ -27,8 +27,8 @@ class Controller_Admin_Contacts extends Controller
 		parent::before();
 		error_reporting(0);
 		if (!Auth::check() && Request::active()->action !== 'index') {
-            Response::redirect('admin');
-        }
+			Response::redirect('admin');
+		}
 	}
 
 	/**
@@ -40,56 +40,56 @@ class Controller_Admin_Contacts extends Controller
 	public function action_index()
 	{
 
-        $page = Input::get('page', 1);
+		$page = Input::get('page', 1);
 
-        $template = View::forge('template/admin/template_main', [
-            'active_menu' => "contact,contact_list"
-        ]);
+		$template = View::forge('template/admin/template_main', [
+			'active_menu' => "contact,contact_list"
+		]);
 
-        $contacts = Model_Contact::getPaging([], $page);
+		$contacts = Model_Contact::getPaging([], $page);
 
-        $view = View::forge('admin/contacts/index', compact('contacts', 'code'));
+		$view = View::forge('admin/contacts/index', compact('contacts', 'code'));
 
-        $template->content = $view;
+		$template->content = $view;
 		$template->title = 'Danh sách liên hệ';
 
 		return Response::forge($template);
 	}
-    public function action_write($id = null)
-    {
-        if($id) {
-            $contact = Model_Contact::find($id);
-            foreach (Input::post() as $key => $value) {
-                $contact->$key = $value;
-            }
-            $contact && $contact->save();
-        } else {
-            $contact = Model_Contact::forge(Input::post());
-            $contact && $contact->save();
-        }
+	public function action_write($id = null)
+	{
+		if($id) {
+			$contact = Model_Contact::find($id);
+			foreach (Input::post() as $key => $value) {
+				$contact->$key = $value;
+			}
+			$contact && $contact->save();
+		} else {
+			$contact = Model_Contact::forge(Input::post());
+			$contact && $contact->save();
+		}
 
-        Session::set_flash('message', 'Liên hệ đã được cập nhật!');
+		Session::set_flash('message', 'Liên hệ đã được cập nhật!');
 
-        return Response::forge(json_encode([
-            'result' => 'success'
-        ]));
-    }
-    public function get_detail($id = null)
-    {
-        $id = intval($id);
-        $contact = Model_Contact::find($id)->to_array();
-        $contact['message'] = nl2br($contact['message']);
-        return Response::forge(json_encode($contact));
-    }
-    public function post_delete() {
-        $ids = Input::post('ids');
-        $cnt = count($ids);
-        for ($i=0; $i < $cnt; $i++) {
-            $entry = Model_Contact::find($ids[$i]);
-            $entry->delete();
-        }
-        return Response::forge(json_encode([
-            'result' => 'success'
-        ]));
-    }
+		return Response::forge(json_encode([
+			'result' => 'success'
+		]));
+	}
+	public function get_detail($id = null)
+	{
+		$id = intval($id);
+		$contact = Model_Contact::find($id)->to_array();
+		$contact['message'] = nl2br($contact['message']);
+		return Response::forge(json_encode($contact));
+	}
+	public function post_delete() {
+		$ids = Input::post('ids');
+		$cnt = count($ids);
+		for ($i=0; $i < $cnt; $i++) {
+			$entry = Model_Contact::find($ids[$i]);
+			$entry->delete();
+		}
+		return Response::forge(json_encode([
+			'result' => 'success'
+		]));
+	}
 }

@@ -1923,9 +1923,9 @@
 						n += settings.lazyLoadEager;
 						// If the carousel is looping also preload images that are to the "left"
 						if (settings.loop) {
-              position -= settings.lazyLoadEager;
-              n++;
-            }
+				position -= settings.lazyLoadEager;
+				n++;
+			}
 					}
 
 					while (i++ < n) {
@@ -1968,7 +1968,7 @@
 
 		$elements.each($.proxy(function(index, element) {
 			var $element = $(element), image,
-                url = (window.devicePixelRatio > 1 && $element.attr('data-src-retina')) || $element.attr('data-src') || $element.attr('data-srcset');
+				url = (window.devicePixelRatio > 1 && $element.attr('data-src-retina')) || $element.attr('data-src') || $element.attr('data-srcset');
 
 			this._core.trigger('load', { element: $element, url: url }, 'lazy');
 
@@ -1977,10 +1977,10 @@
 					$element.css('opacity', 1);
 					this._core.trigger('loaded', { element: $element, url: url }, 'lazy');
 				}, this)).attr('src', url);
-            } else if ($element.is('source')) {
-                $element.one('load.owl.lazy', $.proxy(function() {
-                    this._core.trigger('loaded', { element: $element, url: url }, 'lazy');
-                }, this)).attr('srcset', url);
+			} else if ($element.is('source')) {
+				$element.one('load.owl.lazy', $.proxy(function() {
+					this._core.trigger('loaded', { element: $element, url: url }, 'lazy');
+				}, this)).attr('srcset', url);
 			} else {
 				image = new Image();
 				image.onload = $.proxy(function() {

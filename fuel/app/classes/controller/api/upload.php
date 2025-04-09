@@ -28,24 +28,24 @@ class Controller_Api_Upload extends Controller
 		error_reporting(0);
 	}
 
-    public function action_editor() {
+	public function action_editor() {
 
-        $uploader = new \Helper\Uploader(DOCROOT . 'uploads/editor/', IMAGE_ALLOWED_FORMAT);
+		$uploader = new \Helper\Uploader(DOCROOT . 'uploads/editor/', IMAGE_ALLOWED_FORMAT);
 
-        if ($uploader->upload()) {
-            $files = $uploader->get();
-            $image = $files[0]['saved_as'];
-            $name = $files[0]['name'];
-            $type = $files[0]['type'];
-        }
+		if ($uploader->upload()) {
+			$files = $uploader->get();
+			$image = $files[0]['saved_as'];
+			$name = $files[0]['name'];
+			$type = $files[0]['type'];
+		}
 
-        return Response::forge(json_encode([
-            "success" => true,
-            "url" => "/uploads/editor/$image",
-            "name" => $name,
-            "type" => $type,
+		return Response::forge(json_encode([
+			"success" => true,
+			"url" => "/uploads/editor/$image",
+			"name" => $name,
+			"type" => $type,
 			'location' => "/uploads/editor/$image",
-        ]));
-    }
+		]));
+	}
 
 }

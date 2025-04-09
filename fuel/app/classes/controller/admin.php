@@ -27,8 +27,8 @@ class Controller_Admin extends Controller
 		parent::before();
 		error_reporting(0);
 		if (!Auth::check() && Request::active()->action !== 'index') {
-            Response::redirect('admin');
-        }
+			Response::redirect('admin');
+		}
 	}
 
 	/**
@@ -60,7 +60,7 @@ class Controller_Admin extends Controller
 			}
 		}
 
-        $view = View::forge('admin/index', $data);
+		$view = View::forge('admin/index', $data);
 
 		return Response::forge($view);
 	}

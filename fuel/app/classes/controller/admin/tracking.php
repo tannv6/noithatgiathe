@@ -26,32 +26,32 @@ class Controller_Admin_Tracking extends Controller
 		parent::before();
 		error_reporting(0);
 		if (!Auth::check() && Request::active()->action !== 'index') {
-            Response::redirect('admin');
-        }
+			Response::redirect('admin');
+		}
 	}
 
-    public function action_product() {
+	public function action_product() {
 
-        $template = View::forge('template/admin/template_main', [
-            'active_menu' => "8,tracking,tracking_product",
-            'title' => 'Thống kê lượt xem sản phẩm'
-        ]);
+		$template = View::forge('template/admin/template_main', [
+			'active_menu' => "8,tracking,tracking_product",
+			'title' => 'Thống kê lượt xem sản phẩm'
+		]);
 
-        $template->content = View::forge('admin/tracking/product');
+		$template->content = View::forge('admin/tracking/product');
 
-        return Response::forge($template);
-    }
+		return Response::forge($template);
+	}
 
-    public function action_articles() {
+	public function action_articles() {
 
-        $template = View::forge('template/admin/template_main', [
-            'active_menu' => "8,tracking,tracking_articles",
-            'title' => 'Thống kê lượt xem bài việt'
-        ]);
+		$template = View::forge('template/admin/template_main', [
+			'active_menu' => "8,tracking,tracking_articles",
+			'title' => 'Thống kê lượt xem bài việt'
+		]);
 
-        $template->content = View::forge('admin/tracking/articles');
+		$template->content = View::forge('admin/tracking/articles');
 
-        return Response::forge($template);
-    }
+		return Response::forge($template);
+	}
 
 }
