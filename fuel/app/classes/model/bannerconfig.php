@@ -35,7 +35,7 @@ class Model_BannerConfig extends Model
 			$new->save();
 		}
 	}
-	public function get_by_banner_code($banner_code) {
+	public static function get_by_banner_code($banner_code) {
 		return self::find('first', ['where' => ['banner_code' => $banner_code]]);
 	}
 }

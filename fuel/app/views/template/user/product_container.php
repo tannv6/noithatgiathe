@@ -1,7 +1,7 @@
 <?php $categories = getCategoriesWithChildren(); ?>
 <?php
-$orderby = Input::get('orderby');
-$price = Input::get('price');
+$orderby = Input::get('orderby') ?: '';
+$price = Input::get('price') ?: [];
 ?>
 <div class="breadcrumb-wrapper">
 	<div class="container">
@@ -112,7 +112,7 @@ $price = Input::get('price');
 									<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-85544">
 										<a class="<?=$category_id == $category['category_id'] ? 'active' : ''?>" href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="external" rel="nofollow external noopener noreferrer"><?=$category['category_name']?></a>
 										<?php if(count($category['children']) > 0): ?>
-										<ul class="sub-menu <?=in_array($category['category_id'], $parents_category) ? 'active' : ''?>">
+										<ul class="sub-menu <?=in_array($category['category_id'], $parents_category ?: []) ? 'active' : ''?>">
 											<?php foreach($category['children'] as $category1): ?>
 												<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-85484">
 													<a class="<?=$category_id == $category1['category_id'] ? 'active' : ''?>" href="/danh-muc-san-pham/<?=$category1['slug']?>" data-wpel-link="external" rel="nofollow external noopener noreferrer">

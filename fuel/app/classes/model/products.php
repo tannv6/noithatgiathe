@@ -85,7 +85,7 @@ class Model_Products extends Orm\Model
 			}
 		}
 
-		if (count($sell_price) > 0) {
+		if (count($sell_price ?: []) > 0) {
 			$query->where_open();
 			foreach ($sell_price as $index => $range) {
 				if (is_array($range) && count($range) === 2) {
