@@ -16,7 +16,7 @@ class Model_Popup_Image extends \Orm\Model
     protected static $_belongs_to = [
         'popup' => [
             'key_from' => 'popup_id',
-            'model_to' => 'Model_Popup',
+            'model_to' => 'Model_Popup_Index',
             'key_to' => 'id',
         ],
     ];

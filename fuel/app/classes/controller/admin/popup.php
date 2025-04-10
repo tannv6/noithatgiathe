@@ -59,38 +59,55 @@ class Controller_Admin_Popup extends Controller
 	public function action_write($id = null)
 	{
 		$popup = null;
-		$image_url = null;
+		$popup_gallery = [];
 		if (Input::method() == 'POST') {
+			$deleted_images = explode(',', Input::post('deleted_images'));
+			$deleted_images = array_filter($deleted_images, function($value) {
+				return $value;
+			});
+
 			$uploader = new \Helper\Uploader(DOCROOT . 'uploads/popups/', IMAGE_ALLOWED_FORMAT);
 
 			if ($uploader->upload()) {
-
-				$image_url = $uploader->getName('image');
-
-				$image_url_m = $uploader->getName('image_mobile');
+				$popup_gallery = $uploader->get('popup_gallery');
 			}
 
 			if($id) {
 				$popup = Model_Popup_Index::find($id);
-				$popup->title = Input::post('title');
-
-				if ($popup && $popup->save()) {
-					Session::set_flash('success', 'Popup được cập nhật!');
-					Response::redirect('admin/popup/write/' . $id);
-				} else {
-					Session::set_flash('error', 'Lỗi khi cập nhật popup.');
+				foreach (Input::post() as $key => $value) {
+					$popup->{$key} = $value;
 				}
+				$success = 'Popup được cập nhật!';
+				$error = 'Lỗi khi cập nhật popup.';
+				$redirect = 'admin/popup/write/' . $id;
 			} else {
-				$popup = Model_Popup_Index::forge([
-					'title' => Input::post('title'),
-				]);
+				$popup = Model_Popup_Index::forge(Input::post());
+				$success = 'Popup đã được thêm!';
+				$error = 'Lỗi khi thêm popup.';
+				$redirect = 'admin/popup';
+			}
 
-				if ($popup && $popup->save()) {
-					Session::set_flash('success', 'Popup đã được thêm!');
-					Response::redirect('admin/popup');
-				} else {
-					Session::set_flash('error', 'Lỗi khi thêm popup.');
+			if ($popup && $popup->save()) {
+
+				foreach ($popup_gallery as $key => $value) {
+					$popup_gallery1 = Model_Popup_Image::forge([
+						'popup_id' => $popup->id,
+						'image_url' => $value['saved_as'],
+						'sort_order' => $key
+					]);
+
+					$popup_gallery1->save();
 				}
+
+				foreach ($deleted_images as $key => $value) {
+					$popup_gallery1 = Model_Popup_Image::find($value);
+					$popup_gallery1->delete();
+				}
+
+				Session::set_flash('success', $success);
+				Response::redirect($redirect);
+			} else {
+				Session::set_flash('error', $error);
 			}
 		} else {
 			$code = Input::get('code');
@@ -99,6 +116,7 @@ class Controller_Admin_Popup extends Controller
 				if (!$popup) {
 					Response::redirect('admin/popup');
 				}
+				$popup_gallery = Model_Popup_Image::find('all', ['where' => ['popup_id' => $id]]);
 			}
 		}
 
@@ -106,7 +124,7 @@ class Controller_Admin_Popup extends Controller
 			'active_menu' => "12,popup"
 		]);
 
-		$template->content = View::forge('admin/popup/write', compact('popup'));
+		$template->content = View::forge('admin/popup/write', compact('popup', 'popup_gallery'));
 		$template->title = $id ? 'Sửa popup' : 'Thêm popup';
 
 		return Response::forge($template);

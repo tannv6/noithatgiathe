@@ -13,5 +13,6 @@
 		]) ?>
 		<?= isset($content) ? $content : '<p>Nội dung đang được cập nhật...</p>' ?>
 		<?= View::forge('template/user/footer') ?>
+		<?= View::forge('main/popup') ?>
 	</body>
 </html>

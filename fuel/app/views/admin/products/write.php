@@ -1,55 +1,3 @@
-<style>
-	.image-card {
-		position: relative;
-		width: 150px;
-		height: 150px;
-		overflow: hidden;
-	}
-	.image-card img {
-		object-fit: cover;
-	}
-	.buttons {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		height: 30px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.btn-edit {
-		flex: 1;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background-color:rgba(0, 123, 255, 0.52);
-		color: #fff;
-		cursor: pointer;
-		margin: 0;
-		height: 100%;
-	}
-	.delete-image {
-		flex: 1;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background-color:rgba(220, 53, 70, 0.45);
-		color: #fff;
-		border: none;
-		cursor: pointer;
-		padding: 0;
-		margin: 0;
-		outline: none;
-		height: 100%;
-	}
-	#addImage ~ .buttons {
-		height: 100%;
-	}
-	#addImage ~ .buttons .btn-edit {
-		background-color: rgba(0, 123, 255);
-	}
-</style>
 <form method="post" enctype="multipart/form-data">
 	<input type="hidden" name="deleted_images" id="deleted_images">
 	<div class="d-flex justify-content-end gap-2">
@@ -151,7 +99,7 @@
 							</div>
 						<?php endforeach; ?>
 						<div class="image-card">
-							<input type="file" id="addImage" name="product_gallery_1" hidden accept="image/*">
+							<input type="file" id="addImage" name="product_gallery_<?= time() ?>" hidden accept="image/*">
 							<img width="100%" height="100%" alt="Image">
 							<div class="buttons">
 								<label class="btn-edit" for="addImage">Thêm</label>

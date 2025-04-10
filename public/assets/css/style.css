@@ -302,7 +302,7 @@ section .title {
 	color: var(--primary_color);
 	font-size: 28px;
 	font-weight: 500;
-	line-height: 35px;
+	line-height: 1.1;
 }
 section .title-with-border {
 	color: var(--primary_color);

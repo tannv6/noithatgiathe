@@ -14,8 +14,8 @@ class Create_popups_and_popup_images
             'height' => ['type' => 'int', 'default' => 300, 'null' => true],
             'position_x' => ['type' => 'varchar', 'constraint' => 50, 'default' => 'center', 'null' => true],
             'position_y' => ['type' => 'varchar', 'constraint' => 50, 'default' => 'center', 'null' => true],
-            'start_date' => ['type' => 'date', 'null' => true],
-            'end_date' => ['type' => 'date', 'null' => true],
+            'start_date' => ['type' => 'datetime', 'null' => true],
+            'end_date' => ['type' => 'datetime', 'null' => true],
             'always_show' => ['type' => 'char', 'default' => 'N', 'constraint' => 1, 'null' => true],
             'always_hide' => ['type' => 'char', 'default' => 'N', 'constraint' => 1, 'null' => true],
             'device' => ['type' => 'varchar', 'constraint' => 20, 'default' => 'all', 'null' => true], // new

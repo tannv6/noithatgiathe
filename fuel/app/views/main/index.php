@@ -184,12 +184,12 @@ $categories = getCategoriesWithChildren();
 			display: none;
 		}
 		@media screen and (max-width: 1024px) {
-			.top_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+7) {
+			.top_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+9) {
 				display: none;
 			}
 		}
 		@media screen and (max-width: 768px) {
-			.top_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+5) {
+			.top_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+7) {
 				display: none;
 			}
 		}
@@ -199,7 +199,7 @@ $categories = getCategoriesWithChildren();
 			<div class="swiper child-categories-top top_categories_carousel">
 			<div class="swiper-wrapper row g-0">
 				<?php foreach($top_categories as $category): ?>
-					<div class="swiper-slide col-5 col-md-4 col-lg-2">
+					<div class="swiper-slide col-4 col-md-3 col-lg-2">
 						<div class="card-cate-item"><a href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="internal">
 								<div class="cover-image border-0">
 									<div class="img-wrap thumbnail-wrapper">
@@ -230,17 +230,22 @@ $categories = getCategoriesWithChildren();
 		$(document).ready(function(){
 			var swiper = new Swiper(".top_categories_carousel", {
 				speed: 1000,
-				slidesPerView: 2.5,
+				slidesPerView: 3,
+				slidesPerGroup: 3,
 				spaceBetween: 5,
 				navigation: false,
 				grid: {
 					rows: 2,
 					fill: 'columns',
 				},
+				pagination: {
+					el: ".swiper-pagination",
+					clickable: true
+				},
 				breakpoints: {
 					679: {
 						spaceBetween: 10,
-						slidesPerView: 3,
+						slidesPerView: 4,
 						navigation: false,
 						pagination: {
 							el: ".swiper-pagination",
@@ -260,9 +265,9 @@ $categories = getCategoriesWithChildren();
 			});
 		});
 	</script>
-	<section id="new_product" class="new_product mt-5">
+	<section id="new_product" class="new_product pt-5" data-aos="fade-up">
 		<div class="container">
-			<h1 class="fs-4 m-0 text-uppercase fw-bold text-center" data-aos="fade-up"><span class="prd-title prd-title-new">Sản phẩm mới về</span></h1>
+			<h1 class="fs-4 m-0 text-uppercase fw-bold text-center"><span class="prd-title prd-title-new">Sản phẩm mới về</span></h1>
 			<div class="mt-4">
 				<div class="row">
 					<?php $cnt = 0; foreach ($new_products as $product):
@@ -274,7 +279,7 @@ $categories = getCategoriesWithChildren();
 							$product['save'] = number_format($init_price - $sell_price, 0, ',', '.');
 						}
 						?>
-						<div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="<?= $cnt++ * 0 ?>">
+						<div class="col-6 col-md-3 col-lg-2" data-aos-delay="<?= $cnt++ * 0 ?>">
 							<div class="h-100 d-flex flex-column">
 								<a rel="nofollow" href="/san-pham/<?=$product['slug']?>" class="ratio ratio ratio-1x1 ratio-hover" title="<?=$product['product_name']?>" data-wpel-link="internal">
 									<img src="/uploads/products/<?= $product['product_image'] ?>" class="" alt="<?=$product['product_name']?>">
@@ -400,7 +405,7 @@ $categories = getCategoriesWithChildren();
 								}
 							?>
 							<div
-								class="product-card-wrapper product type-product post-91167 status-publish first instock product_cat-ghe-cong-thai-hoc product_cat-san-pham-moi-ve product_cat-ghe-lam-viec-tai-nha product_cat-ghe-van-phong-gia-re has-post-thumbnail shipping-taxable purchasable product-type-simple">
+								class="product-card-wrapper product type-product post-91167 status-publish first instock product_cat-san-pham-moi-ve has-post-thumbnail shipping-taxable purchasable product-type-simple">
 								<div class="product-card">
 									<div class="img-cover">
 										<a rel="nofollow" href="/san-pham/<?=$product['slug']?>"
