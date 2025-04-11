@@ -156,6 +156,7 @@ class Controller_Shop extends Controller
 
 		$template = View::forge('template/user/template_main', [
 			'category_id' => $category['category_id'],
+			'parents_category' => $parents_category,
 			'body_class' => "archive tax-product_cat term-{$category['slug']} term-{$category['category_id']} website-design-by-thcmedia theme-thcmedia-company woocommerce woocommerce-page woocommerce-no-js",
 			'active' => 'shop',
 			'title' => $category['category_name'],
@@ -180,7 +181,7 @@ class Controller_Shop extends Controller
 			'active' => 'shop',
 			'title' => $product['product_name'],
 			// 'description' => $product['product_name'],
-			'og_image' => DOMAIN . "/uploads/products/" . $product['product_image'],
+			'og_image' => DOMAIN . "/storages/products/" . $product['product_image'],
 			'og_url' => DOMAIN . '/san-pham/' . $product['slug'],
 		]);
 		$breadcrumb = [[

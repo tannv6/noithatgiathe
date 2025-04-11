@@ -9,7 +9,7 @@
 					<div class="wrapper-thumb">
 						<a href="/bai-viet/<?= $post['slug']?>"
 							class="img-wrap thumbnail-wrapper" rel="" data-wpel-link="internal">
-							<img decoding="async" class="img" src="/uploads/bbs/<?= $post['category_code'] ?>/<?= $post['thumb']?>" alt="">
+							<img decoding="async" class="img" src="/storages/bbs/<?= $post['category_code'] ?>/<?= $post['thumb']?>" alt="">
 						</a>
 					</div>
 					<div class="card-info">

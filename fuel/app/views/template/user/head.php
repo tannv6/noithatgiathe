@@ -2,10 +2,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="robots" content="index, nofollow">
-	<link rel="shortcut icon" href="/uploads/settings/<?=FAVICON?>" type="image/x-icon">
+	<link rel="shortcut icon" href="/storages/settings/<?=FAVICON?>" type="image/x-icon">
 	<meta property="og:title" content="<?=$title ?: TITLE?>">
 	<meta property="og:description" content="<?=$description ?:DESCRIPTION?>">
-	<meta property="og:image" content="<?=$og_image ?: (DOMAIN . '/uploads/settings/' . OG_IMAGE)?>">
+	<meta property="og:image" content="<?=$og_image ?: (DOMAIN . '/storages/settings/' . OG_IMAGE)?>">
 	<meta property="og:url" content="<?=$og_url ?: DOMAIN?>">
 	<meta property="og:type" content="website">
 	<meta property="og:site_name" content="<?=TITLE?>">

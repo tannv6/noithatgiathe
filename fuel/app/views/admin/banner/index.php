@@ -24,7 +24,7 @@
 				<td><?= $key + 1 ?></td>
 				<td>
 					<?php if($banner->image_url): ?>
-						<img src="/uploads/banners/<?= $banner->image_url ?>" alt="" width="100">
+						<img src="/storages/banners/<?= $banner->image_url ?>" alt="" width="100">
 					<?php endif; ?>
 				</td>
 				<td>

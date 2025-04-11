@@ -33,7 +33,7 @@
 					<?= $key + 1 ?>
 				</td>
 				<td><?= $category->category_name ?></td>
-				<td><img src="/uploads/categories/<?= $category->category_image ?>" width="50"></td>
+				<td><img src="/storages/categories/<?= $category->category_image ?>" width="50"></td>
 				<td><?= $category->status == "Y" ? 'Hiển thị' : 'Ẩn' ?></td>
 				<td>
 					<input type="text" name="o_num[]" value="<?= $category->o_num ?>" class="form-control">

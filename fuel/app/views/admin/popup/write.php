@@ -79,7 +79,7 @@
 						<?php foreach ($popup_gallery as $img) : ?>
 							<div class="image-card" data-id="<?= $img['id'] ?>">
 								<input type="file" id="img_<?= $img['id'] ?>" name="popup_gallery_<?= $img['id'] ?>" class="has-image" hidden accept="image/*">
-								<img width="100%" height="100%" src="/uploads/popups/<?= $img['image_url'] ?>" alt="Image">
+								<img width="100%" height="100%" src="/storages/popups/<?= $img['image_url'] ?>" alt="Image">
 								<div class="buttons">
 									<label class="btn-edit" for="img_<?= $img['id'] ?>">Sửa</label>
 									<button type="button" class="delete-image" data-id="<?= $img['id'] ?>">Xóa</button>

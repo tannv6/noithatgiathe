@@ -59,7 +59,7 @@
 				<td><?= $products['num']-- ?></td>
 				<td>
 					<?php if ($product->product_image): ?>
-						<img src="/uploads/products/<?= $product->product_image ?>" alt="" width="100">
+						<img src="/storages/products/<?= $product->product_image ?>" alt="" width="100">
 					<?php endif; ?>
 				</td>
 				<td><?= $product->product_name ?></td>

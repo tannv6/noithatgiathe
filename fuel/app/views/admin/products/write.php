@@ -79,7 +79,7 @@
 					<input type="file" name="product_image" class="form-control">
 					<?php if ($product['product_image']): ?>
 						<div class="mt-2">
-							<img src="/uploads/products/<?= $product['product_image'] ?>" alt="" width="150">
+							<img src="/storages/products/<?= $product['product_image'] ?>" alt="" width="150">
 						</div>
 					<?php endif; ?>
 				</td>
@@ -91,7 +91,7 @@
 						<?php foreach ($product_gallery as $img) : ?>
 							<div class="image-card" data-id="<?= $img['gallery_id'] ?>">
 								<input type="file" id="img_<?= $img['gallery_id'] ?>" name="product_gallery_<?= $img['gallery_id'] ?>" class="has-image" hidden accept="image/*">
-								<img width="100%" height="100%" src="/uploads/products/<?= $img['image_path'] ?>" alt="Image">
+								<img width="100%" height="100%" src="/storages/products/<?= $img['image_path'] ?>" alt="Image">
 								<div class="buttons">
 									<label class="btn-edit" for="img_<?= $img['gallery_id'] ?>">Sửa</label>
 									<button type="button" class="delete-image" data-id="<?= $img['gallery_id'] ?>">Xóa</button>

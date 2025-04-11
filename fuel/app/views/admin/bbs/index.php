@@ -66,7 +66,7 @@
 					<td><?= $bbs->title ?></td>
 					<td>
 						<?php if ($bbs->thumb): ?>
-							<img src="/uploads/bbs/<?= $category_code ?>/<?= $bbs->thumb ?>" alt="" width="100">
+							<img src="/storages/bbs/<?= $category_code ?>/<?= $bbs->thumb ?>" alt="" width="100">
 						<?php endif; ?>
 					</td>
 					<td><?= $bbs->status == "Y" ? 'Hiển thị' : 'Ẩn' ?></td>

@@ -70,7 +70,7 @@ $popups = array_values($popups);
             const images = popup.images.map(image => {
                 return `
                     <div style="width: ${popup.width}px;height: ${popup.height}px">
-                        <img style="width: 100%;height: 100%;object-fit: cover" src="/uploads/popups/${image.image_url}" alt="Image">
+                        <img style="width: 100%;height: 100%;object-fit: cover" src="/storages/popups/${image.image_url}" alt="Image">
                     </div>
                 `;
             }).join('');

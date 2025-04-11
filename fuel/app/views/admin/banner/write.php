@@ -34,7 +34,7 @@
 					</div> -->
 					<?php if ($banner['image_url']): ?>
 						<div class="mt-2">
-							<img src="/uploads/banners/<?= $banner['image_url'] ?>" alt="" width="100">
+							<img src="/storages/banners/<?= $banner['image_url'] ?>" alt="" width="100">
 						</div>
 					<?php endif; ?>
 				</td>
@@ -51,7 +51,7 @@
 					</div> -->
 					<?php if ($banner['image_url_m']): ?>
 						<div class="mt-2">
-							<img src="/uploads/banners/<?= $banner['image_url_m'] ?>" alt="" width="100">
+							<img src="/storages/banners/<?= $banner['image_url_m'] ?>" alt="" width="100">
 						</div>
 					<?php endif; ?>
 				</td>

@@ -19,8 +19,8 @@ $categories = getCategoriesWithChildren();
 					<?php foreach ($banners as $banner): ?>
 						<div class="item">
 							<picture>
-								<source media="(min-width:769px)" srcset="/uploads/banners/<?= $banner['image_url'] ?>">
-								<img src="/uploads/banners/<?= $banner['image_url_m'] ?>">
+								<source media="(min-width:769px)" srcset="/storages/banners/<?= $banner['image_url'] ?>">
+								<img src="/storages/banners/<?= $banner['image_url_m'] ?>">
 							</picture>
 						</div>
 					<?php endforeach; ?>
@@ -88,8 +88,8 @@ $categories = getCategoriesWithChildren();
 				<?php foreach ($ads as $ad): ?>
 					<div class="position-relative swiper-slide rounded-1 overflow-hidden">
 						<picture class="ratio ratio-16x9">
-							<source media="(min-width:769px)" srcset="/uploads/banners/<?= $ad['image_url'] ?>">
-							<img src="/uploads/banners/<?= $ad['image_url_m'] ?>">
+							<source media="(min-width:769px)" srcset="/storages/banners/<?= $ad['image_url'] ?>">
+							<img src="/storages/banners/<?= $ad['image_url_m'] ?>">
 						</picture>
 						<div class="position-absolute top-50 translate-middle-y px-2">
 							<h2 class="fs-6 m-0 fw-bold">
@@ -151,7 +151,7 @@ $categories = getCategoriesWithChildren();
 										<a href="/bai-viet/<?= $project['slug'] ?>" class="img-wrap thumbnail-wrapper"
 											rel="nofollow" data-wpel-link="internal">
 											<img decoding="async" class="img entered lazyloaded"
-												src="/uploads/bbs/project/<?= $project['thumb'] ?>" alt="">
+												src="/storages/bbs/project/<?= $project['thumb'] ?>" alt="">
 										</a>
 									</div>
 									<div class="card-info">
@@ -203,7 +203,7 @@ $categories = getCategoriesWithChildren();
 						<div class="card-cate-item"><a href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="internal">
 								<div class="cover-image border-0">
 									<div class="img-wrap thumbnail-wrapper">
-										<img src="/uploads/categories/<?=$category['category_image']?>" alt="<?=$category['category_name']?>" />
+										<img src="/storages/categories/<?=$category['category_image']?>" alt="<?=$category['category_name']?>" />
 									</div>
 								</div>
 							</a>
@@ -282,7 +282,7 @@ $categories = getCategoriesWithChildren();
 						<div class="col-6 col-md-3 col-lg-2" data-aos-delay="<?= $cnt++ * 0 ?>">
 							<div class="h-100 d-flex flex-column">
 								<a rel="nofollow" href="/san-pham/<?=$product['slug']?>" class="ratio ratio ratio-1x1 ratio-hover" title="<?=$product['product_name']?>" data-wpel-link="internal">
-									<img src="/uploads/products/<?= $product['product_image'] ?>" class="" alt="<?=$product['product_name']?>">
+									<img src="/storages/products/<?= $product['product_image'] ?>" class="" alt="<?=$product['product_name']?>">
 								</a>
 								<div class="flex-fill d-flex flex-column justify-content-between">
 									<!-- <a rel="nofollow" href="https://noithatgiathe.vn/ghe-cong-thai-hoc/"
@@ -320,7 +320,7 @@ $categories = getCategoriesWithChildren();
 						<div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="<?= $cnt++ * 0 ?>">
 							<div class="h-100 d-flex flex-column">
 								<a rel="nofollow" href="/san-pham/<?=$product['slug']?>" class="ratio ratio ratio-1x1 ratio-hover" title="<?=$product['product_name']?>" data-wpel-link="internal">
-									<img src="/uploads/products/<?= $product['product_image'] ?>" class="" alt="<?=$product['product_name']?>">
+									<img src="/storages/products/<?= $product['product_image'] ?>" class="" alt="<?=$product['product_name']?>">
 								</a>
 								<div class="flex-fill d-flex flex-column justify-content-between">
 									<!-- <a rel="nofollow" href="https://noithatgiathe.vn/ghe-cong-thai-hoc/"
@@ -361,7 +361,7 @@ $categories = getCategoriesWithChildren();
 						<div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="<?= $cnt++ * 0 ?>">
 							<div class="h-100 d-flex flex-column">
 								<a rel="nofollow" href="/san-pham/<?=$product['slug']?>" class="ratio ratio ratio-1x1 ratio-hover" title="<?=$product['product_name']?>" data-wpel-link="internal">
-									<img src="/uploads/products/<?= $product['product_image'] ?>" class="" alt="<?=$product['product_name']?>">
+									<img src="/storages/products/<?= $product['product_image'] ?>" class="" alt="<?=$product['product_name']?>">
 									<?php if($save > 0): ?>
 										<span class="badge discount-badge">-<?=$save?>%</span>
 									<?php endif; ?>
@@ -412,7 +412,7 @@ $categories = getCategoriesWithChildren();
 											class="thumbnail-wrapper" title="<?=$product['product_name']?>"
 											data-wpel-link="internal">
 											<img width="300" height="300"
-												src="/uploads/products/<?= $product['product_image'] ?>"
+												src="/storages/products/<?= $product['product_image'] ?>"
 												class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">
 										</a>
 										<a title="Chat zalo" class="float-button chat-zalo" target="_blank"
@@ -458,7 +458,7 @@ $categories = getCategoriesWithChildren();
 											class="thumbnail-wrapper" title="<?=$product['product_name']?>"
 											data-wpel-link="internal">
 											<img width="300" height="300"
-												src="/uploads/products/<?= $product['product_image'] ?>"
+												src="/storages/products/<?= $product['product_image'] ?>"
 												class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">
 										</a>
 										<a title="Chat zalo" class="float-button chat-zalo" target="_blank"
@@ -499,7 +499,7 @@ $categories = getCategoriesWithChildren();
 											class="thumbnail-wrapper" title="<?=$product['product_name']?>"
 											data-wpel-link="internal">
 											<img width="300" height="300"
-												src="/uploads/products/<?= $product['product_image'] ?>"
+												src="/storages/products/<?= $product['product_image'] ?>"
 												class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">
 										</a>
 										<a title="Chat zalo" class="float-button chat-zalo" target="_blank"
@@ -535,8 +535,8 @@ $categories = getCategoriesWithChildren();
 						<div class="col-6 col-md-6 col-lg-6">
 							<div class="img-wrap">
 								<picture>
-									<source media="(max-width:768px)" srcset="/uploads/banners/<?=$banners_middle[0]['image_url']?>">
-									<img src="/uploads/banners/<?=$banners_middle[0]['image_url']?>" alt="">
+									<source media="(max-width:768px)" srcset="/storages/banners/<?=$banners_middle[0]['image_url']?>">
+									<img src="/storages/banners/<?=$banners_middle[0]['image_url']?>" alt="">
 								</picture>
 							</div>
 						</div>
@@ -558,8 +558,8 @@ $categories = getCategoriesWithChildren();
 						<div class="col-6 col-md-6 col-lg-6">
 							<div class="img-wrap">
 								<picture>
-									<source media="(max-width:768px)" srcset="/uploads/banners/<?=$banners_middle[1]['image_url']?>">
-									<img src="/uploads/banners/<?=$banners_middle[1]['image_url']?>" alt="">
+									<source media="(max-width:768px)" srcset="/storages/banners/<?=$banners_middle[1]['image_url']?>">
+									<img src="/storages/banners/<?=$banners_middle[1]['image_url']?>" alt="">
 								</picture>
 							</div>
 						</div>
@@ -608,7 +608,7 @@ $categories = getCategoriesWithChildren();
 									<a href="/san-pham/<?=$product['slug']?>"
 										class="thumbnail-wrapper" title="<?=$product['product_name']?>"
 										data-wpel-link="internal">
-										<img width="300" height="300" src="/uploads/products/<?=$product['product_image']?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail entered lazyloaded" alt="">
+										<img width="300" height="300" src="/storages/products/<?=$product['product_image']?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail entered lazyloaded" alt="">
 									</a>
 									<a title="Chat zalo" class="float-button chat-zalo" target="_blank"
 										href="<?= ZALO_LINK ?>" rel="nofollow" data-wpel-link="external">

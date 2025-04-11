@@ -66,7 +66,7 @@ class Controller_Admin_Popup extends Controller
 				return $value;
 			});
 
-			$uploader = new \Helper\Uploader(DOCROOT . 'uploads/popups/', IMAGE_ALLOWED_FORMAT);
+			$uploader = new \Helper\Uploader(DOCROOT . 'storages/popups/', IMAGE_ALLOWED_FORMAT);
 
 			if ($uploader->upload()) {
 				$popup_gallery = $uploader->get('popup_gallery');

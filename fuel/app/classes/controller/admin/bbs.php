@@ -71,7 +71,7 @@ class Controller_Admin_Bbs extends Controller_Base
 	{
 		$bbs = null;
 		if (Input::method() == 'POST') {
-			$uploader = new \Helper\Uploader(DOCROOT . 'uploads/bbs/' . Input::post('category_code') . '/', IMAGE_ALLOWED_FORMAT);
+			$uploader = new \Helper\Uploader(DOCROOT . 'storages/bbs/' . Input::post('category_code') . '/', IMAGE_ALLOWED_FORMAT);
 
 			if ($uploader->upload()) {
 				$thumb = $uploader->getName('image');

@@ -12,7 +12,10 @@
 			'category_id' => $category_id
 		]) ?>
 		<?= isset($content) ? $content : '<p>Nội dung đang được cập nhật...</p>' ?>
-		<?= View::forge('template/user/footer') ?>
+		<?= View::forge('template/user/footer', [
+			'parents_category' => $parents_category,
+			'category_id' => $category_id,
+		]) ?>
 		<?= View::forge('main/popup') ?>
 	</body>
 </html>

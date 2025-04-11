@@ -38,7 +38,7 @@
 					<div class="img-cover">
 						<a rel="" href="/san-pham/<?=$product4['slug']?>" class="thumbnail-wrapper" title="<?=$product4['product_name']?>" data-wpel-link="internal">
 							<?= $save ?>
-							<img width="300" height="300" src="/uploads/products/<?= $product4['product_image'] ?>"
+							<img width="300" height="300" src="/storages/products/<?= $product4['product_image'] ?>"
 								class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt=""
 								decoding="async" fetchpriority="high" sizes="(max-width: 300px) 100vw, 300px">
 						</a>

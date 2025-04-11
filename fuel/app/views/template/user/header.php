@@ -40,8 +40,8 @@ $categories = getCategoriesWithChildren();
 						</div>
 						<a href="/" class="logo img-wrap" data-wpel-link="internal">
 							<picture>
-								<source srcset="/uploads/settings/<?=LOGO_HEADER?>" media="(min-width: 770px)" type="image/png">
-								<img decoding="async" class="img lazyload" src="/uploads/settings/<?=LOGO_HEADER_REVERSE?>" alt="Logo">
+								<source srcset="/storages/settings/<?=LOGO_HEADER?>" media="(min-width: 770px)" type="image/png">
+								<img decoding="async" class="img lazyload" src="/storages/settings/<?=LOGO_HEADER_REVERSE?>" alt="Logo">
 							</picture>
 						</a>
 					</div>
@@ -85,11 +85,11 @@ $categories = getCategoriesWithChildren();
 								<!-- <a class="img-wrap no-scale-image" href="https://noithatgiathe.vn/gio-hang/"
 									data-wpel-link="external" rel="nofollow external noopener noreferrer">
 									<img decoding="async" class="img entered lazyloaded"
-										src="https://noithatgiathe.vn/wp-content/uploads/2024/03/cart-image.png"
+										src="https://noithatgiathe.vn/wp-content/storages/2024/03/cart-image.png"
 										srcset="" alt=""
-										data-lazy-src="https://noithatgiathe.vn/wp-content/uploads/2024/03/cart-image.png"
+										data-lazy-src="https://noithatgiathe.vn/wp-content/storages/2024/03/cart-image.png"
 										data-ll-status="loaded"><noscript><img decoding="async" class="img"
-											src="https://noithatgiathe.vn/wp-content/uploads/2024/03/cart-image.png"
+											src="https://noithatgiathe.vn/wp-content/storages/2024/03/cart-image.png"
 											srcset="" alt=""></noscript>
 								</a>
 								<span class="amount-cart-item">0</span> -->

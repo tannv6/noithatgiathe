@@ -51,7 +51,7 @@ class Controller_Admin_Setting extends Controller_Base
 
 		$post = Input::post();
 
-		$uploader = new \Helper\Uploader(DOCROOT . 'uploads/settings/', IMAGE_ALLOWED_FORMAT);
+		$uploader = new \Helper\Uploader(DOCROOT . 'storages/settings/', IMAGE_ALLOWED_FORMAT);
 
 		if ($uploader->upload()) {
 			$favicon = $uploader->getName('favicon');

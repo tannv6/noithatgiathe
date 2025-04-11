@@ -77,10 +77,10 @@
 								<div class="card-wrap">
 									<a rel="nofollow" href="/bai-viet/<?=$post['slug']?>"
 										class="img-wrap" data-wpel-link="internal">
-										<img src="/uploads/bbs/<?=$post['category_code']?>/<?=$post['thumb']?>"
+										<img src="/storages/bbs/<?=$post['category_code']?>/<?=$post['thumb']?>"
 											alt="" class="thumbnail"
-											data-lazy-src="/uploads/bbs/<?=$post['category_code']?>/<?=$post['thumb']?>"><noscript><img
-												src="/uploads/bbs/<?=$post['category_code']?>/<?=$post['thumb']?>"
+											data-lazy-src="/storages/bbs/<?=$post['category_code']?>/<?=$post['thumb']?>"><noscript><img
+												src="/storages/bbs/<?=$post['category_code']?>/<?=$post['thumb']?>"
 												alt="" class="thumbnail"></noscript>
 									</a>
 									<div class="card-info">

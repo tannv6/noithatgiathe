@@ -32,7 +32,7 @@ $categories = getCategoriesWithChildren();
 						<?php foreach ($product['gallery'] as $key => $value): ?>
 							<div class="img-cover">
 								<div class="img-wrap thumbnail-wrapper" id="ex1">
-									<img id="thumb" src="/uploads/products/<?=$value['image_path']?>" alt="">
+									<img id="thumb" src="/storages/products/<?=$value['image_path']?>" alt="">
 								</div>
 							</div>
 						<?php endforeach; ?>
@@ -42,7 +42,7 @@ $categories = getCategoriesWithChildren();
 					<?php foreach ($product['gallery'] as $key => $value): ?>
 						<div class="item-small img-cover">
 							<div class="thumbnail-wrapper">
-								<img src="/uploads/products/<?=$value['image_path']?>" alt="" >
+								<img src="/storages/products/<?=$value['image_path']?>" alt="" >
 							</div>
 						</div>
 					<?php endforeach; ?>
@@ -307,7 +307,7 @@ $categories = getCategoriesWithChildren();
 							<div class="img-cover">
 								<a href="/san-pham/<?=$product4['slug']?>" class="thumbnail-wrapper" title="<?=$product4['product_name']?>" data-wpel-link="internal">
 									<?= $save ?>
-									<img width="300" height="300" src="/uploads/products/<?= $product4['product_image'] ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt=""/>
+									<img width="300" height="300" src="/storages/products/<?= $product4['product_image'] ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt=""/>
 								</a>
 								<a title="Chat zalo" class="float-button chat-zalo" target="_blank" href="<?=ZALO_LINK?>" rel="nofollow external noopener noreferrer" data-wpel-link="external">
 									<img src="/assets/img/zalo-stick.png" alt=""/>
@@ -362,7 +362,7 @@ $categories = getCategoriesWithChildren();
 							<div class="img-cover">
 								<a href="/san-pham/<?=$product5['slug']?>" class="thumbnail-wrapper" title="<?=$product5['product_name']?>" data-wpel-link="internal">
 									<?= $save ?>
-									<img width="300" height="300" src="/uploads/products/<?= $product5['product_image'] ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt=""/>
+									<img width="300" height="300" src="/storages/products/<?= $product5['product_image'] ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt=""/>
 								</a>
 								<a title="Chat zalo" class="float-button chat-zalo" target="_blank" href="<?=ZALO_LINK?>" rel="nofollow external noopener noreferrer" data-wpel-link="external">
 									<img src="/assets/img/zalo-stick.png" alt=""/>
@@ -417,7 +417,7 @@ $categories = getCategoriesWithChildren();
 							<div class="img-cover">
 								<a href="/san-pham/<?=$product6['slug']?>" class="thumbnail-wrapper" title="<?=$product6['product_name']?>" data-wpel-link="internal">
 									<?= $save ?>
-									<img width="300" height="300" src="/uploads/products/<?= $product6['product_image'] ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt=""/>
+									<img width="300" height="300" src="/storages/products/<?= $product6['product_image'] ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt=""/>
 								</a>
 								<a title="Chat zalo" class="float-button chat-zalo" target="_blank" href="<?=ZALO_LINK?>" rel="nofollow external noopener noreferrer" data-wpel-link="external">
 									<img src="/assets/img/zalo-stick.png" alt=""/>

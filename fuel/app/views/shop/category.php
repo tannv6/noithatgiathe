@@ -6,7 +6,7 @@
 						data-wpel-link="internal">
 						<div class="cover-image">
 							<div class="img-wrap thumbnail-wrapper">
-								<img src="/uploads/categories/<?=$category['category_image']?>" alt="<?=$category['category_name']?>" />
+								<img src="/storages/categories/<?=$category['category_image']?>" alt="<?=$category['category_name']?>" />
 							</div>
 						</div>
 					</a>

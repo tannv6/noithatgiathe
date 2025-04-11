@@ -126,7 +126,7 @@ class Controller_Bbs extends Controller
 		$template = View::forge('template/user/template_main', [
 			'active' => $category['slug'],
 			'title' => $bbs['title'],
-			'og_image' => DOMAIN . "/uploads/bbs/{$bbs['category_code']}/" . $bbs['thumb'],
+			'og_image' => DOMAIN . "/storages/bbs/{$bbs['category_code']}/" . $bbs['thumb'],
 			'og_url' => DOMAIN . "/bai-viet/" . $bbs['slug'],
 		]);
 

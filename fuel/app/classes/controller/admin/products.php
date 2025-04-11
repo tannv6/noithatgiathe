@@ -122,7 +122,7 @@ class Controller_Admin_Products extends Controller_Base
 				return $value;
 			});
 
-			$uploader = new \Helper\Uploader(DOCROOT . 'uploads/products/', IMAGE_ALLOWED_FORMAT);
+			$uploader = new \Helper\Uploader(DOCROOT . 'storages/products/', IMAGE_ALLOWED_FORMAT);
 
 			if ($uploader->upload()) {
 

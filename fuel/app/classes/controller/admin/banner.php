@@ -72,7 +72,7 @@ class Controller_Admin_Banner extends Controller
 		$image_url = null;
 		$config = null;
 		if (Input::method() == 'POST') {
-			$uploader = new \Helper\Uploader(DOCROOT . 'uploads/banners/', IMAGE_ALLOWED_FORMAT);
+			$uploader = new \Helper\Uploader(DOCROOT . 'storages/banners/', IMAGE_ALLOWED_FORMAT);
 
 			if ($uploader->upload()) {
 

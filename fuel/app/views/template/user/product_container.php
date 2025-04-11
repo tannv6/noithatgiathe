@@ -29,7 +29,7 @@ $price = Input::get('price') ?: [];
 	<?php if($category['category_banner']): ?>
 		<div class="banner">
 			<div class="img-wrap no-scale-image">
-				<img decoding="async" class="img entered lazyloaded" src="/uploads/categories/<?=$category['category_banner']?>" alt="<?=$category['category_name']?>">
+				<img decoding="async" class="img entered lazyloaded" src="/storages/categories/<?=$category['category_banner']?>" alt="<?=$category['category_name']?>">
 			</div>
 		</div>
 	<?php endif; ?>
@@ -51,7 +51,7 @@ $price = Input::get('price') ?: [];
 				<div class="card-cate-item"><a href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="internal">
 						<div class="cover-image border-0">
 							<div class="img-wrap thumbnail-wrapper">
-								<img src="/uploads/categories/<?=$category['category_image']?>" alt="<?=$category['category_name']?>" />
+								<img src="/storages/categories/<?=$category['category_image']?>" alt="<?=$category['category_name']?>" />
 							</div>
 						</div>
 					</a>
@@ -112,7 +112,7 @@ $price = Input::get('price') ?: [];
 									<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-85544">
 										<a class="<?=$category_id == $category['category_id'] ? 'active' : ''?>" href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="external" rel="nofollow external noopener noreferrer"><?=$category['category_name']?></a>
 										<?php if(count($category['children']) > 0): ?>
-										<ul class="sub-menu <?=in_array($category['category_id'], $parents_category ?: []) ? 'active' : ''?>">
+										<ul class="sub-menu <?=in_array($category['category_id'], $parents_category ?: []) || $category_id == $category['category_id'] ? 'active' : ''?>">
 											<?php foreach($category['children'] as $category1): ?>
 												<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-85484">
 													<a class="<?=$category_id == $category1['category_id'] ? 'active' : ''?>" href="/danh-muc-san-pham/<?=$category1['slug']?>" data-wpel-link="external" rel="nofollow external noopener noreferrer">
@@ -178,7 +178,7 @@ $price = Input::get('price') ?: [];
 								<div class="img-cover">
 									<a rel="nofollow" href="/san-pham/<?=$product['slug']?>"
 										class="thumbnail-wrapper" title="<?=$product['product_name']?>" data-wpel-link="internal">
-										<img width="300" height="300" src="/uploads/products/<?=$product['product_image']?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" />
+										<img width="300" height="300" src="/storages/products/<?=$product['product_image']?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" />
 									</a>
 									<a title="Chat zalo" class="float-button chat-zalo" target="_blank"
 										href="https://zalo.me/3269059400105626655"
@@ -218,10 +218,10 @@ $price = Input::get('price') ?: [];
 							target="_blank" data-wpel-link="external">
 							<div class="img-wrap">
 								<picture>
-									<source media="(max-width:768px)" srcset="/uploads/banners/<?=$banner['image_url']?>">
-									<source media="(max-width:1024px)" srcset="/uploads/banners/<?=$banner['image_url']?>">
-									<source media="(max-width:1200px)" srcset="/uploads/banners/<?=$banner['image_url']?>">
-									<img src="/uploads/banners/<?=$banner['image_url']?>">
+									<source media="(max-width:768px)" srcset="/storages/banners/<?=$banner['image_url']?>">
+									<source media="(max-width:1024px)" srcset="/storages/banners/<?=$banner['image_url']?>">
+									<source media="(max-width:1200px)" srcset="/storages/banners/<?=$banner['image_url']?>">
+									<img src="/storages/banners/<?=$banner['image_url']?>">
 								</picture>
 							</div>
 						</a>

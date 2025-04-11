@@ -25,7 +25,7 @@
 					<input type="file" name="image" class="form-control">
 					<?php if ($bbs['thumb']): ?>
 						<div class="mt-2">
-							<img src="/uploads/bbs/<?=$category_code?>/<?= $bbs['thumb'] ?>" alt="" width="100">
+							<img src="/storages/bbs/<?=$category_code?>/<?= $bbs['thumb'] ?>" alt="" width="100">
 						</div>
 					<?php endif; ?>
 				</td>

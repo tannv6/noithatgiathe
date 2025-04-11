@@ -328,13 +328,13 @@
 				<?php foreach ($categories as $category): ?>
 					<li
 						class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-85544">
-						<a href="/danh-muc-san-pham/<?= $category['slug'] ?>" data-wpel-link="external"
+						<a class="<?=$category_id == $category['category_id'] ? 'active' : ''?>" href="/danh-muc-san-pham/<?= $category['slug'] ?>" data-wpel-link="external"
 							rel="nofollow external noopener noreferrer"><?= $category['category_name'] ?></a>
 						<?php if (count($category['children']) > 0): ?>
-							<ul class="sub-menu">
+							<ul class="sub-menu <?=in_array($category['category_id'], $parents_category ?: []) || $category_id == $category['category_id'] ? 'active' : ''?>">
 								<?php foreach ($category['children'] as $category1): ?>
 									<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-85484">
-										<a href="/danh-muc-san-pham/<?= $category1['slug'] ?>" data-wpel-link="external"
+										<a class="<?=$category_id == $category1['category_id'] ? 'active' : ''?>" href="/danh-muc-san-pham/<?= $category1['slug'] ?>" data-wpel-link="external"
 											rel="nofollow external noopener noreferrer">
 											<?= $category1['category_name'] ?>
 										</a>

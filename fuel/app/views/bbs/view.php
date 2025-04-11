@@ -36,7 +36,7 @@
 		<div class="author-box-wrap" itemtype="http://schema.org/Person" itemscope="" itemprop="author">
 			<div class="author-box-tab">
 				<div class="author-box-gravatar">
-					<img src="/uploads/settings/<?= OWNER_AVATAR ?>" width="100" height="100"
+					<img src="/storages/settings/<?= OWNER_AVATAR ?>" width="100" height="100"
 						alt="" itemprop="image" />
 				</div>
 				<div class="author-box-authorname">

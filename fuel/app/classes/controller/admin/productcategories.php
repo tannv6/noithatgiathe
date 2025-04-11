@@ -88,7 +88,7 @@ class Controller_Admin_ProductCategories extends Controller_Base
 	{
 		$category = null;
 		if (Input::method() == 'POST') {
-			$uploader = new \Helper\Uploader(DOCROOT . 'uploads/categories/', IMAGE_ALLOWED_FORMAT);
+			$uploader = new \Helper\Uploader(DOCROOT . 'storages/categories/', IMAGE_ALLOWED_FORMAT);
 
 			if ($uploader->upload()) {
 				$category_image = $uploader->getName('category_image');

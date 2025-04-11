@@ -39,7 +39,7 @@
 					<input type="file" name="category_image" class="form-control">
 					<?php if($category['category_image']): ?>
 						<div class="mt-2">Hình ảnh hiện tại: <br/>
-						<img src="/uploads/categories/<?=$category['category_image']?>" class="img-thumbnail" width="100">
+						<img src="/storages/categories/<?=$category['category_image']?>" class="img-thumbnail" width="100">
 						<button type="submit" name="delete_image" value="delete_image" class="btn btn-danger">Xóa</button>
 					</div>
 					<?php endif; ?>
@@ -51,7 +51,7 @@
 					<input type="file" name="category_banner" class="form-control">
 					<?php if($category['category_banner']): ?>
 						<div class="mt-2">Hình ảnh hiện tại: <br/>
-						<img src="/uploads/categories/<?=$category['category_banner']?>" class="img-thumbnail" width="200">
+						<img src="/storages/categories/<?=$category['category_banner']?>" class="img-thumbnail" width="200">
 						<button type="submit" name="delete_banner" value="delete_banner" class="btn btn-danger">Xoa</button>
 					</div>
 					<?php endif; ?>

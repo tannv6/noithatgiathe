@@ -36,7 +36,7 @@
 				<span>OWNER_AVATAR</span>
 			</div>
 			<?php if($setting['owner_avatar']): ?>
-				<img src="/uploads/settings/<?= $setting['owner_avatar']; ?>" alt="" width="100">
+				<img src="/storages/settings/<?= $setting['owner_avatar']; ?>" alt="" width="100">
 			<?php endif; ?>
 		</div>
 		<div class="col-2">
@@ -94,7 +94,7 @@
 				<span>FAVICON</span>
 			</div>
 			<?php if($setting['favicon']): ?>
-				<img src="/uploads/settings/<?= $setting['favicon']; ?>" alt="" width="100">
+				<img src="/storages/settings/<?= $setting['favicon']; ?>" alt="" width="100">
 			<?php endif; ?>
 		</div>
 		<div class="col-2">
@@ -108,7 +108,7 @@
 				<span>LOGO_HEADER</span>
 			</div>
 			<?php if($setting['logo_header']): ?>
-				<img src="/uploads/settings/<?= $setting['logo_header']; ?>" alt="" width="100">
+				<img src="/storages/settings/<?= $setting['logo_header']; ?>" alt="" width="100">
 			<?php endif; ?>
 		</div>
 		<div class="col-2">
@@ -122,7 +122,7 @@
 				<span>LOGO_HEADER_REVERSE</span>
 			</div>
 			<?php if($setting['logo_header_reverse']): ?>
-				<img src="/uploads/settings/<?= $setting['logo_header_reverse']; ?>" class="shadow bg-secondary" alt="" width="100">
+				<img src="/storages/settings/<?= $setting['logo_header_reverse']; ?>" class="shadow bg-secondary" alt="" width="100">
 			<?php endif; ?>
 		</div>
 		<div class="col-2">
@@ -158,7 +158,7 @@
 				<span>OG_IMAGE</span>
 			</div>
 			<?php if($setting['og_image']): ?>
-				<img src="/uploads/settings/<?= $setting['og_image']; ?>" alt="" width="100">
+				<img src="/storages/settings/<?= $setting['og_image']; ?>" alt="" width="100">
 			<?php endif; ?>
 		</div>
 		<div class="col-2">

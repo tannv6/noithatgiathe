@@ -54,7 +54,7 @@ $price = Input::get('price');
 					<?php if($save > 0): ?>
 						<span class="onsale">-<?=$save?>%</span>
 					<?php endif; ?>
-						<img width="300" height="300" src="/uploads/products/<?=$product['product_image']?>"
+						<img width="300" height="300" src="/storages/products/<?=$product['product_image']?>"
 							class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail entered lazyloaded"
 							alt="" decoding="async" >
 					</a>

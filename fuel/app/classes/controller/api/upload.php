@@ -30,7 +30,7 @@ class Controller_Api_Upload extends Controller
 
 	public function action_editor() {
 
-		$uploader = new \Helper\Uploader(DOCROOT . 'uploads/editor/', IMAGE_ALLOWED_FORMAT);
+		$uploader = new \Helper\Uploader(DOCROOT . 'storages/editor/', IMAGE_ALLOWED_FORMAT);
 
 		if ($uploader->upload()) {
 			$files = $uploader->get();
@@ -41,10 +41,10 @@ class Controller_Api_Upload extends Controller
 
 		return Response::forge(json_encode([
 			"success" => true,
-			"url" => "/uploads/editor/$image",
+			"url" => "/storages/editor/$image",
 			"name" => $name,
 			"type" => $type,
-			'location' => "/uploads/editor/$image",
+			'location' => "/storages/editor/$image",
 		]));
 	}
 
