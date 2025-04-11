@@ -13,6 +13,9 @@
 // Bootstrap the framework - THIS LINE NEEDS TO BE FIRST!
 require COREPATH.'bootstrap.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '../../../');
+$dotenv->load();
+
 // Add framework overload classes here
 \Autoloader::add_classes(array(
 	// Example: 'View' => APPPATH.'classes/myview.php',
