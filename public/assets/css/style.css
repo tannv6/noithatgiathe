@@ -435,6 +435,7 @@ section .title-with-border {
 	width: 100%;
 	margin-top: 10px;
 	display: flex;
+	overflow: hidden;
 }
 .image-product-single .image-small .slick-list {
 	margin: 0 -5px;
@@ -443,7 +444,7 @@ section .title-with-border {
 	margin: 0 5px;
 }
 .image-product-single .image-small .item-small {
-	width: 23%;
+	flex: 0 0 calc(25% - ( 30px / 4 ));
 	max-width: 100%;
 	max-height: calc(100vw * 0.5);
 	border: 1px solid #ccc;

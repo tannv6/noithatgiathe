@@ -153,6 +153,21 @@
 	object-position: left;
 	}
 }
+@media screen and (max-width: 1024px) {
+	.image-product-single .image-small .item-small {
+		flex: 0 0 calc(33.33% - ( 20px / 3 ));
+	}
+}
+@media screen and (max-width: 769px) {
+	.image-product-single .image-small .item-small {
+		flex: 0 0 calc(25% - ( 30px / 4 ));
+	}
+}
+@media screen and (max-width: 480px) {
+	.image-product-single .image-small .item-small {
+		flex: 0 0 calc(33.33% - ( 20px / 3 ));
+	}
+}
 @media only screen and (max-width: 991px) {
 	header .header-wrap .main-header .header-inner .logo-thc-wrap {
 	max-width: 160px;

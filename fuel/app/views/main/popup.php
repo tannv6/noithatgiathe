@@ -34,6 +34,26 @@ $popups = array_values($popups);
 
 ?>
 
+<style>
+    .pop_close {
+        position: relative;
+        z-index: 1;
+    }
+    .pop_close::before {
+        content: "";
+        width: 1px;
+        height: 1px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        box-shadow: 0 0 35px 10px #00000050;
+        z-index: -1;
+        border-radius: 50%;
+    }
+</style>
+
 <script>
     const popups = JSON.parse('<?= addslashes(json_encode($popups, JSON_UNESCAPED_UNICODE)); ?>');
     console.log(popups);
@@ -78,10 +98,12 @@ $popups = array_values($popups);
             div.innerHTML = `
             <div style="height: 100%;width: 100%;position:relative;">
                 <a target="_blank" href="${popup.content || '#!'}" style="width:100%;height:100%;" class="popup_images owl-carousel owl-theme">${images}</a>
-                <div style="display: flex;position: absolute;top: 100%;left: 0;width: 100%;">
+                <!-- <div style="display: flex;position: absolute;top: 100%;left: 0;width: 100%;">
                     <button style="flex: 1;background-color:#795353;border: none;color: #fff;padding: 7px 0;" onclick="$('#popup_${popup.id}').remove()">Tắt</button>
                     <button style="flex: 1;background-color: #333;border: none;color: #fff;padding: 7px 0;" onclick="hideToday(${popup.id}); $('#popup_${popup.id}').remove()">Không hiện lại</button>
                 </div>
+                -->
+                <button class="pop_close" style="position: absolute;top: 0;right: 0;border: none;background-color: transparent;color: #fff;" onclick="hideToday(${popup.id}); $('#popup_${popup.id}').remove()"><i class="fa-solid fa-xmark fs-1"></i></button>
             </div>
         `;
             document.body.appendChild(div);

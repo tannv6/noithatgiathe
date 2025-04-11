@@ -262,7 +262,7 @@ jQuery(document).ready(function ($) {
 	$(".image-small .item-small").each(function () {
 		const width = $(this).width();
 		$(this).width(width);
-		$(this).height(width);
+		// $(this).height(width);
 	});
 	$(".image-big").slick({
 	slidesToShow: 1,
@@ -291,16 +291,9 @@ jQuery(document).ready(function ($) {
 		},
 		},
 		{
-		breakpoint: 991,
-		settings: {
-			slidesToShow: sliderDetail >= 4 ? 4 : sliderDetail,
-			slidesToScroll: 1,
-		},
-		},
-		{
 		breakpoint: 769,
 		settings: {
-			slidesToShow: sliderDetail >= 3 ? 3 : sliderDetail,
+			slidesToShow: sliderDetail >= 4 ? 4 : sliderDetail,
 			slidesToScroll: 1,
 		},
 		},

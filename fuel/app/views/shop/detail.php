@@ -19,6 +19,11 @@ $categories = getCategoriesWithChildren();
 		</nav>
 	</div>
 </div>
+<style>
+	.image-big > .img-cover:nth-child(n+2) {
+		display: none;
+	}
+</style>
 <div id="product-91156" class="product type-product post-91156 status-publish first instock product_cat-noi-that-thanh-ly product_cat-ghe-cong-thai-hoc product_cat-ghe-xoay product_cat-ghe-lam-viec-tai-nha product_cat-ghe-van-phong-gia-re has-post-thumbnail sale shipping-taxable purchasable product-type-simple">
 	<div class="container">
 		<div class="header-product">
