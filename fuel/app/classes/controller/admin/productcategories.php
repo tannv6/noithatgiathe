@@ -175,7 +175,7 @@ class Controller_Admin_ProductCategories extends Controller_Base
 		$cnt = count($ids);
 		for ($i=0; $i < $cnt; $i++) {
 			$entry = Model_ProductCategory::find($ids[$i]);
-			$entry->delete();
+			$entry && $entry->delete();
 		}
 		return Response::forge(json_encode([
 			'result' => 'success'

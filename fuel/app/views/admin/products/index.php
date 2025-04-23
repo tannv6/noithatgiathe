@@ -30,20 +30,30 @@
 					</select>
 				</td>
 			</tr>
+			<tr>
+				<td colspan="2">
+					<div class="d-flex gap-2">
+						<label class="form-check" for="is_new"><input type="checkbox" name="is_new" id="is_new" <?=$is_new == "Y" ? "checked" : ""?> class="form-check-input" value="Y">Mới về</label>
+						<label class="form-check" for="top_seller"><input type="checkbox" name="top_seller" id="top_seller" <?=$top_seller == "Y" ? "checked" : ""?> class="form-check-input" value="Y">Bán chạy</label>
+						<label class="form-check" for="is_flash_sale"><input type="checkbox" name="is_flash_sale" id="is_flash_sale" <?=$is_flash_sale == "Y" ? "checked" : ""?> class="form-check-input" value="Y">Flash sale</label>
+					</div>
+				</td>
+			</tr>
 		</tbody>
 	</table>
 	<button class="btn btn-primary">Tìm kiếm</button>
 </form>
-<table class="table w-100">
-	<colgroup>
-		<col width="5%">
-		<col width="120px">
-		<col width="30%">
-		<col width="20%">
-		<col width="20%">
-		<col width="10%">
-	</colgroup>
-	<thead>
+<div class="gallery">
+	<table class="table w-100">
+		<colgroup>
+			<col width="5%">
+			<col width="120px">
+			<col width="30%">
+			<col width="20%">
+			<col width="20%">
+			<col width="10%">
+		</colgroup>
+		<thead>
 		<tr>
 			<th>ID</th>
 			<th>Ảnh</th>
@@ -52,14 +62,16 @@
 			<th>Trạng thái</th>
 			<th>Quản lý</th>
 		</tr>
-	</thead>
-	<tbody>
+		</thead>
+		<tbody>
 		<?php foreach ($products['data'] as $product): ?>
 			<tr>
 				<td><?= $products['num']-- ?></td>
 				<td>
 					<?php if ($product->product_image): ?>
-						<img src="/storages/products/<?= $product->product_image ?>" alt="" width="100">
+						<a href="javascript:;" data-src="/storages/products/<?= $product->product_image ?>" data-fancybox="gallery" data-caption="<?=$product->product_name?>">
+							<img src="/storages/products/<?= $product->product_image ?>" alt="<?=$product->product_name?>" width="100"/>
+						</a>
 					<?php endif; ?>
 				</td>
 				<td><?= $product->product_name ?></td>
@@ -67,13 +79,14 @@
 				<td><?= $product->status == "Y" ? 'Hiển thị' : 'Ẩn' ?></td>
 				<td>
 					<a class="btn btn-primary "
-						href="<?= Uri::create('admin/products/write/' . $product->product_id) ?>">Sửa</a>
+					   href="<?= Uri::create('admin/products/write/' . $product->product_id) ?>">Sửa</a>
 					<a class="btn btn-danger " href="javascript:confirmDelete('<?= $product->product_id ?>')">Xóa</a>
 				</td>
 			</tr>
 		<?php endforeach; ?>
-	</tbody>
-</table>
+		</tbody>
+	</table>
+</div>
 <?= renderPagination($products['page'], $products['total_page']) ?>
 <script>
 	function confirmDelete(id) {

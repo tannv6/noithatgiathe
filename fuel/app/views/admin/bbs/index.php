@@ -36,55 +36,59 @@
 	</table>
 	<button class="btn btn-primary">Tìm kiếm</button>
 </form>
-<form action="/admin/bbs/change" name="F1" id="F1" target="hiddenIframe" method="post">
-	<table class="table w-100">
-		<colgroup>
-			<col width="5%">
-			<col width="*">
-			<col width="20%">
-			<col width="20%">
-			<col width="10%">
-			<col width="15%">
-		</colgroup>
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Tiêu đề</th>
-				<th>Ảnh</th>
-				<th>Trạng thái</th>
-				<th>Ưu tiên</th>
-				<th>Quản lý</th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php foreach ($result['data'] as $key => $bbs): ?>
+<div class="gallery">
+	<form action="/admin/bbs/change" name="F1" id="F1" target="hiddenIframe" method="post">
+		<table class="table w-100">
+			<colgroup>
+				<col width="5%">
+				<col width="*">
+				<col width="20%">
+				<col width="20%">
+				<col width="10%">
+				<col width="15%">
+			</colgroup>
+			<thead>
 				<tr>
-					<td>
-						<input type="hidden" name="bbs_id[]" value="<?= $bbs->bbs_id ?>">
-						<?= $result['num']-- ?>
-					</td>
-					<td><?= $bbs->title ?></td>
-					<td>
-						<?php if ($bbs->thumb): ?>
-							<img src="/storages/bbs/<?= $category_code ?>/<?= $bbs->thumb ?>" alt="" width="100">
-						<?php endif; ?>
-					</td>
-					<td><?= $bbs->status == "Y" ? 'Hiển thị' : 'Ẩn' ?></td>
-					<td>
-						<input type="text" value="<?= $bbs->o_num ?>" name="o_num[]" data-id="<?= $bbs->bbs_id ?>"
-							class="form-control o_num" style="width: 60px">
-					</td>
-					<td>
-					<a class="btn btn-info" href="<?= Uri::create('/bai-viet/' . $bbs->slug) ?>" target="_blank">Xem</a>
-						<a class="btn btn-primary "
-							href="<?= Uri::create('admin/bbs/write/' . $bbs->bbs_id) ?>?category_code=<?= $category_code ?>">Sửa</a>
-						<a class="btn btn-danger " href="javascript:confirmDelete('<?= $bbs->bbs_id ?>')">Xóa</a>
-					</td>
+					<th>ID</th>
+					<th>Tiêu đề</th>
+					<th>Ảnh</th>
+					<th>Trạng thái</th>
+					<th>Ưu tiên</th>
+					<th>Quản lý</th>
 				</tr>
-			<?php endforeach; ?>
-		</tbody>
-	</table>
-</form>
+			</thead>
+			<tbody>
+				<?php foreach ($result['data'] as $key => $bbs): ?>
+					<tr>
+						<td>
+							<input type="hidden" name="bbs_id[]" value="<?= $bbs->bbs_id ?>">
+							<?= $result['num']-- ?>
+						</td>
+						<td><?= $bbs->title ?></td>
+						<td>
+							<?php if ($bbs->thumb): ?>
+								<a href="javascript:;" data-src="/storages/bbs/<?= $category_code ?>/<?= $bbs->thumb ?>" data-fancybox="gallery" data-caption="<?=$bbs->title?>">
+									<img src="/storages/bbs/<?= $category_code ?>/<?= $bbs->thumb ?>" alt="" width="100">
+								</a>
+							<?php endif; ?>
+						</td>
+						<td><?= $bbs->status == "Y" ? 'Hiển thị' : 'Ẩn' ?></td>
+						<td>
+							<input type="text" value="<?= $bbs->o_num ?>" name="o_num[]" data-id="<?= $bbs->bbs_id ?>"
+								class="form-control o_num" style="width: 60px">
+						</td>
+						<td>
+						<a class="btn btn-info" href="<?= Uri::create('/bai-viet/' . $bbs->slug) ?>" target="_blank">Xem</a>
+							<a class="btn btn-primary "
+								href="<?= Uri::create('admin/bbs/write/' . $bbs->bbs_id) ?>?category_code=<?= $category_code ?>">Sửa</a>
+							<a class="btn btn-danger " href="javascript:confirmDelete('<?= $bbs->bbs_id ?>')">Xóa</a>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+	</form>
+</div>
 <?= renderPagination($result['page'], $result['total_page']) ?>
 <script>
 	function confirmDelete(id) {

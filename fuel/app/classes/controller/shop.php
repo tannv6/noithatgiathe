@@ -79,7 +79,6 @@ class Controller_Shop extends Controller
 				'products' => $products['data'],
 				'page' => $products['page'],
 				'total_page' => $products['total_page'],
-				'url' => "/danh-muc-san-pham/abc/",
 			]),
 			'title' => 'Sản phẩm tại nội thất Gia Thế',
 			'top_sellers' => Model_Products::find('all', ['where' => ['top_seller' => "Y", 'status' => "Y",]]),
@@ -135,9 +134,13 @@ class Controller_Shop extends Controller
 
 		$parents_category = Model_ProductCategory::getParents($category['category_id']);
 		$parents_category = array_column($parents_category, 'category_id');
+
+		$child_categories = Model_ProductCategory::find('all', ['where' => ['parent_id' => $category['category_id'], 'status' => 'Y']]);
+
 		$content = View::forge('template/user/product_container', [
 			'breadcrumb' => $breadcrumb,
 			'top_categories' => [],
+			'child_categories' => $child_categories,
 			'category_id' => $category['category_id'],
 			'parents_category' => $parents_category,
 			'content' => View::forge('shop/products', [
@@ -145,7 +148,6 @@ class Controller_Shop extends Controller
 				'products' => $products['data'],
 				'page' => $products['page'],
 				'total_page' => $products['total_page'],
-				'url' => "/danh-muc-san-pham/{$slug}/",
 			]),
 			'title' => $category['category_name'],
 			'top_sellers' => Model_Products::find('all', ['where' => ['top_seller' => "Y", 'status' => "Y",]]),

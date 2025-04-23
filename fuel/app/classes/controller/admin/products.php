@@ -43,6 +43,9 @@ class Controller_Admin_Products extends Controller_Base
 		$page = Input::get('page', 1);
 		$product_name = Input::get('product_name');
 		$sort = Input::get('sort');
+		$is_new = Input::get('is_new');
+		$top_seller = Input::get('top_seller');
+		$is_flash_sale = Input::get('is_flash_sale');
 
 		$sort_arr1 = explode('-', $sort);
 
@@ -57,12 +60,26 @@ class Controller_Admin_Products extends Controller_Base
 		}
 
 		$sort_arr['product_id'] = 'desc';
-
-		$products = Model_Products::getPaging([
+		
+		$where = [
 			'product_name' => $product_name
-		], $page, 10, $sort_arr);
+		];
+		
+		if($is_new) {
+			$where['is_new'] = $is_new;
+		}
+		
+		if($top_seller) {
+			$where['top_seller'] = $top_seller;
+		}
+		
+		if($is_flash_sale) {
+			$where['is_flash_sale'] = $is_flash_sale;
+		}
 
-		$view = View::forge('admin/products/index', compact('products', 'product_name', 'sort'));
+		$products = Model_Products::getPaging($where, $page, 10, $sort_arr);
+
+		$view = View::forge('admin/products/index', compact('products', 'product_name', 'sort', 'is_new', 'top_seller', 'is_flash_sale'));
 
 		$template->content = $view;
 		$template->title = 'Sản phẩm';

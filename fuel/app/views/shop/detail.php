@@ -26,7 +26,7 @@ $categories = getCategoriesWithChildren();
 </style>
 <div id="product-91156" class="product type-product post-91156 status-publish first instock product_cat-noi-that-thanh-ly product_cat-ghe-cong-thai-hoc product_cat-ghe-xoay product_cat-ghe-lam-viec-tai-nha product_cat-ghe-van-phong-gia-re has-post-thumbnail sale shipping-taxable purchasable product-type-simple">
 	<div class="container">
-		<div class="header-product">
+		<div class="header-product d-md-none">
 			<h1 class="title"><?=$product['product_name']?></h1>
 		</div>
 		<div class="row meta-info-product">
@@ -56,6 +56,7 @@ $categories = getCategoriesWithChildren();
 			</div>
 			<div class="col-12 col-md-7 col-lg-6 right-part">
 				<div class="main_product_header">
+					<h1 class="title d-none d-md-block"><?=$product['product_name']?></h1>
 					<div>
 						<span class="main-price">
 							<span class="woocommerce-Price-amount amount">

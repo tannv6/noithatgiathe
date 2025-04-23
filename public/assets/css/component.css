@@ -2248,7 +2248,8 @@ form.woocommerce-form.woocommerce-form-login.login {
 	border-radius: 1rem;
 	background: var(--primary_color);
 	padding: 2px 2rem;
-	width: max-content;
+	/* width: max-content; */
+	display: inline-block;
 	margin-bottom: 0;
 }
 .tu-van-form ul {

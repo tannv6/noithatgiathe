@@ -17,6 +17,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 	<link href="/assets/vendor/jquery.datetimepicker.min.css" rel="stylesheet" />
 	<script src="/assets/vendor/jquery.datetimepicker.full.min.js"></script>
+	<link href="/assets/vendor/fancybox.css" rel="stylesheet" />
+	<script src="/assets/vendor/fancybox.umd.js"></script>
 	<title>Nội thất Gia Thế</title>
 	<style>
 		table {

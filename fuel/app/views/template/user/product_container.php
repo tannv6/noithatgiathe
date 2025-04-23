@@ -82,7 +82,7 @@ $price = Input::get('price') ?: [];
 					clickable: true
 				},
 				breakpoints: {
-					679: {
+					769: {
 						slidesPerView: 3,
 						grid: {
 							rows: 2,
@@ -95,6 +95,82 @@ $price = Input::get('price') ?: [];
 							rows: 2,
 							fill: 'columns',
 						},
+					}
+				}
+			});
+		});
+	</script>
+	<style>
+		.child_categories_carousel:not(.swiper-initialized) .swiper-wrapper {
+			display: flex;
+			gap: 10px
+		}
+		.child_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide {
+			width: calc(16.67% - 50px / 6);
+		}
+		.child_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+7) {
+			display: none;
+		}
+		@media screen and (max-width: 1024px) {
+			.child_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide {
+				width: calc(33.33% - 20px / 3);
+			}
+			.child_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+4) {
+				display: none;
+			}
+		}
+		@media screen and (max-width: 768px) {
+			.child_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide {
+				width: calc(50% - 5px);
+			}
+			.child_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+3) {
+				display: none;
+			}
+		}
+	</style>
+	<?php if($child_categories): ?>
+	<div class="swiper child-categories-top child_categories_carousel">
+	<div class="swiper-wrapper">
+		<?php foreach($child_categories as $category): ?>
+			<div class="swiper-slide">
+				<div class="card-cate-item"><a href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="internal">
+						<div class="cover-image border-0">
+							<div class="img-wrap thumbnail-wrapper">
+								<img src="/storages/categories/<?=$category['category_image']?>" alt="<?=$category['category_name']?>" />
+							</div>
+						</div>
+					</a>
+					<div class="title">
+						<a href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="internal"><?=$category['category_name']?></a>
+					</div>
+				</div>
+			</div>
+		<?php endforeach; ?>
+	</div>
+	<!-- <div class="swiper-button-prev"></div>
+	<div class="swiper-button-next"></div> -->
+	</div>
+	<div class="swiper-pagination swiper-pagination-child position-relative"></div>
+	<?php endif; ?>
+	<script>
+		$(document).ready(function(){
+			var swiper = new Swiper(".child_categories_carousel", {
+				speed: 1000,
+				slidesPerView: 2,
+				slidesPerGroup: 2,
+				spaceBetween: 10,
+				pagination: {
+					el: ".swiper-pagination-child",
+					clickable: true
+				},
+				breakpoints: {
+					769: {
+						slidesPerView: 3,
+						slidesPerGroup: 3,
+					},
+					1025: {
+						slidesPerView: 6,
+						slidesPerGroup: 3,
 					}
 				}
 			});
