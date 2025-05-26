@@ -63,20 +63,20 @@ $articleViews = DB::query("
 		<col width="15%">
 	</colgroup>
 	<thead>
-		<tr>
-			<th>STT</th>
-			<th>Tiêu đề</th>
-			<th>Lượt xem</th>
-		</tr>
+	<tr>
+		<th>STT</th>
+		<th>Tiêu đề</th>
+		<th>Lượt xem</th>
+	</tr>
 	</thead>
 	<tbody>
-		<?php foreach ($articleViews as $index => $articleView): ?>
-			<tr>
-				<td><?= $index + 1 ?></td>
-				<td><?= $articleView['title'] ?></td>
-				<td><?= $articleView['view_count'] ?></td>
-			</tr>
-		<?php endforeach; ?>
+	<?php foreach ($articleViews as $index => $articleView): ?>
+		<tr>
+			<td><?= $index + 1 ?></td>
+			<td><?= $articleView['title'] ?></td>
+			<td><?= $articleView['view_count'] ?></td>
+		</tr>
+	<?php endforeach; ?>
 	</tbody>
 </table>
 <script>
@@ -88,7 +88,7 @@ $articleViews = DB::query("
 	const dailyCtx = document.getElementById('dailyChart').getContext('2d');
 	const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
 	const yearlyCtx = document.getElementById('yearlyChart').getContext('2d');
-
+	
 	// Dữ liệu lượt xem theo ngày
 	const dailyChart = new Chart(dailyCtx, {
 		type: 'line',
@@ -102,7 +102,7 @@ $articleViews = DB::query("
 			}]
 		}
 	});
-
+	
 	// Dữ liệu lượt xem theo tháng
 	const monthlyChart = new Chart(monthlyCtx, {
 		type: 'bar',
@@ -115,7 +115,7 @@ $articleViews = DB::query("
 			}]
 		}
 	});
-
+	
 	// Dữ liệu lượt xem theo năm
 	const yearlyChart = new Chart(yearlyCtx, {
 		type: 'bar',

@@ -43,17 +43,18 @@ $views_by_product = DB::query("
 	INNER JOIN products ON product_views.product_id = products.product_id
 	WHERE 1=1
 	GROUP BY product_id
+	ORDER BY view_count DESC
 	LIMIT 100
 ")->execute()->as_array();
 
 // Chuyển dữ liệu thành JSON để truyền vào Chart.js
-$data_day   = json_encode(array_reverse(array_column($views_by_day, 'views')));
+$data_day = json_encode(array_reverse(array_column($views_by_day, 'views')));
 $labels_day = json_encode(array_reverse(array_column($views_by_day, 'period')));
 
-$data_month   = json_encode(array_reverse(array_column($views_by_month, 'views')));
+$data_month = json_encode(array_reverse(array_column($views_by_month, 'views')));
 $labels_month = json_encode(array_reverse(array_column($views_by_month, 'period')));
 
-$data_year   = json_encode(array_reverse(array_column($views_by_year, 'views')));
+$data_year = json_encode(array_reverse(array_column($views_by_year, 'views')));
 $labels_year = json_encode(array_reverse(array_column($views_by_year, 'period')));
 
 ?>
@@ -75,104 +76,104 @@ $labels_year = json_encode(array_reverse(array_column($views_by_year, 'period'))
 </div>
 <table class="table">
 	<colgroup>
-	<col width="5%">
-	<col width="*">
-	<col width="15%">
-	<col width="15%">
-	<col width="10%">
-</colgroup>
+		<col width="5%">
+		<col width="*">
+		<col width="15%">
+		<col width="15%">
+		<col width="10%">
+	</colgroup>
 	<thead>
-		<tr>
-			<th>STT</th>
-			<th>Tên sản phẩm</th>
-			<th>Giá bán</th>
-			<th>Trạng thái</th>
-			<th>Lượt xem</th>
-		</tr>
+	<tr>
+		<th>STT</th>
+		<th>Tên sản phẩm</th>
+		<th>Giá bán</th>
+		<th>Trạng thái</th>
+		<th>Lượt xem</th>
+	</tr>
 	</thead>
 	<tbody>
-		<?php foreach ($views_by_product as $key => $product): ?>
-			<tr>
-				<td><?= $key + 1 ?></td>
-				<td><?= $product['product_name'] ?></td>
-				<td><?= number_format($product['sell_price']) ?> đ</td>
-				<td><?= $product['status'] == 'Y' ? 'Hoạt động' : 'Khóa' ?></td>
-				<td><?= $product['view_count'] ?></td>
-			</tr>
-		<?php endforeach; ?>
+	<?php foreach ($views_by_product as $key => $product): ?>
+		<tr>
+			<td><?= $key + 1 ?></td>
+			<td><?= $product['product_name'] ?></td>
+			<td><?= number_format($product['sell_price']) ?> đ</td>
+			<td><?= $product['status'] == 'Y' ? 'Hoạt động' : 'Khóa' ?></td>
+			<td><?= $product['view_count'] ?></td>
+		</tr>
+	<?php endforeach; ?>
 	</tbody>
 </table>
 <script>
-	$(document).ready(function() {
+	$(document).ready(function () {
 		$('#tabs').tabs();
 	})
 </script>
 
-	<script>
-		// Dữ liệu thống kê theo ngày
-		const dataDay = {
-			labels: <?php echo $labels_day; ?>,
-			datasets: [{
-				label: "Lượt xem theo ngày",
-				data: <?php echo $data_day; ?>,
-				backgroundColor: "rgba(75, 192, 192, 0.5)",
-				borderColor: "rgba(75, 192, 192, 1)",
-				borderWidth: 2
-			}]
-		};
+<script>
+	// Dữ liệu thống kê theo ngày
+	const dataDay = {
+		labels: <?php echo $labels_day; ?>,
+		datasets: [{
+			label: "Lượt xem theo ngày",
+			data: <?php echo $data_day; ?>,
+			backgroundColor: "rgba(75, 192, 192, 0.5)",
+			borderColor: "rgba(75, 192, 192, 1)",
+			borderWidth: 2
+		}]
+	};
+	
+	// Dữ liệu thống kê theo tháng
+	const dataMonth = {
+		labels: <?php echo $labels_month; ?>,
+		datasets: [{
+			label: "Lượt xem theo tháng",
+			data: <?php echo $data_month; ?>,
+			backgroundColor: "rgba(255, 159, 64, 0.5)",
+			borderColor: "rgba(255, 159, 64, 1)",
+			borderWidth: 2
+		}]
+	};
+	
+	// Dữ liệu thống kê theo năm
+	const dataYear = {
+		labels: <?php echo $labels_year; ?>,
+		datasets: [{
+			label: "Lượt xem theo năm",
+			data: <?php echo $data_year; ?>,
+			backgroundColor: "rgba(54, 162, 235, 0.5)",
+			borderColor: "rgba(54, 162, 235, 1)",
+			borderWidth: 2
+		}]
+	};
+	
+	// Vẽ biểu đồ theo ngày
+	new Chart(document.getElementById("chartDay"), {
+		type: "line",
+		data: dataDay,
+		options: {
+			responsive: true,
+			plugins: {legend: {display: true}}
+		}
+	});
+	
+	// Vẽ biểu đồ theo tháng
+	new Chart(document.getElementById("chartMonth"), {
+		type: "bar",
+		data: dataMonth,
+		options: {
+			responsive: true,
+			plugins: {legend: {display: true}}
+		}
+	});
+	
+	// Vẽ biểu đồ theo năm
+	new Chart(document.getElementById("chartYear"), {
+		type: "bar",
+		data: dataYear,
+		options: {
+			responsive: true,
+			plugins: {legend: {display: true}}
+		}
+	});
 
-		// Dữ liệu thống kê theo tháng
-		const dataMonth = {
-			labels: <?php echo $labels_month; ?>,
-			datasets: [{
-				label: "Lượt xem theo tháng",
-				data: <?php echo $data_month; ?>,
-				backgroundColor: "rgba(255, 159, 64, 0.5)",
-				borderColor: "rgba(255, 159, 64, 1)",
-				borderWidth: 2
-			}]
-		};
-
-		// Dữ liệu thống kê theo năm
-		const dataYear = {
-			labels: <?php echo $labels_year; ?>,
-			datasets: [{
-				label: "Lượt xem theo năm",
-				data: <?php echo $data_year; ?>,
-				backgroundColor: "rgba(54, 162, 235, 0.5)",
-				borderColor: "rgba(54, 162, 235, 1)",
-				borderWidth: 2
-			}]
-		};
-
-		// Vẽ biểu đồ theo ngày
-		new Chart(document.getElementById("chartDay"), {
-			type: "line",
-			data: dataDay,
-			options: {
-				responsive: true,
-				plugins: { legend: { display: true } }
-			}
-		});
-
-		// Vẽ biểu đồ theo tháng
-		new Chart(document.getElementById("chartMonth"), {
-			type: "bar",
-			data: dataMonth,
-			options: {
-				responsive: true,
-				plugins: { legend: { display: true } }
-			}
-		});
-
-		// Vẽ biểu đồ theo năm
-		new Chart(document.getElementById("chartYear"), {
-			type: "bar",
-			data: dataYear,
-			options: {
-				responsive: true,
-				plugins: { legend: { display: true } }
-			}
-		});
-
-	</script>
+</script>

@@ -59,7 +59,7 @@ $price = Input::get('price');
 							alt="" decoding="async" >
 					</a>
 					<a title="Chat zalo" class="float-button chat-zalo" target="_blank"
-						href="https://zalo.me/3269059400105626655" rel="nofollow" data-wpel-link="external">
+						href="<?= ZALO_LINK ?>" rel="nofollow" data-wpel-link="external">
 						<img src="/assets/img/zalo-stick.png" alt="">
 					</a>
 				</div>

@@ -63,7 +63,6 @@ class Model_Products extends Orm\Model
 		$category_id = $where['category_id'];
 		unset($where['category_id']);
 
-		// Đếm tổng số bản ghi phù hợp
 		$query = Model_Products::query()->where($where);
 
 		if ($product_name) {
@@ -111,6 +110,8 @@ class Model_Products extends Orm\Model
 		$total = $total->count();
 
 		$total_page = ceil($total / $limit);
+		
+		$query->group_by('product_id');
 
 		// Thêm điều kiện sắp xếp nếu có
 		if (!empty($order_by)) {
@@ -122,7 +123,7 @@ class Model_Products extends Orm\Model
 		// Lấy danh sách sản phẩm theo phân trang
 		$data = $query->rows_limit($limit)->rows_offset($offset)->get();
 
-		// dd(DB::last_query());
+//		dd(DB::last_query());
 
 		return [
 			'total_page' => $total_page,

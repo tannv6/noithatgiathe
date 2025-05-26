@@ -54,8 +54,8 @@ function updatePageParam($new_value) {
 	$new_url = Uri::create(implode('/', $segments));
 
 	// Lấy query string hiện tại
-	$query_string = $_SERVER['QUERY_STRING']; // Lấy toàn bộ query string
-
+	$query_string = http_build_query(\Input::get());
+	
 	// Tạo URL mới từ segment
 	$new_url = Uri::create(implode('/', $segments));
 
@@ -208,14 +208,17 @@ function renderPagination($page, $pages) {
 if (!function_exists('dd')) {
 	function dd(...$vars)
 	{
-		\Debug::$js_toggle_open = true;
-		$trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
-		$caller = $trace[0];
-		echo "<pre style='background: #222; color: #0f0; padding: 10px;margin: 0;'>";
-		echo "Called at: " . ($caller['file'] ?? 'unknown file') . " on line " . ($caller['line'] ?? 'unknown line') . "\n";
-		echo "</pre>";
-		\Debug::dump(...$vars);
-		exit;
+		$ip = \Input::ip();
+		if($ip == "222.252.18.26") {
+			\Debug::$js_toggle_open = true;
+			$trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
+			$caller = $trace[0];
+			echo "<pre style='background: #222; color: #0f0; padding: 10px;margin: 0;'>";
+			echo "Called at: " . ($caller['file'] ?? 'unknown file') . " on line " . ($caller['line'] ?? 'unknown line') . "\n";
+			echo "</pre>";
+			\Debug::dump(...$vars);
+			exit;
+		}
 	}
 }
 

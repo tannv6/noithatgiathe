@@ -116,9 +116,7 @@ class Controller_Shop extends Controller
 
 		$category = Model_ProductCategory::find('first', ['where' => ['slug' => $slug]]);
 
-		$breadcrumb = [[
-			'name' => $category['category_name'],
-		]];
+		$breadcrumb = [];
 
 		$orderby_arr = [];
 
@@ -133,9 +131,21 @@ class Controller_Shop extends Controller
 		$products = Model_Products::getPaging($where, $page, $limit, $orderby_arr, $prices);
 
 		$parents_category = Model_ProductCategory::getParents($category['category_id']);
+		
+		foreach ($parents_category as $parent) {
+			$breadcrumb[] = [
+				'name' => $parent['category_name'],
+				'url' => "/danh-muc-san-pham/{$parent['slug']}",
+			];
+		}
+		
 		$parents_category = array_column($parents_category, 'category_id');
 
 		$child_categories = Model_ProductCategory::find('all', ['where' => ['parent_id' => $category['category_id'], 'status' => 'Y']]);
+		
+		$breadcrumb[] = [
+			'name' => $category['category_name'],
+		];
 
 		$content = View::forge('template/user/product_container', [
 			'breadcrumb' => $breadcrumb,
@@ -186,15 +196,19 @@ class Controller_Shop extends Controller
 			'og_image' => DOMAIN . "/storages/products/" . $product['product_image'],
 			'og_url' => DOMAIN . '/san-pham/' . $product['slug'],
 		]);
-		$breadcrumb = [[
-			'name' => $product['product_name'],
-		]];
+		$breadcrumb = [];
 
-		if($product) {
-			$product['gallery'] = Model_ProductGallery::find('all', ['where' => ['product_id' => $product['product_id']]]);
-			$product['category'] = Model_ProductCategory::find('first', ['where' => ['category_id' => $product['category_id']]]);
+		$product['gallery'] = Model_ProductGallery::find('all', ['where' => ['product_id' => $product['product_id']]]);
+		
+		$categories = Model_ProductCategoryMapping::getCateOfProduct($product['product_id']);
+		
+		foreach ($categories as $category) {
+			$breadcrumb[] = [
+				'name' => $category['category_name'],
+				'url' => "/danh-muc-san-pham/{$category['slug']}",
+			];
 		}
-
+		
 		$sell_price = $product['sell_price'];
 		$init_price = $product['init_price'];
 
@@ -232,6 +246,10 @@ class Controller_Shop extends Controller
 		foreach ($top_sell_products as $key => $product3) {
 			$top_sell_products[$key]['category'] = Model_ProductCategory::find('first', ['where' => ['category_id' => $product3->category_id]]);
 		}
+		
+		$breadcrumb[] = [
+			'name' => $product['product_name'],
+		];
 
 		$content = View::forge('shop/detail',[
 			'breadcrumb' => $breadcrumb,

@@ -108,10 +108,21 @@ class Controller_Bbs extends Controller
 		]);
 
 		$view ->set('bbs', $bbs, false);
+		
+		$breadcrumb = [];
+		
+		$category = Model_BbsCategory::find('first', ['where' => ['code' => $bbs['category_code']]]);
+		
+		if (!empty($category)) {
+			$breadcrumb[] = [
+				'name' => $category['name'],
+				'url' => "/danh-muc-bai-viet/" . $category['slug'],
+			];
+		}
 
-		$breadcrumb = [[
+		$breadcrumb[] = [
 			'name' => $bbs['title'],
-		]];
+		];
 
 		$most_view = Model_BbsList::getMostView();
 
@@ -120,8 +131,6 @@ class Controller_Bbs extends Controller
 			'breadcrumb' => $breadcrumb,
 			'most_view' => $most_view,
 		]);
-
-		$category = Model_BbsCategory::find('first', ['where' => ['code' => $bbs['category_code']]]);
 
 		$template = View::forge('template/user/template_main', [
 			'active' => $category['slug'],

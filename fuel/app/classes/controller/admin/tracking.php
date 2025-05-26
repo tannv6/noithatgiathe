@@ -46,7 +46,7 @@ class Controller_Admin_Tracking extends Controller
 
 		$template = View::forge('template/admin/template_main', [
 			'active_menu' => "8,tracking,tracking_articles",
-			'title' => 'Thống kê lượt xem bài việt'
+			'title' => 'Thống kê lượt xem bài viết'
 		]);
 
 		$template->content = View::forge('admin/tracking/articles');

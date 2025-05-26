@@ -129,7 +129,7 @@ $price = Input::get('price') ?: [];
 		}
 	</style>
 	<?php if($child_categories): ?>
-	<div class="swiper child-categories-top child_categories_carousel">
+	<div class="swiper child_categories_carousel">
 	<div class="swiper-wrapper">
 		<?php foreach($child_categories as $category): ?>
 			<div class="swiper-slide">
@@ -159,6 +159,7 @@ $price = Input::get('price') ?: [];
 				slidesPerView: 2,
 				slidesPerGroup: 2,
 				spaceBetween: 10,
+				centerInsufficientSlides: true,
 				pagination: {
 					el: ".swiper-pagination-child",
 					clickable: true
@@ -257,7 +258,7 @@ $price = Input::get('price') ?: [];
 										<img width="300" height="300" src="/storages/products/<?=$product['product_image']?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" />
 									</a>
 									<a title="Chat zalo" class="float-button chat-zalo" target="_blank"
-										href="https://zalo.me/3269059400105626655"
+										href="<?= ZALO_LINK ?>"
 										rel="nofollow external noopener noreferrer" data-wpel-link="external">
 										<img src="/assets/img/zalo-stick.png" alt=""  />
 									</a>
