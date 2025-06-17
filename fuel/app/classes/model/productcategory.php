@@ -47,7 +47,7 @@ class Model_ProductCategory extends Orm\Model
 			$category = Model_ProductCategory::find('first', ['where' => ['category_id' => $category_id]]);
 			$list[] = $category;
 		}
-		$children = Model_ProductCategory::find('all', ['where' => ['parent_id' => $category_id]]);
+		$children = Model_ProductCategory::find('all', ['where' => ['parent_id' => $category_id], 'order_by' => ['o_num' => 'desc']]);
 		$list = array_merge($list, $children);
 		foreach($children as $child) {
 			$children1 = self::getChildren($child['category_id'], false);

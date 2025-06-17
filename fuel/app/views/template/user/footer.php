@@ -100,7 +100,7 @@
 							<div class="title">
 								Tư vấn : </div>
 							<div class="desc">
-								<a href="<?= ZALO_LINK ?>" data-wpel-link="external" rel="nofollow">Chat Zalo trực tiếp
+								<a href="<?= ZALO_LINK ?>" data-wpel-link="external" target="_blank">Chat Zalo trực tiếp
 									24/7</a>
 							</div>
 						</div>
@@ -186,19 +186,19 @@
 				<div class="footer-column">
 					<div class="title-footer">LIÊN HỆ VỚI CHÚNG TÔI</div>
 					<div class="social-wrap">
-						<a href="<?= ZALO_LINK ?>" class="social" style="background-color: " data-wpel-link="external"
+						<a href="<?= ZALO_LINK ?>" class="social" style="background-color: " target="_blank"
 							rel="nofollow">
 							<img src="/assets/img/zalo-s.svg" alt="" data-lazy-src="/assets/img/zalo-s.svg"
 								data-ll-status="loaded" class="entered lazyloaded"></a>
 						<a href="<?= FACEBOOK_LINK ?>" class="social" style="background-color: "
-							data-wpel-link="external" rel="nofollow">
+							data-wpel-link="external" rel="nofollow" target="_blank">
 							<img src="/assets/img/face-s.svg" alt="" data-lazy-src="/assets/img/face-s.svg"
 								data-ll-status="loaded" class="entered lazyloaded"></a>
 						<a href="<?= YOUTUBE_LINK ?>" class="social" style="background-color: "
-							data-wpel-link="external" rel="nofollow">
+							data-wpel-link="external" rel="nofollow" target="_blank">
 							<img src="/assets/img/ytb-s.svg" alt="" data-lazy-src="/assets/img/ytb-s.svg"
 								data-ll-status="loaded" class="entered lazyloaded"></a>
-						<a href="<?= TIKTOK_LINK ?>" class="social" style="background-color: " data-wpel-link="external"
+						<a href="<?= TIKTOK_LINK ?>" class="social" style="background-color: " data-wpel-link="external" target="_blank"
 							rel="nofollow">
 							<?= Asset::img('tiktok-s.svg') ?>
 						</a>
@@ -258,7 +258,7 @@
 	<div class="textwidget custom-html-widget">
 		<div class="btn-contact-bar1">
 			<div class="item-contact-box d-none d-md-block">
-				<a class="item-contact" rel="nofollow" href="<?= ZALO_LINK ?>" data-wpel-link="external">
+				<a class="item-contact" rel="nofollow" href="<?= ZALO_LINK ?>" target="_blank">
 					<div class="icon-contact" style="background : #1f5be0;">
 						<img class="entered lazyloaded" alt="url" src="/assets/img/Logo-Zalo-Arc.webp"
 							data-lazy-src="/assets/img/Logo-Zalo-Arc.webp" data-ll-status="loaded">
@@ -289,7 +289,7 @@
 			<div class="pop_contact_menu d-md-none">
 				<a href="#!" data-bs-toggle="modal" data-bs-target="#tuVanModal" class="button"><img
 						style="width: 38px;height: 28px" src="/assets/img/Email.png" alt=""></a>
-				<a href="<?= ZALO_LINK ?>" class="button"><img src="/assets/img/Logo-Zalo-Arc.webp" alt=""></a>
+				<a href="<?= ZALO_LINK ?>" class="button" target="_blank"><img src="/assets/img/Logo-Zalo-Arc.webp" alt=""></a>
 				<a href="<?= MESSENGER_LINK ?>" target="_blank" class="button bg-transparent p-0"><img src="/assets/img/messenger.svg"
 						alt=""></i></a>
 			</div>
@@ -423,7 +423,6 @@
 			$(this).toggleClass("open");
 		});
 		$(".button").click(function (e) {
-			e.preventDefault();
 			e.stopPropagation();
 		});
 		$(document).click(function (e) {
@@ -431,5 +430,24 @@
 				$(".pop_contact_menu").removeClass("open");
 			}
 		});
+	});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+	const iframes = document.querySelectorAll('iframe[src*="youtube.com"]');
+	iframes.forEach(function (iframe) {
+		const wrapper = document.createElement("div");
+		wrapper.classList.add("video-container");
+
+		// Chỉ bọc nếu chưa được bọc
+		if (!iframe.parentElement.classList.contains("video-container")) {
+		iframe.parentElement.insertBefore(wrapper, iframe);
+		wrapper.appendChild(iframe);
+		}
+
+		// Xoá width/height cố định
+		iframe.removeAttribute("width");
+		iframe.removeAttribute("height");
+	});
 	});
 </script>

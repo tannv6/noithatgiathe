@@ -386,7 +386,7 @@ section .title-with-border {
 	margin-bottom: 15px;
 }
 .breadcrumb-wrapper .container {
-	padding: 0;
+	/* padding: 0; */
 	height: 100%;
 }
 .breadcrumb-wrapper .rank-math-breadcrumb {

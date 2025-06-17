@@ -145,8 +145,8 @@
 		tinymce.init({
 			selector: "#description",
 			content_css: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
-			plugins: "image code table autoresize",
-			toolbar: "undo redo | styles fontsize fontfamily | bold italic underline | alignleft aligncenter alignright | table | image | code",
+			plugins: "image code table autoresize media",
+			toolbar: "undo redo | styles fontsize fontfamily | bold italic underline | alignleft aligncenter alignright | table | image | media | code",
 			images_upload_url: "/api/upload/editor",
 			automatic_uploads: true,
 			elementpath: false,

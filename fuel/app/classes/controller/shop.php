@@ -70,10 +70,16 @@ class Controller_Shop extends Controller
 		}
 
 		$products = Model_Products::getPaging([ 'status' => "Y", ], $page, $limit, $orderby_arr, $prices);
+		$top_categories = Model_ProductCategory::find('all', ['where' => ['level' => 1, 'status' => 'Y'], 'order_by' => ['o_num' => 'desc']]);
 
+		if($top_categories) {
+			foreach($top_categories as $key => $top_category) {
+				$top_categories[$key] = $top_category->to_array();
+			}
+		}
 		$content = View::forge('template/user/product_container', [
 			'breadcrumb' => $breadcrumb,
-			'top_categories' => Model_ProductCategory::find('all', ['where' => ['level' => 1, 'status' => 'Y']]),
+			'top_categories' => $top_categories,
 			'content' => View::forge('shop/products', [
 				'content' => '',
 				'products' => $products['data'],
@@ -141,7 +147,7 @@ class Controller_Shop extends Controller
 		
 		$parents_category = array_column($parents_category, 'category_id');
 
-		$child_categories = Model_ProductCategory::find('all', ['where' => ['parent_id' => $category['category_id'], 'status' => 'Y']]);
+		$child_categories = Model_ProductCategory::find('all', ['where' => ['parent_id' => $category['category_id'], 'status' => 'Y'], 'order_by' => ['o_num' => 'desc']]);
 		
 		$breadcrumb[] = [
 			'name' => $category['category_name'],

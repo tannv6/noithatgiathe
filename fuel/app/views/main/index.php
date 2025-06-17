@@ -183,46 +183,47 @@ $categories = getCategoriesWithChildren();
 		.top_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+13) {
 			display: none;
 		}
+		.top_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+7) {
+			visibility: hidden
+		}
 		@media screen and (max-width: 1024px) {
 			.top_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+9) {
 				display: none;
+			}
+			.top_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+5) {
+				visibility: hidden
 			}
 		}
 		@media screen and (max-width: 768px) {
 			.top_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+7) {
 				display: none;
 			}
+			.top_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+4) {
+				visibility: hidden
+			}
 		}
 	</style>
 	<section>
 		<div class="container">
 			<div class="swiper child-categories-top top_categories_carousel">
-			<div class="swiper-wrapper row g-0">
-				<?php foreach($top_categories as $category): ?>
-					<div class="swiper-slide col-4 col-md-3 col-lg-2">
-						<div class="card-cate-item"><a href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="internal">
-								<div class="cover-image border-0">
-									<div class="img-wrap thumbnail-wrapper">
-										<img src="/storages/categories/<?=$category['category_image']?>" alt="<?=$category['category_name']?>" />
+				<div class="swiper-wrapper row g-0">
+					<?php foreach($top_categories as $category): ?>
+						<div class="swiper-slide col-4 col-md-3 col-lg-2">
+							<div class="card-cate-item"><a href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="internal">
+									<div class="cover-image border-0">
+										<div class="img-wrap thumbnail-wrapper">
+											<img src="/storages/categories/<?=$category['category_image']?>" alt="<?=$category['category_name']?>" />
+										</div>
 									</div>
+								</a>
+								<div class="title">
+									<a href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="internal"><?=$category['category_name']?></a>
 								</div>
-							</a>
-							<div class="title">
-								<a href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="internal"><?=$category['category_name']?></a>
 							</div>
 						</div>
-					</div>
-				<?php endforeach; ?>
-			</div>
-			<div class="swiper-pagination"></div>
-			<!-- <div class="d-flex gap-2 justify-content-center">
-				<div class="swiper-button-prev-top_categories_carousel">
-					<i class="fa-solid fa-chevron-left"></i>
+					<?php endforeach; ?>
 				</div>
-				<div class="swiper-button-next-top_categories_carousel">
-					<i class="fa-solid fa-chevron-right"></i>
-				</div>
-			</div> -->
+				<div class="swiper-pagination"></div>
 			</div>
 		</div>
 	</section>

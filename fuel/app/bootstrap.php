@@ -209,7 +209,7 @@ if (!function_exists('dd')) {
 	function dd(...$vars)
 	{
 		$ip = \Input::ip();
-		if($ip == "222.252.18.26") {
+		if($ip == "1.54.42.117") {
 			\Debug::$js_toggle_open = true;
 			$trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
 			$caller = $trace[0];
@@ -237,7 +237,7 @@ if (!function_exists('d')) {
 
 define("IMAGE_ALLOWED_FORMAT", ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'bmp', 'tiff', 'tif', 'ico', 'heic', 'heif', 'raw', 'psd', 'ai', 'eps']);
 
-define("ASSETS_VERSION", time());
+define("ASSETS_VERSION", 221417062025);
 
 function to_snake_case_filename($filename) {
 	$name = pathinfo($filename, PATHINFO_FILENAME);

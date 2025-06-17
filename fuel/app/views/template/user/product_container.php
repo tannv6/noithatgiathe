@@ -42,58 +42,81 @@ $price = Input::get('price') ?: [];
 		.top_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+13) {
 			display: none;
 		}
+		.top_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+7) {
+			visibility: hidden
+		}
+		@media screen and (max-width: 1024px) {
+			.top_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+9) {
+				display: none;
+			}
+			.top_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+5) {
+				visibility: hidden
+			}
+		}
+		@media screen and (max-width: 768px) {
+			.top_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+7) {
+				display: none;
+			}
+			.top_categories_carousel:not(.swiper-initialized) .swiper-wrapper .swiper-slide:nth-child(n+4) {
+				visibility: hidden
+			}
+		}
 	</style>
 	<?php if($top_categories): ?>
 	<div class="swiper child-categories-top top_categories_carousel">
-	<div class="swiper-wrapper row g-0">
-		<?php foreach($top_categories as $category): ?>
-			<div class="swiper-slide col-2">
-				<div class="card-cate-item"><a href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="internal">
-						<div class="cover-image border-0">
-							<div class="img-wrap thumbnail-wrapper">
-								<img src="/storages/categories/<?=$category['category_image']?>" alt="<?=$category['category_name']?>" />
+		<div class="swiper-wrapper row g-0">
+			<?php foreach($top_categories as $category): ?>
+				<div class="swiper-slide col-4 col-md-3 col-lg-2">
+					<div class="card-cate-item"><a href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="internal">
+							<div class="cover-image border-0">
+								<div class="img-wrap thumbnail-wrapper">
+									<img src="/storages/categories/<?=$category['category_image']?>" alt="<?=$category['category_name']?>" />
+								</div>
 							</div>
+						</a>
+						<div class="title">
+							<a href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="internal"><?=$category['category_name']?></a>
 						</div>
-					</a>
-					<div class="title">
-						<a href="/danh-muc-san-pham/<?=$category['slug']?>" data-wpel-link="internal"><?=$category['category_name']?></a>
 					</div>
 				</div>
-			</div>
-		<?php endforeach; ?>
-	</div>
-	<!-- <div class="swiper-button-prev"></div>
-	<div class="swiper-button-next"></div> -->
-	<div class="swiper-pagination"></div>
+			<?php endforeach; ?>
+		</div>
+		<div class="swiper-pagination"></div>
 	</div>
 	<?php endif; ?>
 	<script>
 		$(document).ready(function(){
 			var swiper = new Swiper(".top_categories_carousel", {
 				speed: 1000,
-				slidesPerView: 1,
-				spaceBetween: 10,
-				// navigation: {
-				//     nextEl: '.swiper-button-next',
-				//     prevEl: '.swiper-button-prev',
-				// },
+				slidesPerView: 3,
+				slidesPerGroup: 3,
+				spaceBetween: 5,
+				navigation: false,
+				grid: {
+					rows: 2,
+					fill: 'columns',
+				},
 				pagination: {
 					el: ".swiper-pagination",
 					clickable: true
 				},
 				breakpoints: {
-					769: {
-						slidesPerView: 3,
-						grid: {
-							rows: 2,
-							fill: 'columns',
+					679: {
+						spaceBetween: 10,
+						slidesPerView: 4,
+						navigation: false,
+						pagination: {
+							el: ".swiper-pagination",
+							clickable: true
 						},
 					},
-					1024: {
+					1025: {
+						spaceBetween: 10,
 						slidesPerView: 6,
-						grid: {
-							rows: 2,
-							fill: 'columns',
+						navigation: false,
+						pagination: {
+							el: ".swiper-pagination",
+							clickable: true
 						},
 					}
 				}
