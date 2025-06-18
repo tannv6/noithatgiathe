@@ -1358,7 +1358,7 @@ span.page-numbers.current {
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	line-height: 18px;
-	height: 36px
+	/*height: 36px;*/
 }
 
 .product-card-wrapper .product-card .price {
@@ -1376,7 +1376,7 @@ span.page-numbers.current {
 	font-weight: 600;
 	font-size: 15px;
 	line-height: 127%;
-	color: var(--third_color)
+	color: var(--secondary_color)
 }
 
 .product-card-wrapper .product-card .price del {
@@ -1507,4 +1507,13 @@ span.woocustom_num_reviews {
 	font-weight: 400;
 	max-width: fit-content;
 	max-height: 21px;
+}
+
+.main_price {
+	color: var(--secondary_color);
+}
+
+.init_main_price, .woocommerce-Price-init {
+	color: #b2b2b2;
+	text-decoration: line-through;
 }

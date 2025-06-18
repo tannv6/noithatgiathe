@@ -87,26 +87,6 @@
 </script>
 <script>
 	$(document).ready(function () {
-		tinymce.init({
-			selector: "#sort_description",
-			content_css: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
-			plugins: "image code table autoresize",
-			toolbar: "undo redo | styles fontsize fontfamily | bold italic underline | alignleft aligncenter alignright | table | image | code",
-			images_upload_url: "/api/upload/editor",
-			automatic_uploads: true,
-			elementpath: false,
-			menubar: false,
-			autoresize_bottom_margin: 20,
-			autoresize_min_height: 200,
-			font_size_formats: '8px 10px 12px 14px 16px 18px 24px 36px 48px',
-			setup: function(editor) {
-				editor.on('init', function() {
-					editor.getBody().classList.add('container', 'mt-3');
-					$(editor.getDoc()).find("html").css({
-						fontSize: '14px'
-					});
-				});
-			}
-		});
+		initTinyMCE("#sort_description");
 	});
 </script>

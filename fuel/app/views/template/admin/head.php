@@ -82,4 +82,46 @@
 		}
 	</style>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js"></script>
+	<script>
+		// Hàm thay thế link Shorts thành iframe
+		function convertShortsToEmbed(content) {
+			return content.replace(
+				/https?:\/\/(www\.)?youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/g,
+				'<iframe width="100%" height="315" src="https://www.youtube.com/embed/$2" frameborder="0" allowfullscreen></iframe>'
+			);
+		}
+
+		function initTinyMCE(selector = "#description") {
+			tinymce.init({
+				selector: selector,
+				content_css: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
+				plugins: "image code table autoresize media autolink lists link preview",
+				toolbar: "undo redo | styles fontsize fontfamily | bold italic underline | alignleft aligncenter alignright | table | numlist bullist | image | media | link | preview | code",
+				images_upload_url: "/api/upload/editor",
+				automatic_uploads: true,
+				elementpath: false,
+				menubar: false,
+				autoresize_bottom_margin: 20,
+				autoresize_min_height: 200,
+				font_size_formats: '8px 10px 12px 14px 16px 18px 24px 36px 48px',
+				setup: function(editor) {
+					editor.on('init', function() {
+						editor.getBody().classList.add('container', 'mt-3');
+						$(editor.getDoc()).find("html").css({
+							fontSize: '14px'
+						});
+					});
+					editor.on('PastePostProcess', function (e) {
+						// Convert pasted content to embed codes
+						e.node.innerHTML = convertShortsToEmbed(e.node.innerHTML);
+					});
+				}
+			});
+
+			// Ensure content from TinyMCE is submitted with the form
+			$("form").off("submit.tinymce").on("submit.tinymce", function (e) {
+				tinymce.triggerSave();
+			});
+		}
+	</script>
 </head>

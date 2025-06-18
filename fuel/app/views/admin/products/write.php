@@ -142,30 +142,7 @@
 </form>
 <script>
 	$(document).ready(function() {
-		tinymce.init({
-			selector: "#description",
-			content_css: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
-			plugins: "image code table autoresize media",
-			toolbar: "undo redo | styles fontsize fontfamily | bold italic underline | alignleft aligncenter alignright | table | image | media | code",
-			images_upload_url: "/api/upload/editor",
-			automatic_uploads: true,
-			elementpath: false,
-			menubar: false,
-			autoresize_bottom_margin: 20,
-			autoresize_min_height: 200,
-			font_size_formats: '8px 10px 12px 14px 16px 18px 24px 36px 48px',
-			setup: function(editor) {
-				editor.on('init', function() {
-					editor.getBody().classList.add('container', 'mt-3');
-					$(editor.getDoc()).find("html").css({
-						fontSize: '14px'
-					});
-				});
-			}
-		});
-		$("form").submit(function (e) {
-			tinymce.triggerSave();
-		})
+		initTinyMCE("#description");
 		$(document).on('change', '#addImage', function (evt) {
 			var file = evt.target.files[0];
 			if(!file) return;

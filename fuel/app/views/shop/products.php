@@ -73,20 +73,20 @@ $price = Input::get('price');
 						<del aria-hidden="true">
 							<span class="woocommerce-Price-amount amount">
 								<bdi>
-									<?=$product['init_price']?>&nbsp; <span class="woocommerce-Price-currencySymbol">₫</span>
+									<?=$product['init_price']?><span class="woocommerce-Price-currencySymbol">₫</span>
 								</bdi>
 							</span>
 						</del>
-						<span class="screen-reader-text">Giá gốc là: <?=$product['init_price']?>&nbsp;₫.</span>
+						<span class="screen-reader-text">Giá gốc là: <?=$product['init_price']?>₫.</span>
 						<?php endif; ?>
 						<ins aria-hidden="true">
 							<span class="woocommerce-Price-amount amount">
 								<bdi>
-									<?=number_format($product['sell_price'], 0, ',', '.')?>&nbsp; <span class="woocommerce-Price-currencySymbol">₫</span>
+									<?=number_format($product['sell_price'], 0, ',', '.')?><span class="woocommerce-Price-currencySymbol">₫</span>
 								</bdi>
 							</span>
 						</ins>
-					<span class="screen-reader-text">Giá hiện tại là: <?=number_format($product['sell_price'], 0, ',', '.')?>&nbsp;₫.</span>
+					<span class="screen-reader-text">Giá hiện tại là: <?=number_format($product['sell_price'], 0, ',', '.')?>₫.</span>
 				</span>
 				</div>
 

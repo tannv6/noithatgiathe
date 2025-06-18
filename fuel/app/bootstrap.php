@@ -237,7 +237,7 @@ if (!function_exists('d')) {
 
 define("IMAGE_ALLOWED_FORMAT", ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'bmp', 'tiff', 'tif', 'ico', 'heic', 'heif', 'raw', 'psd', 'ai', 'eps']);
 
-define("ASSETS_VERSION", 221417062025);
+define("ASSETS_VERSION", 115818062025);
 
 function to_snake_case_filename($filename) {
 	$name = pathinfo($filename, PATHINFO_FILENAME);

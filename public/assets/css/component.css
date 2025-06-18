@@ -1086,7 +1086,7 @@ form.price-filter .submit:hover {
 	font-weight: 700;
 	font-size: 22px;
 	line-height: 127%;
-	color: var(--third_color);
+	color: var(--secondary_color);
 }
 .single-product .right-part .main_product_header .regular-price {
 	text-decoration-line: line-through;
